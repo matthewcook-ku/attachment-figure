@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: xrrig
-  updateType: 1
+  updateType: 0
 --- !u!1001 &1536852537
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,8 +11,13 @@ public class ExperimentGenerator : MonoBehaviour
     // the session is passed as an argument by the event call.
     public void Generate(Session session)
     {
-        // generate a single block with 10 trials.
-        int numTrials = 10;
+        // single trial for now, maybe separate later
+        int numTrials = 2;
         session.CreateBlock(numTrials);
+    }
+
+    public void StartNextTrial(Session session)
+    {
+        session.BeginNextTrial();
     }
 }
