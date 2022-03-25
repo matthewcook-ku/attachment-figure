@@ -13,7 +13,7 @@ namespace UnityLibrary
     [DefaultExecutionOrder(-100)]
     public class Speech : MonoBehaviour
     {
-        public string voiceID = "Johnny";
+        public string voiceID = "Annie";
 
         // singleton isntance
         public static Speech instance;
