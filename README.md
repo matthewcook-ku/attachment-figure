@@ -17,3 +17,6 @@ https://readyplayer.me/
 
 Attention Rigging  
 https://www.youtube.com/watch?v=Htl7ysv10Qs&ab_channel=Brackeys  
+
+Unity Inspector Info Boxes  
+https://github.com/johnearnshaw/unity-inspector-help  
