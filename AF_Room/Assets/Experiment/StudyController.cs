@@ -7,13 +7,14 @@ using UXF;
 
 public class StudyController : MonoBehaviour
 {
-    [Help("Object representing the view of the subject, probably a camera. This object should have a ProxemicsTracker attached.")]
-    public GameObject subject;
+    [Help("Object representing the subject.")]
+    public SubjectController subject;
+
     [Help("Object representing the agent.")]
     public GameObject agent;
 
     [Help("Refs to the UI canvas objects.")]
-    public GameObject experimenterUI;
+    public ExperimenterUIController experimenterUI;
     public GameObject subjectUI;
 
     [Help("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
@@ -30,13 +31,20 @@ public class StudyController : MonoBehaviour
         // set up the agent
         initializeAgent();
 
+        // turn on the FPS controller
+        Debug.Log("Turning on FPS controller.");
+        subject.fps.enabled = true;
+
         // start experimenter UI
-        experimenterUI.SetActive(true);
+        Debug.Log("Load experimenter UI.");
+        experimenterUI.gameObject.SetActive(true);
 
         // start subject UI
+        //Debug.Log("Load subject UI.");
         //subjectUI.SetActive(true);
 
         // start the proxemics tracker
+        Debug.Log("Starting proxemics tracker.");
         StartCoroutine(ManualRecord());
     }
 
@@ -47,22 +55,34 @@ public class StudyController : MonoBehaviour
         Debug.Log("TODO: Set selected agent voice here...");
     }
 
-    // This method will be called every trackingInterval seconds to manually signal the orixemics tracker to record a row of data.
+    // This coroutine method will set up recording and then continue every trackingInterval seconds to manually signal the porixemics tracker to record a row of data.
     IEnumerator ManualRecord()
     {
-        // get a reference to the tracker, its attached to the subject.
-        ProxemicsTracker proxemicsTracker = subject.GetComponent<ProxemicsTracker>();
-        if(proxemicsTracker == null)
-        {
-            Debug.LogError("ProxemicsTracker not found on Subject!!");
-        }
-
         while(true)
         {
-            if(proxemicsTracker.Recording)
+            //if (subject == null) Debug.Log("subject null in manual record.");
+            //if (subject.proxemicsTracker == null) Debug.Log("tracker null in manual record.");
+
+            if (subject.proxemicsTracker.Recording)
             {
-                proxemicsTracker.RecordRow();
+                subject.proxemicsTracker.RecordRow();
             }
+
+            float distance = subject.proxemicsTracker.agentSubjectDistance();
+            float gaze = subject.proxemicsTracker.gazeScore();
+
+            // display the new data in the UI
+            //Debug.Log("Updating UI with tracking data.\n" +
+            //    "distance: " + distance + "\n" +
+            //    "gaze: " + gaze
+            //    );
+
+            //if (experimenterUI == null) Debug.Log("experimenterUI null in manual record.");
+            //if (experimenterUI.experimentPanelController == null) Debug.Log("experimentPanelController null in manual record.");
+            //if (experimenterUI.experimentPanelController.distanceField == null) Debug.Log("distanceField null in manual record.");
+
+            experimenterUI.experimentPanelController.distanceField.SetTextWithoutNotify(distance.ToString());
+            experimenterUI.experimentPanelController.gazeField.SetTextWithoutNotify(gaze.ToString());
 
             // pause for the tracking interval
             yield return new WaitForSeconds(trackingInterval);

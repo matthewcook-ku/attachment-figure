@@ -18,10 +18,9 @@ public class ExperimentGenerator : MonoBehaviour
 
         // make any settings needed to each trial
         // currently there are none.
-        /*
-        foreach(Trial trial in attachmentFigureBlock.trials)
-        {
-            trial.settings.SetValue("key", "value");
-        }*/
+        //foreach(Trial trial in attachmentFigureBlock.trials)
+        //{
+        //    trial.settings.SetValue("key", "value");
+        //}
     }
 }

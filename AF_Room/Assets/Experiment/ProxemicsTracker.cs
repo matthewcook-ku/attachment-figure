@@ -5,13 +5,12 @@ using UXF;
 
 //
 // Tracker to record proxemics data for the trial.
-// connect to the StudyController object so that it will have access to right game objects and data.
+// Attach this tracker to an object that represents the location and direction of the player's view. Probably a camera.
 //
 
 public class ProxemicsTracker : Tracker
 {
-    private GameObject subject;
-    private GameObject agent;
+    private GameObject agent = null;
     private int HMDFieldOfView = 110;
 
     public override string MeasurementDescriptor => "proxemics";
@@ -21,23 +20,28 @@ public class ProxemicsTracker : Tracker
             "gaze"
         };
 
-    // initialize variables
-    void Awake()
-    {
-        // find the StudyController attached to this GameObject
-        StudyController studyController = GetComponent<StudyController>();
+    // the most recent calculations for these properties. 
+    public float distance { get; private set; }
+    public float gaze { get; private set; }
 
-        // local copies of objects.
-        subject = studyController.subject;
-        agent = studyController.agent;
-        HMDFieldOfView = studyController.HMDFieldOfView;
+    // initialize variables
+    void Start()
+    {
+        // collect a local reference to the agent from the AFManager
+        agent = AFManager.Instance.studyController.agent;
+        if (null == agent) Debug.LogError("agent null in ProxemicsTracker!");
+        HMDFieldOfView = AFManager.Instance.studyController.HMDFieldOfView;
     }
 
     // return one row of values to be written to file by the UXF tracking system.
     protected override UXFDataRow GetCurrentValues()
     {
-        float distance = agentSubjectDistance();
-        float gaze = gazeScore();
+        distance = agentSubjectDistance();
+        gaze = gazeScore();
+
+        Debug.Log("Writing data row...\n" +
+            "distance: " + distance + " " + "gaze: " + gaze
+            );
 
         var values = new UXFDataRow()
         {
@@ -49,10 +53,10 @@ public class ProxemicsTracker : Tracker
     }
 
     // calcualte the distance between agent and subject
-    float agentSubjectDistance()
+    public float agentSubjectDistance()
     {
         Vector3 agentLocation = agent.transform.position;
-        Vector3 subjectLocation = subject.transform.position;
+        Vector3 subjectLocation = transform.position;
 
         return Vector3.Distance(agentLocation, subjectLocation);
     }
@@ -60,17 +64,17 @@ public class ProxemicsTracker : Tracker
     // The degree to which the agent falls within the subject's field of view.
     // 1.0 means looking right at the agent.
     // 0.0 means out of the field of view.
-    float gazeScore()
+    public float gazeScore()
     {
         // find the vector from subject to agent
         Vector3 agentLocation = agent.transform.position;
-        Vector3 subjectLocation = subject.transform.position;
+        Vector3 subjectLocation = transform.position;
         Vector3 directionVector = agentLocation - subjectLocation;
         directionVector.Normalize();
 
         // find the forward sight line vector of the subject
         // assuming this is a camera, in unity this will be the subject's positive Z vector.
-        Vector3 subjectForwardVector = subject.transform.forward;
+        Vector3 subjectForwardVector = transform.forward;
 
         // find the angle (degrees) between these 2 vectors
         float angleBetween = Vector3.Angle(subjectForwardVector, directionVector);

@@ -255,12 +255,19 @@ namespace UXF.UI
                 }
                 else if (!Directory.Exists(localFilePath))
                 {
-                    //Debug.Log("WARNING! File Path Check commented out for OSX testing.");
+                    #if (UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX)
+
                     // For some reason, this directory check always fails on mac, but the same code works elsewhere. Not sure why.
                     // commented this out just for the moment for testing. 
+                    Debug.Log("WARNING! File Path Check commented out for OSX testing.");
+
+                    #else
+
                     localFilePathElement.DisplayFault();
                     Utilities.UXFDebugLogErrorFormat("Cannot start session - local data directory {0} does not exist.", localFilePath);
                     error = true;
+
+                    #endif
                 }
 
                 foreach (var dh in ActiveLocalFileDataHandlers)

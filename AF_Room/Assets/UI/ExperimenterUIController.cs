@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fake : MonoBehaviour
+public class ExperimenterUIController : MonoBehaviour
 {
+    public AnimationPanelController animationPanelController;
+    public SpeechPanelController speechPanelController;
+    public ExperimentPanelController experimentPanelController;
+
     // Start is called before the first frame update
     void Start()
     {
