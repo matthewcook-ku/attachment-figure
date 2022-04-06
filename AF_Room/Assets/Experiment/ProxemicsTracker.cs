@@ -80,9 +80,10 @@ public class ProxemicsTracker : Tracker
         float angleBetween = Vector3.Angle(subjectForwardVector, directionVector);
 
         // find proportion within field of view.
-        if (angleBetween >= HMDFieldOfView)
+        float halfFOV = (float)HMDFieldOfView / 2.0f;
+        if (angleBetween >= (halfFOV))
             return 0.0f;
         else
-            return (1.0f - (angleBetween / (float)HMDFieldOfView));
+            return (1.0f - (angleBetween / halfFOV));
     }
 }

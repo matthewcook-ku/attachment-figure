@@ -21,13 +21,31 @@ public class FirstPersonController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    public Canvas reticle;
+
+    private void Awake()
+    {
+        reticle = GetComponentInChildren<Canvas>();
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+    }
 
+    private void OnEnable()
+    {
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        reticle.enabled = true;
+    }
+    private void OnDisable()
+    {
+        // unlock the cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        reticle.enabled = false;
     }
 
     void Update()
