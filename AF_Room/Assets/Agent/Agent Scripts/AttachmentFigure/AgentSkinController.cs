@@ -59,12 +59,18 @@ public class AgentSkinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("space"))
+        if(UnityEngine.InputSystem.Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            int nextSkin = (activeSkinIndex + 1) % AgentSkins.Count;
-            print("swapping to new skin");
-            activateSkin(nextSkin);
+            cycleToNextSkin();
         }
+    }
+
+    // cycle to the next skin
+    void cycleToNextSkin()
+    {
+        int nextSkin = (activeSkinIndex + 1) % AgentSkins.Count;
+        print("swapping to new skin");
+        activateSkin(nextSkin);
     }
 
     // set the active skin to the skin at the given 0-based index.
