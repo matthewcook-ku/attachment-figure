@@ -72,13 +72,13 @@ public class ProxemicsTracker : Tracker
         Vector3 directionVector = agentLocation - subjectLocation;
         directionVector.Normalize();
 
-        Debug.DrawLine(agentLocation, subjectLocation, Color.red, 2.0f, false);
+        Debug.DrawLine(agentLocation, subjectLocation, Color.red, 0.0f, false);
 
         // find the forward sight line vector of the subject
         // assuming this is a camera, in unity this will be the subject's positive Z vector.
         Vector3 subjectForwardVector = transform.forward;
 
-        Debug.DrawRay(subjectLocation, subjectForwardVector * 10.0f, Color.blue, 2.0f, false);
+        Debug.DrawRay(subjectLocation, subjectForwardVector * 10.0f, Color.blue, 0.0f, false);
 
         // find the angle (degrees) between these 2 vectors
         float angleBetween = Vector3.Angle(subjectForwardVector, directionVector);
