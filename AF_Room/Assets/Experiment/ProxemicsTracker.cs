@@ -10,7 +10,7 @@ using UXF;
 
 public class ProxemicsTracker : Tracker
 {
-    private GameObject agent = null;
+    private AgentController agent = null;
     private int HMDFieldOfView = 110;
 
     public override string MeasurementDescriptor => "proxemics";
@@ -39,9 +39,9 @@ public class ProxemicsTracker : Tracker
         distance = agentSubjectDistance();
         gaze = gazeScore();
 
-        Debug.Log("Writing data row...\n" +
-            "distance: " + distance + " " + "gaze: " + gaze
-            );
+        //Debug.Log("Writing data row...\n" +
+         //   "distance: " + distance + " " + "gaze: " + gaze
+          //  );
 
         var values = new UXFDataRow()
         {
@@ -55,7 +55,7 @@ public class ProxemicsTracker : Tracker
     // calcualte the distance between agent and subject
     public float agentSubjectDistance()
     {
-        Vector3 agentLocation = agent.transform.position;
+        Vector3 agentLocation = agent.gazeTarget.transform.position;
         Vector3 subjectLocation = transform.position;
 
         return Vector3.Distance(agentLocation, subjectLocation);
@@ -67,14 +67,18 @@ public class ProxemicsTracker : Tracker
     public float gazeScore()
     {
         // find the vector from subject to agent
-        Vector3 agentLocation = agent.transform.position;
+        Vector3 agentLocation = agent.gazeTarget.transform.position;
         Vector3 subjectLocation = transform.position;
         Vector3 directionVector = agentLocation - subjectLocation;
         directionVector.Normalize();
 
+        Debug.DrawLine(agentLocation, subjectLocation, Color.red, 2.0f, false);
+
         // find the forward sight line vector of the subject
         // assuming this is a camera, in unity this will be the subject's positive Z vector.
         Vector3 subjectForwardVector = transform.forward;
+
+        Debug.DrawRay(subjectLocation, subjectForwardVector * 10.0f, Color.blue, 2.0f, false);
 
         // find the angle (degrees) between these 2 vectors
         float angleBetween = Vector3.Angle(subjectForwardVector, directionVector);
