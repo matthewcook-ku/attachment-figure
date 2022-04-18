@@ -23,10 +23,29 @@ using UnityEngine;
  *      additinal rigs (AnimationRigging package, optional)
  */
 
-public class AgentSkinController : MonoBehaviour
+
+
+public class AgentController : MonoBehaviour
 {
     private int activeSkinIndex = 0;
-    public List<GameObject> AgentSkins;
+    public List<AgentSkin> AgentSkins;
+
+    public GameObject gazeTarget 
+    { 
+        get 
+        {
+            
+            return activeSkin.gazeTarget;
+        } 
+    }
+
+    public AgentSkin activeSkin
+    {
+        get
+        {
+            return AgentSkins[activeSkinIndex];
+        }
+    }
 
     public GameObject spawnLocation = null;
     public bool updateSpawnLocation = false;
@@ -49,22 +68,28 @@ public class AgentSkinController : MonoBehaviour
         }
 
         // turn off all skins, activate current skin
-        foreach (GameObject skin in AgentSkins)
+        foreach (AgentSkin skin in AgentSkins)
         {
-            skin.SetActive(false);
+            skin.gameObject.SetActive(false);
         }
-        AgentSkins[activeSkinIndex].SetActive(true);
+        AgentSkins[activeSkinIndex].gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("space"))
+        if(UnityEngine.InputSystem.Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            int nextSkin = (activeSkinIndex + 1) % AgentSkins.Count;
-            print("swapping to new skin");
-            activateSkin(nextSkin);
+            cycleToNextSkin();
         }
+    }
+
+    // cycle to the next skin
+    void cycleToNextSkin()
+    {
+        int nextSkin = (activeSkinIndex + 1) % AgentSkins.Count;
+        print("swapping to new skin");
+        activateSkin(nextSkin);
     }
 
     // set the active skin to the skin at the given 0-based index.
@@ -81,7 +106,7 @@ public class AgentSkinController : MonoBehaviour
     // set the active skin to the given skinGameObject. skinGameObject must already be on the list.
     // if null, this call is ignored.
     // if this is already the active skin, no action is taken. 
-    void setActiveSkin(GameObject skinGameObject)
+    void setActiveSkin(AgentSkin skinGameObject)
     {
         if (skinGameObject == null) return;
         if (AgentSkins[activeSkinIndex] == skinGameObject) return;
@@ -109,9 +134,9 @@ public class AgentSkinController : MonoBehaviour
         }
 
         // swap!
-        AgentSkins[activeSkinIndex].SetActive(false);
+        AgentSkins[activeSkinIndex].gameObject.SetActive(false);
         activeSkinIndex = index;
         AgentSkins[activeSkinIndex].transform.SetPositionAndRotation(spawnPosition, spawnRotation);
-        AgentSkins[activeSkinIndex].SetActive(true);
+        AgentSkins[activeSkinIndex].gameObject.SetActive(true);
     }
 }

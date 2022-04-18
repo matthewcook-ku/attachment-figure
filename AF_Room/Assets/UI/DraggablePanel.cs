@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
+
+#if ENABLE_LEGACY_INPUT_MANAGER
+#endif
 
 public class DraggablePanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -30,7 +36,12 @@ public class DraggablePanel : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (dragging)
         {
+#if ENABLE_LEGACY_INPUT_MANAGER
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - offset;
+#elif ENABLE_INPUT_SYSTEM
+            transform.position = Mouse.current.position.ReadValue() - offset;
+#endif
+
         }
     }
 

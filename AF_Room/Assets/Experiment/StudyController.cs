@@ -11,11 +11,11 @@ public class StudyController : MonoBehaviour
     public SubjectController subject;
 
     [Help("Object representing the agent.")]
-    public GameObject agent;
+    public AgentController agent;
 
     [Help("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
-    public GameObject subjectUI;
+    public SubjectUIController subjectUI;
 
     [Help("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
@@ -32,16 +32,16 @@ public class StudyController : MonoBehaviour
         initializeAgent();
 
         // turn on the FPS controller
-        Debug.Log("Turning on FPS controller.");
-        subject.fps.enabled = true;
+        //Debug.Log("Turning on FPS controller.");
+        //subject.fps.enabled = true;
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");
         experimenterUI.gameObject.SetActive(true);
 
         // start subject UI
-        //Debug.Log("Load subject UI.");
-        //subjectUI.SetActive(true);
+        Debug.Log("Load subject UI.");
+        subjectUI.gameObject.SetActive(true);
 
         // start the proxemics tracker
         Debug.Log("Starting proxemics tracker.");
@@ -65,6 +65,7 @@ public class StudyController : MonoBehaviour
 
             if (subject.proxemicsTracker.Recording)
             {
+                //Debug.Log("Recording data row...");
                 subject.proxemicsTracker.RecordRow();
             }
 
@@ -83,6 +84,9 @@ public class StudyController : MonoBehaviour
 
             experimenterUI.experimentPanelController.distanceField.SetTextWithoutNotify(distance.ToString());
             experimenterUI.experimentPanelController.gazeField.SetTextWithoutNotify(gaze.ToString());
+
+            subjectUI.headsetReadoutController.distanceField.SetTextWithoutNotify(distance.ToString());
+            subjectUI.headsetReadoutController.gazeField.SetTextWithoutNotify(gaze.ToString());
 
             // pause for the tracking interval
             yield return new WaitForSeconds(trackingInterval);
