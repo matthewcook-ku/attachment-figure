@@ -10,8 +10,27 @@ using UXF;
 
 public class ProxemicsTracker : Tracker
 {
+
+    // collect from StudyController
     private AgentController agent = null;
-    private int HMDFieldOfView = 110;
+    private int HMDFieldOfView;
+
+    // the most recent calculations for these properties. 
+    public float distance { get; private set; }
+    public float gaze { get; private set; }
+
+    // running count of samples since the last average
+    private uint sampleCountDistance = 0;
+    private uint sampleCountGaze = 0;
+
+    // running totals for averages
+    private float runningTotalDistance = 0.0f;
+    private float runningTotalGaze = 0.0f;
+
+    // values averaged over the averageInterval
+    public float averageDistance { get; private set; }
+    public float averageGaze { get; private set; }
+
 
     public override string MeasurementDescriptor => "proxemics";
     public override IEnumerable<string> CustomHeader => new string[]
@@ -20,10 +39,6 @@ public class ProxemicsTracker : Tracker
             "gaze"
         };
 
-    // the most recent calculations for these properties. 
-    public float distance { get; private set; }
-    public float gaze { get; private set; }
-
     // initialize variables
     void Start()
     {
@@ -31,17 +46,64 @@ public class ProxemicsTracker : Tracker
         agent = AFManager.Instance.studyController.agent;
         if (null == agent) Debug.LogError("agent null in ProxemicsTracker!");
         HMDFieldOfView = AFManager.Instance.studyController.HMDFieldOfView;
+
+        // zero the counts and values, just in case
+        distance = 0.0f;
+        gaze = 0.0f;
+        sampleCountDistance = 0;
+        sampleCountGaze = 0;
+        runningTotalDistance = 0.0f;
+        runningTotalGaze = 0.0f;
+        averageDistance = 0.0f;
+        averageGaze = 0.0f;
+    }
+
+    // Calculate the average of recorded data since the last average was calcualted.
+    // This function will reset the average counters and running totals.
+    private void CalculateAverageValues()
+    {
+        if (sampleCountDistance != 0)
+        {
+            averageDistance = runningTotalDistance / (float)sampleCountDistance;
+            runningTotalDistance = 0.0f;
+            sampleCountDistance = 0;
+        }
+        if (sampleCountGaze != 0)
+        {
+            averageGaze = runningTotalGaze / (float)sampleCountGaze;
+            runningTotalGaze = 0.0f;
+            sampleCountGaze = 0;
+        }
+    }
+
+    // calculate the average data and record it to the trial object
+    public UXFDataRow GetAverageValues()
+    {
+        CalculateAverageValues();
+
+        var values = new UXFDataRow()
+        {
+            ("average distance", averageDistance),
+            ("average gaze", averageGaze)
+        };
+        return values;
     }
 
     // return one row of values to be written to file by the UXF tracking system.
     protected override UXFDataRow GetCurrentValues()
     {
-        distance = agentSubjectDistance();
-        gaze = gazeScore();
+        // update data values
+        distance = AgentSubjectDistance();
+        sampleCountDistance++;
+        runningTotalDistance += distance;
+
+        gaze = GazeScore();
+        sampleCountGaze++;
+        runningTotalGaze += gaze;
 
         //Debug.Log("Writing data row...\n" +
-         //   "distance: " + distance + " " + "gaze: " + gaze
-          //  );
+        //   "distance: " + distance + " " + "gaze: " + gaze
+        //  );
 
         var values = new UXFDataRow()
         {
@@ -53,7 +115,7 @@ public class ProxemicsTracker : Tracker
     }
 
     // calcualte the distance between agent and subject
-    public float agentSubjectDistance()
+    public float AgentSubjectDistance()
     {
         Vector3 agentLocation = agent.gazeTarget.transform.position;
         Vector3 subjectLocation = transform.position;
@@ -64,7 +126,7 @@ public class ProxemicsTracker : Tracker
     // The degree to which the agent falls within the subject's field of view.
     // 1.0 means looking right at the agent.
     // 0.0 means out of the field of view.
-    public float gazeScore()
+    public float GazeScore()
     {
         // find the vector from subject to agent
         Vector3 agentLocation = agent.gazeTarget.transform.position;

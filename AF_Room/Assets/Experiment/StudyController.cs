@@ -20,8 +20,10 @@ public class StudyController : MonoBehaviour
     [Help("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
 
-    [Help("Set the frequency of tracking data collection. 0.1 is 1/10 second.")]
+    [Help("Frequency of tracking data collection in sec. 0.1 is 1/10 second.")]
     public float trackingInterval = 0.3f;
+    [Help("Frequency of averaged data collection in sec. 60 is 1 minute.")]
+    public float averageInterval = 60.0f;
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialStart(Trial trial)
@@ -43,9 +45,10 @@ public class StudyController : MonoBehaviour
         Debug.Log("Load subject UI.");
         subjectUI.gameObject.SetActive(true);
 
-        // start the proxemics tracker
+        // start the proxemics trackers
         Debug.Log("Starting proxemics tracker.");
-        StartCoroutine(ManualRecord());
+        StartCoroutine(ProxemicsTrackingManualRecord());
+        StartCoroutine(ProxemicsTrackingManualRecordAverage());
     }
 
     // set up the agent paramters for this session. 
@@ -56,7 +59,7 @@ public class StudyController : MonoBehaviour
     }
 
     // This coroutine method will set up recording and then continue every trackingInterval seconds to manually signal the porixemics tracker to record a row of data.
-    IEnumerator ManualRecord()
+    IEnumerator ProxemicsTrackingManualRecord()
     {
         while(true)
         {
@@ -69,8 +72,8 @@ public class StudyController : MonoBehaviour
                 subject.proxemicsTracker.RecordRow();
             }
 
-            float distance = subject.proxemicsTracker.agentSubjectDistance();
-            float gaze = subject.proxemicsTracker.gazeScore();
+            float distance = subject.proxemicsTracker.AgentSubjectDistance();
+            float gaze = subject.proxemicsTracker.GazeScore();
 
             // display the new data in the UI
             //Debug.Log("Updating UI with tracking data.\n" +
@@ -92,6 +95,23 @@ public class StudyController : MonoBehaviour
             yield return new WaitForSeconds(trackingInterval);
         }
     }
+
+    // Coroutine to record average data from the proxemics tracker.
+    IEnumerator ProxemicsTrackingManualRecordAverage()
+    {
+        while (true)
+        {
+            if (subject.proxemicsTracker.Recording && subject.proxemicsAverageTracker.Recording)
+            {
+                //Debug.Log("Recording data average row...");
+                subject.proxemicsAverageTracker.RecordRow();
+            }
+
+            // pause for the tracking interval
+            yield return new WaitForSeconds(averageInterval);
+        }
+    }
+
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialEnd()
