@@ -10,6 +10,8 @@ public class SpeechPanelController : MonoBehaviour
     public InputField chatInputField;
     public ChatHistoryScollViewController chatHistory;
 
+    public GameObject TTSProvider;
+
     private void Start()
     {
         if (null == chatInputField) Debug.LogError("Chat Input Field missing on Speech Panel Controller!");
@@ -36,7 +38,7 @@ public class SpeechPanelController : MonoBehaviour
         Debug.Log("Text Update Ended: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         // Detect if the user pressed enter, or if the field just lost focus.
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetButtonDown("Submit"))
+        if (UnityEngine.InputSystem.Keyboard.current.enterKey.wasPressedThisFrame || UnityEngine.InputSystem.Keyboard.current.numpadEnterKey.wasPressedThisFrame)
         {
             if(chatInputField.text != string.Empty)
             {
@@ -72,5 +74,9 @@ public class SpeechPanelController : MonoBehaviour
     void speak(string text)
     {
         Debug.Log("SPEAK: " + text);
+
+        // readspeaker
+        TextSpeaker tts = TTSProvider.GetComponent<TextSpeaker>();
+        tts.Say(text);
     }
 }

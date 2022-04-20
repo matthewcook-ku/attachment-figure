@@ -78,7 +78,7 @@ public class AgentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(UnityEngine.InputSystem.Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(UnityEngine.InputSystem.Keyboard.current.backquoteKey.wasPressedThisFrame)
         {
             cycleToNextSkin();
         }
