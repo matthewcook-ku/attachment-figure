@@ -22,5 +22,9 @@ public class ExperimentGenerator : MonoBehaviour
         //{
         //    trial.settings.SetValue("key", "value");
         //}
+
+        // set the session to cleanup safely if the application quits
+        uxfSession.endOnDestroy = true;
+        uxfSession.endOnQuit = true;
     }
 }

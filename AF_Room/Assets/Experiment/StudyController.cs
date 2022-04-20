@@ -12,6 +12,8 @@ public class StudyController : MonoBehaviour
 
     [Help("Object representing the agent.")]
     public AgentController agent;
+    [Help("Layer Mask for proxemics gaze target ray casting.")]
+    public LayerMask gazeTargetLayerMask;
 
     [Help("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
@@ -63,9 +65,6 @@ public class StudyController : MonoBehaviour
     {
         while(true)
         {
-            //if (subject == null) Debug.Log("subject null in manual record.");
-            //if (subject.proxemicsTracker == null) Debug.Log("tracker null in manual record.");
-
             if (subject.proxemicsTracker.Recording)
             {
                 //Debug.Log("Recording data row...");
@@ -113,10 +112,22 @@ public class StudyController : MonoBehaviour
     }
 
 
-    // This method should be called by the OnTrialBegin event in the UXF rig.
+    // This method should be called by the OnTrialEnd event in the UXF rig.
     public void TrialEnd()
     {
+        Debug.Log("Ending Trial...");
+        
         // stop the tracking
         StopAllCoroutines();
+    }
+    // This method should be called by the PreSessionEnd event in the UXF rig.
+    public void PreSessionEnd()
+    {
+        Debug.Log("Ending Session...");
+    }
+    // This method should be called by the OnSessionEnd event in the UXF rig.
+    public void SessionEnd()
+    {
+        Debug.Log("Session Ended ... Safe to Quit");
     }
 }

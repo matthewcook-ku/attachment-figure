@@ -11,7 +11,9 @@ public class ProxemicsAverageTracker : Tracker
     public override IEnumerable<string> CustomHeader => new string[]
         {
             "average distance",
-            "average gaze"
+            "distance samples",
+            "average gaze",
+            "gaze samples"
         };
     public ProxemicsTracker proxemicsTracker = null;
 
