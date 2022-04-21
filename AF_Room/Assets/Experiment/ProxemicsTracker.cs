@@ -188,12 +188,12 @@ public class ProxemicsTracker : Tracker
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, gazeTargetLayerMask, QueryTriggerInteraction.Collide))
         {
             Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow, 2.0f, true);
-            Debug.Log("Raycast Hit ***** !!");
+            //Debug.Log("Raycast Hit ***** !!");
         }
         else
         {
             Debug.DrawRay(transform.position, transform.forward * 10.0f, Color.white, 2.0f, true);
-            Debug.Log("Raycast Miss");
+            //Debug.Log("Raycast Miss");
         }
     }
 }
