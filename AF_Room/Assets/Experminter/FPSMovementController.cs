@@ -2,6 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// FPS Style Player Movement Control
+//
+// This is a simple implementation of an FPS style player controller.
+// Note that this uses the new unity InputSystem controls.
+//
+// This controller should be placed with a CharacterController component. Place this on an empty, and then place the player camera as a child. This allows the camera to look left/right, but the whole object to tilt up/down.
+//
+// Inputs:
+// See the FPSControls object for input actions and bindings.
+// See also : https://docs.unity3d.com/Packages/com.unity.inputsystem@1.0/manual/QuickStartGuide.html 
+
 [RequireComponent(typeof(CharacterController))]
 
 public class FPSMovementController : MonoBehaviour
@@ -15,8 +26,6 @@ public class FPSMovementController : MonoBehaviour
     bool runButton;
     float lookX;
     float lookY;
-
-    public bool fly = false;
 
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;

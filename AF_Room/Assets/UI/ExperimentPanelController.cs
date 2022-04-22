@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UXF;
 
+// Controller for the Experiment UI
+//
+// This is the pannel where info about the current running tiral / block / session should be placed. It's purpose is to let the experimenter monitor things.
+//
+// Connections:
+// ExperimenterUI - ExperimentPanel
+
 public class ExperimentPanelController : MonoBehaviour
 {
     public InputField distanceField;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controller for the Animation UI Panel
+
 public class AnimationPanelController : MonoBehaviour
 {
     public void smileExpButtonPressed()

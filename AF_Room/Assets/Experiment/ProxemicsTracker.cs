@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UXF;
 
-//
-// Tracker to record proxemics data for the trial.
+// UXF Tracker for proximity data
+// 
+// Tracker to record proxemics data for the trial:
+//  - distance between this object and a target
+//  - how much this object is "looking at" the target
 // Attach this tracker to an object that represents the location and direction of the player's view. Probably a camera or empty parented to the camera.
+// Create a layer to represent objects that will be targets. This is used for ray casting.
 //
+// See: https://github.com/immersivecognition/unity-experiment-framework/wiki/Tracker-system
+//
+// Unity Settings:
+// Layer 6 set as Gaze Target
+//
+// Connections:
+// UXF_Rig - Data Collection Tab: add to tracked object.
 
 public class ProxemicsTracker : Tracker
 {
@@ -14,7 +25,7 @@ public class ProxemicsTracker : Tracker
     // collect from StudyController
     private AgentController agent = null;
     private int HMDFieldOfView;
-    private LayerMask gazeTargetLayerMask;
+    private LayerMask gazeTargetLayerMask; // layer #6
 
     // the most recent calculations for these properties. 
     public float distance { get; private set; }

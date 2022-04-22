@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Controller for elements related to the study subject.
+//
+// This is the central place to access and adjust anything to do with the subject. This component should be on a main subject object with all subject related elements as children.
+//
+// This currently includes:
+// - access to proximity trackers
+// - VR display elements and camera should be children under this game object
+
+
 public class SubjectController : MonoBehaviour
 {
     // will be collected from children in Start
@@ -12,14 +21,6 @@ public class SubjectController : MonoBehaviour
     void Start()
     {
         proxemicsTracker = GetComponentInChildren<ProxemicsTracker>();
-        if(null == proxemicsTracker)
-        {
-            Debug.LogError("Missing ProxemicsTracker - make sure some child of the subject game object has a tracker attached.");
-        }
         proxemicsAverageTracker = GetComponentInChildren<ProxemicsAverageTracker>();
-        if (null == proxemicsAverageTracker)
-        {
-            Debug.LogError("Missing ProxemicsAverageTracker - make sure some child of the subject game object has a tracker attached.");
-        }
     }
 }

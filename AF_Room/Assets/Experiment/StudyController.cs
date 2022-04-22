@@ -3,7 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UXF;
 
-// This script drives the major events of the study session.
+// UXF Session Driver
+//
+// This script drives the major events of the study session. This is the place to sequence out any events fro the study.
+// This is also the central place to put settings for this session. Objects implementing the session should come here to collect those settings. 
+// This will probably need to be broken up into different sessions for the different studies.
+//
+// Elements
+// - UXF event handlers
+// - manual tracking data collection
+// - updating UI with live info
+//
+// Connections:
+// Subject - subject controller, and down to proxemics trackers
+// Agent - agent controller
+// ExperimenterUI
+// SubjectUI
+//
+// UXF_Rig - connect event handlers to Events tab
 
 public class StudyController : MonoBehaviour
 {

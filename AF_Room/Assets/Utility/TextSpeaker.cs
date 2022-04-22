@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using ReadSpeaker;
 
+// ReadSpeaker.ai TTS Manager
+//
+// This component initializes and manages the ReadSpeaker TTS system.
+// This should be added to a game object with a TTSSpeaker and an AudioSource.
+//
+// see: https://www.readspeaker.ai/blog/unity-text-to-speech-plugin/
+// see: https://youtu.be/VjTudTubypE
+//
+// InputSystem:
+// 'x' - stop voice playback
 
 public class TextSpeaker : MonoBehaviour
 {

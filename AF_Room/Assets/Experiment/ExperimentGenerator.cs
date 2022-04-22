@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// add the UXF namespace
 using UXF;
+
+// UXF Setup Object
+//
+// This object is responsible for setting up the sessions, blocks, and trials for the UXF framrwork. This is also a place to store any settings into the trial or settings objects.
+// see: https://github.com/immersivecognition/unity-experiment-framework/wiki/Session-generation
+//
+// Connections:
+// UXF_Rig Session component
+
 
 public class ExperimentGenerator : MonoBehaviour
 {

@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
+// Controller for the Chat History UI component
+//
+// Turns a ScrollView into a chat history.
+// - text can be appended to the end of the view easily.
+// - the view can be set to always scroll to the bottom
+//
+// This controller should be attached to a ScrollView UI object.
+
 public class ChatHistoryScollViewController : MonoBehaviour
 {
     public Scrollbar verticalScrollbar;
@@ -23,7 +31,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
     }
 
     private ScrollRect scrollRect;
-
+    // should the scroll area always show the bottom as new lines are added
     public bool scrollToBottom = true;
 
     // Start is called before the first frame update
@@ -33,10 +41,8 @@ public class ChatHistoryScollViewController : MonoBehaviour
         if (null == horizontalScrollbar) Debug.LogError("Hoizontal Scrollbar not connected in Chat History Scroll View Controller!");
 
         historyText = GetComponentInChildren<Text>();
-        if (null == historyText) Debug.LogError("Text object missing in Chat History Scroll View Controller!");
 
         scrollRect = GetComponentInChildren<ScrollRect>();
-        if (null == historyText) Debug.LogError("ScrollRect missing from Chat History Scroll View Controller!");
         scrollRect.GetComponentInParent<RectTransform>().pivot = new Vector2(0.0f, 0.0f); // set y pivot to 0 to scroll to bottom.
     }
 

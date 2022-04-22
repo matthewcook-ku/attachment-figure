@@ -8,6 +8,11 @@ using UnityEngine.InputSystem;
 #if ENABLE_LEGACY_INPUT_MANAGER
 #endif
 
+// Make a UI Panel draggable
+//
+// Allows a UI panel to be grabbed with the mouse and dragged around the screen, like a desktop window. Attach to any UI panel object.
+// This script works with both the old and new input systems.
+
 public class DraggablePanel : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
