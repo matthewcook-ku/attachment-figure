@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /*
  * Allow swapping of skins.
@@ -52,6 +53,23 @@ public class AgentController : MonoBehaviour
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
 
+    AgentControls agentControls;
+
+    private void Awake()
+    {
+        agentControls = new AgentControls();
+        agentControls.PuppetControls.SwapSkins.performed += context => cycleToNextSkin();
+    }
+
+    private void OnEnable()
+    {
+        agentControls.Enable();
+    }
+    private void OnDisable()
+    {
+        agentControls.Disable();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,15 +91,6 @@ public class AgentController : MonoBehaviour
             skin.gameObject.SetActive(false);
         }
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(UnityEngine.InputSystem.Keyboard.current.backquoteKey.wasPressedThisFrame)
-        {
-            cycleToNextSkin();
-        }
     }
 
     // cycle to the next skin
