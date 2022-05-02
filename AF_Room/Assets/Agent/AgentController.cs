@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 /*
  * Allow swapping of skins.
@@ -24,22 +23,36 @@ using UnityEngine.InputSystem;
  *      additinal rigs (AnimationRigging package, optional)
  */
 
-
-
 public class AgentController : MonoBehaviour
 {
+    public enum BodyAction
+    {
+        None = 0,
+        HeadNod = 1,
+        HeadShake = 2,
+        HeadTiltRight = 3,
+        HeadTiltNeutral = 4,
+        HeadTiltLeft = 5,
+        BodyLeanForward = 6,
+        BodyLeanNeutral = 7,
+        BodyLeanBack = 8,
+        Blink = 9
+    };
+    public enum FaceExpression
+    {
+        None = 0,
+        Neutral = 1,
+        Smile = 2,
+        Frown = 3,
+        Concern = 4,
+        Disgust = 5,
+        Anger = 6,
+        Laugh = 7
+    };
+
+    // skins
     private int activeSkinIndex = 0;
     public List<AgentSkin> AgentSkins;
-
-    public GameObject gazeTarget 
-    { 
-        get 
-        {
-            
-            return activeSkin.gazeTarget;
-        } 
-    }
-
     public AgentSkin activeSkin
     {
         get
@@ -48,19 +61,33 @@ public class AgentController : MonoBehaviour
         }
     }
 
+    // gaze target
+    public GameObject gazeTarget 
+    { 
+        get 
+        {
+            return activeSkin.gazeTarget;
+        } 
+    }
+
+    // spawn point
     public GameObject spawnLocation = null;
     public bool updateSpawnLocation = false;
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
 
+    // control set
     AgentControls agentControls;
 
     private void Awake()
     {
         agentControls = new AgentControls();
-        agentControls.PuppetControls.SwapSkins.performed += context => cycleToNextSkin();
-    }
 
+        agentControls.Skin.SwapSkins.performed += context => cycleToNextSkin();
+
+        //agentControls.Action.HeadNod.performed += context => return;
+
+    }
     private void OnEnable()
     {
         agentControls.Enable();
@@ -147,5 +174,75 @@ public class AgentController : MonoBehaviour
         activeSkinIndex = index;
         AgentSkins[activeSkinIndex].transform.SetPositionAndRotation(spawnPosition, spawnRotation);
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
+    }
+
+    public void PerformBodyAction(BodyAction action)
+    {
+        Animator animator = activeSkin.animator;
+        switch(action)
+        {
+            case BodyAction.HeadNod:
+                animator.SetTrigger("HeadNod");
+                break;
+            case BodyAction.HeadShake:
+                animator.SetTrigger("HeadShake");
+                break;
+            case BodyAction.HeadTiltRight:
+                //animator.SetTrigger("HeadTiltRight");
+                break;
+            case BodyAction.HeadTiltNeutral:
+                //animator.SetTrigger("HeadTiltNeutral");
+                break;
+            case BodyAction.HeadTiltLeft:
+                //animator.SetTrigger("HeadTiltLeft");
+                break;
+            case BodyAction.BodyLeanForward:
+                //animator.SetTrigger("BodyLeanForward");
+                break;
+            case BodyAction.BodyLeanNeutral:
+                //animator.SetTrigger("BodyLeanNeutral");
+                break;
+            case BodyAction.BodyLeanBack:
+                //animator.SetTrigger("BodyLeanBack");
+                break;
+            case BodyAction.Blink:
+                //animator.SetTrigger("Blink");
+                break;
+            default:
+                Debug.Log("Unknown BodyAction: " + action);
+                break;
+        }
+
+    }
+    public void MakeFace(FaceExpression face)
+    {
+        Animator animator = activeSkin.animator;
+        switch (face)
+        {
+            case FaceExpression.Neutral:
+                animator.SetTrigger("FaceNeutral");
+                break;
+            case FaceExpression.Smile:
+                animator.SetTrigger("FaceSmile");
+                break;
+            case FaceExpression.Frown:
+                animator.SetTrigger("FaceFrown");
+                break;
+            case FaceExpression.Concern:
+                animator.SetTrigger("FaceConcern");
+                break;
+            case FaceExpression.Disgust:
+                animator.SetTrigger("FaceDisgust");
+                break;
+            case FaceExpression.Anger:
+                animator.SetTrigger("FaceAnger");
+                break;
+            case FaceExpression.Laugh:
+                animator.SetTrigger("FaceLaugh");
+                break;
+            default:
+                Debug.Log("Unknown Face: " + face);
+                break;
+        }
     }
 }
