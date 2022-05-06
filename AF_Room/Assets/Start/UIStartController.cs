@@ -1,19 +1,32 @@
 using System.Collections;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using System.IO;
+using SubjectNerd.Utilities;
 using UXF;
 using UXF.UI;
-using SubjectNerd.Utilities; 
 
 public class UIStartController : MonoBehaviour
 {
     private Canvas canvas;
+    private Session session;
+    public FormElement localFilePathElement;
 
-    [Tooltip("Name of experiment used in data output.")]
-    public string experimentName = "my_experiment";
+    public bool RequiresFilePathElement
+    {
+        get
+        {
+            if (session == null) return false;
+            return session.ActiveDataHandlers
+                .Where((dh) => dh is LocalFileDataHander)
+                .Any(dh => ((LocalFileDataHander)dh).dataSaveLocation == DataSaveLocation.AcquireFromUI);
+        }
+    }
 
-    [SubjectNerd.Utilities.Reorderable]
-    public List<FormElementEntry> participantDataPoints = new List<FormElementEntry>();
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +37,17 @@ public class UIStartController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnValidate()
+    {
+        UpdateLocalFileElementState();
+    }
+
+
+
+    void UpdateLocalFileElementState()
+    {
+        if (localFilePathElement != null) localFilePathElement.gameObject.SetActive(RequiresFilePathElement);
     }
 }
