@@ -18,6 +18,7 @@ using UnityEngine.UI;
 public class ExperimenterViewController : MonoBehaviour
 {
     public FPSMovementController fps { get; private set; }
+    public UIStartController startUI { get; private set; }
 
     private Text FPSIndicator;
 
@@ -25,6 +26,7 @@ public class ExperimenterViewController : MonoBehaviour
     void Start()
     {
         fps = GetComponent<FPSMovementController>();
+        startUI = GetComponent<UIStartController>();
         // disable the FPS on startup
         fps.enabled = false;
 
