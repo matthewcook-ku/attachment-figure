@@ -35,7 +35,7 @@ public class StudyController : MonoBehaviour
     [Help("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
     public SubjectUIController subjectUI;
-    public UIStartController startUI;
+    // public UIStartController startUI;
 
     [Help("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
@@ -58,8 +58,10 @@ public class StudyController : MonoBehaviour
         //subject.fps.enabled = true;
 
         // begin start UI
+        /*
         Debug.Log("Load start UI");
         startUI.gameObject.SetActive(true);
+        */
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");
