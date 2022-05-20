@@ -97,6 +97,9 @@ public class ExprSettings : MonoBehaviour
         Session.instance.settings.SetValue("Voice_pitch", voice_pitch);
         Session.instance.settings.SetValue("Voice_vol", voice_vol);
 
+        // Hard coded model selection for now
+        // TODO: 1 -> model_ind eventually
+        Session.instance.settings.SetValue("Model", 1); 
 
 
 
