@@ -17,6 +17,8 @@ public class ExprSettings : MonoBehaviour
     TMP_InputField input;
     TMP_Dropdown expr_drop;
     Slider voice_slider;
+    ModelSelectTracker model;
+    public LocalFileDataHander fileDataHandler;
     public int experiment = 1;
 
     /*
@@ -46,6 +48,8 @@ public class ExprSettings : MonoBehaviour
         string file_path = input.text;
         Debug.Log("File path: " + file_path);
 
+        fileDataHandler.storagePath = file_path;
+
 
         // Session get
         input = GameObject.Find("SesInput").GetComponent<TMP_InputField>();
@@ -60,11 +64,13 @@ public class ExprSettings : MonoBehaviour
 
 
         // Experiment selection get
+        /*
         expr_drop = GameObject.Find("ExpSelectDropDown").GetComponent<TMP_Dropdown>();
         int expr_ind = expr_drop.value;
         string expr_str = expr_drop.options[expr_ind].text;
         Debug.Log("Experiment index: " + expr_ind);
         Debug.Log("Experiment string: " + expr_str);
+        */
 
         // Voice selection get
         expr_drop = GameObject.Find("VoiceSelectDropdown").GetComponent<TMP_Dropdown>();
@@ -82,10 +88,15 @@ public class ExprSettings : MonoBehaviour
         Debug.Log("Voice pitch: " + voice_vol);
 
 
+        // Model selection get
+        model = GameObject.Find("ModelSlctGroup").GetComponent<ModelSelectTracker>();
+        int model_num = model.keyIndex; 
+
+
 
         // Experiment start
         Block attachmentFigureBlock = Session.instance.CreateBlock(1);
-        Session.instance.Begin(expr_str, part_name, 1);
+        Session.instance.Begin("Experiment 1", part_name, 1);
 
         // Settings storage
         Session.instance.settings.SetValue("FilePath", file_path);
@@ -99,11 +110,12 @@ public class ExprSettings : MonoBehaviour
 
         // Hard coded model selection for now
         // TODO: 1 -> model_ind eventually
-        Session.instance.settings.SetValue("Model", 1); 
+        Session.instance.settings.SetValue("Model", model_num); 
 
 
-
-        this.transform.parent.parent.gameObject.SetActive(false);
+        // hard-coded disabling parent, disabling start UI
+        // if you move the hierarchy you will need to +/- .parent
+        this.transform.parent.gameObject.SetActive(false); 
 
         // For multi-scene experiments
         // SceneManager.LoadScene(expr_ind, LoadSceneMode.Single);

@@ -6,27 +6,28 @@ using ReadSpeaker;
 
 public class VoiceTest : MonoBehaviour
 {
-    public GameObject gameObj;
+    public TTSSpeaker speaker;
+    Slider vol_slider;
+    Slider pitch_slider;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        vol_slider = GameObject.Find("VolSlider").GetComponent<Slider>();
+        pitch_slider = GameObject.Find("PitchSlider").GetComponent<Slider>();
+
+        // set initial values
+        vol_slider.value = 0.5f;
+        pitch_slider.value = 0.5f;
     }
 
     void testVoice()
     {
-        Slider voice_slider;
-        TTSSpeaker speaker = gameObj.GetComponent<TTSSpeaker>();
+        float voice_vol = vol_slider.value;
+        float voice_pitch = pitch_slider.value;
 
-        voice_slider = GameObject.Find("VolSlider").GetComponent<Slider>();
-        float voice_vol = voice_slider.value;
-
-        voice_slider = GameObject.Find("PitchSlider").GetComponent<Slider>();
-        float voice_pitch = voice_slider.value;
-
-        // Need to figure out the setter functions for TTSSpeaker
-
-        // speaker.volume = voice_vol * 500; 
-        // speaker.pitch = 50 + (voice_pitch * 140);
+        // update settings in speaker
+        speaker.GetSpeechCharacteristics().Volume = (int)(voice_vol * 500);
+        speaker.GetSpeechCharacteristics().Pitch = (int)(50 + (voice_pitch * 140));
     }
 }
