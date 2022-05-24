@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // Overall controller for items in the experimenter's desktop view.
@@ -18,8 +20,24 @@ using UnityEngine.UI;
 public class ExperimenterViewController : MonoBehaviour
 {
     public FPSMovementController fps { get; private set; }
-
     private Text FPSIndicator;
+
+    private void OnEnable()
+    {
+        AFManager.Instance.InputManager.InputActions.ExperimenterControls.ToggleFPS.performed += OnFPSTogglePerformed;
+    }
+    private void OnDisable()
+    {
+        AFManager.Instance.InputManager.InputActions.ExperimenterControls.ToggleFPS.performed -= OnFPSTogglePerformed;
+    }
+
+    private void OnFPSTogglePerformed(InputAction.CallbackContext obj)
+    {
+        bool fpsToggledState = !fps.enabled;
+        Debug.Log("FPS Controls: " + (fpsToggledState ? "on" : "off"));
+        FPSIndicator.enabled = fpsToggledState;
+        fps.enabled = fpsToggledState;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,18 +48,5 @@ public class ExperimenterViewController : MonoBehaviour
 
         FPSIndicator = GetComponentInChildren<Text>();
         FPSIndicator.enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // toggle on and off the FPS with key
-        if(UnityEngine.InputSystem.Keyboard.current.equalsKey.wasPressedThisFrame || UnityEngine.InputSystem.Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            bool fpsToggledState = !fps.enabled;
-            Debug.Log("FPS Controls: " + (fpsToggledState ? "on" : "off"));
-            FPSIndicator.enabled = fpsToggledState;
-            fps.enabled = fpsToggledState;
-        }
     }
 }

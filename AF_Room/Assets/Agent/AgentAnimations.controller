@@ -463,7 +463,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Facial Expressions
     m_StateMachine: {fileID: 6675143431491082309}
-    m_Mask: {fileID: 31900000, guid: 997e3c9fba06b4b98a772553666697af, type: 2}
+    m_Mask: {fileID: 31900000, guid: eab104cc2a63644378f6a050cb899873, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0

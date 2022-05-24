@@ -18,8 +18,7 @@ using UnityEngine;
 public class FPSMovementController : MonoBehaviour
 {
     // Input System controller
-    FPSControls controls;
-    FPSControls.GroundMovementActions groundMovement;
+    InputControls.FPSControlsActions controls;
     // Input System values from controls
     Vector2 horizontalInput;
     bool jumpButton;
@@ -44,15 +43,14 @@ public class FPSMovementController : MonoBehaviour
 
     private void Awake()
     {
-        controls = new FPSControls();
-        groundMovement = controls.GroundMovement;
+        controls = AFManager.Instance.InputManager.InputActions.FPSControls;
 
         // connect variables to the input controls
-        groundMovement.HorizontalMovement.performed += context => horizontalInput = context.ReadValue<Vector2>();
-        groundMovement.Jump.performed += context => jumpButton = context.ReadValueAsButton();
-        groundMovement.Run.performed += context => runButton = context.ReadValueAsButton();
-        groundMovement.LookX.performed += context => lookX = context.ReadValue<float>();
-        groundMovement.LookY.performed += context => lookY = context.ReadValue<float>();
+        controls.HorizontalMovement.performed += context => horizontalInput = context.ReadValue<Vector2>();
+        controls.Jump.performed += context => jumpButton = context.ReadValueAsButton();
+        controls.Run.performed += context => runButton = context.ReadValueAsButton();
+        controls.LookX.performed += context => lookX = context.ReadValue<float>();
+        controls.LookY.performed += context => lookY = context.ReadValue<float>();
     }
 
     private void OnEnable()
