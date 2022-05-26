@@ -63,7 +63,6 @@ public class ExprSettings : MonoBehaviour
     {
         transform.root.Find("ErrorBox").GetComponent<ErrorBoxToggle>().DisplayError();
     }
-
     private bool checkForms()
     {
         if (checkName() || checkSession() || checkFile() || checkID())
