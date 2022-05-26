@@ -14,6 +14,10 @@ public class ModelSelectTracker : MonoBehaviour
             int j = i; // local copy of i for the lambda function
             Transform child = transform.GetChild(j);
             Button btn = child.GetComponent<Button>();
+            if(i == 0)
+            {
+                btn.Select();
+            }
             btn.onClick.AddListener(() => OnKeyPressed(j));
         }
     }

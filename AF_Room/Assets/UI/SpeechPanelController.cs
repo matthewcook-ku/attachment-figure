@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,9 +21,8 @@ public class SpeechPanelController : MonoBehaviour
     // the system will use the button's text component as the phrase to say.
     public Button[] phraseButtons;
 
-    public InputField chatInputField;
+    public TMP_InputField chatInputField;
     public ChatHistoryScollViewController chatHistory;
-
     public GameObject TTSProvider;
 
     private void Start()
@@ -34,11 +34,12 @@ public class SpeechPanelController : MonoBehaviour
         {
             b.onClick.AddListener(delegate { phraseButtonPressed(b); });
         }
+
     }
 
     public void phraseButtonPressed(Button sender)
     {
-        speak(sender.GetComponentInChildren<Text>().text);
+        speak(sender.GetComponentInChildren<TMP_Text>().text);
     }
 
     // called when the text in the chat field changes. 
@@ -71,6 +72,8 @@ public class SpeechPanelController : MonoBehaviour
 
     void sendChatText()
     {
+        // Debug.Log("Now we are in sendChatText(), and " + chatInputField.text);
+        // Debug.Log(chatInputField);
         string chatText = chatInputField.text;
 
         // clear the chat box

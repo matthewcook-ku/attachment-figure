@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 using UXF;
 using TMPro;
 
@@ -14,12 +15,22 @@ public class ExprSettings : MonoBehaviour
      public static int SessionNum { get; set; }
      */
 
-    TMP_InputField input;
     TMP_Dropdown expr_drop;
     Slider voice_slider;
     ModelSelectTracker model;
     public LocalFileDataHander fileDataHandler;
     public int experiment = 1;
+
+
+    // member variables
+    string part_name = "";
+    string file_path = "";
+    int session_num;
+    int ID_num;
+    int voice_ind;
+    float voice_pitch;
+    float voice_vol;
+    int model_num;
 
     /*
     public enum Model
@@ -37,29 +48,71 @@ public class ExprSettings : MonoBehaviour
 
     public void BeginExperiment()
     {
+        if(checkForms())
+        {
+            getForms();
+        }
+        else
+        {
+            activateErrorForm();
+        }
         
+    }
+
+    public void activateErrorForm()
+    {
+        transform.root.Find("ErrorBox").GetComponent<ErrorBoxToggle>().DisplayError();
+    }
+
+    private bool checkForms()
+    {
+        if (checkName() || checkSession() || checkFile() || checkID())
+        {
+            return false;
+        }
+        return true;
+
+    }
+
+    private bool checkName()
+    {
+        return string.IsNullOrEmpty(GameObject.Find("NameInput").GetComponent<TMP_InputField>().text);
+    }
+
+    private bool checkSession()
+    {
+        return string.IsNullOrEmpty(GameObject.Find("SesInput").GetComponent<TMP_InputField>().text);
+    }
+
+    private bool checkFile()
+    {
+        return string.IsNullOrEmpty(GameObject.Find("FileSaveInput").GetComponent<TMP_InputField>().text);
+    }
+
+    private bool checkID()
+    {
+        return string.IsNullOrEmpty(GameObject.Find("IDInput").GetComponent<TMP_InputField>().text);
+
+    }
+
+    private void getForms()
+    {
         // Participant name get
-        input = GameObject.Find("NameInput").GetComponent<TMP_InputField>();
-        string part_name = input.text;
+        part_name = GameObject.Find("NameInput").GetComponent<TMP_InputField>().text;
         Debug.Log("Participant name: " + part_name);
 
         // Filepath get
-        input = GameObject.Find("FileSaveInput").GetComponent<TMP_InputField>();
-        string file_path = input.text;
+        file_path = GameObject.Find("FileSaveInput").GetComponent<TMP_InputField>().text;
         Debug.Log("File path: " + file_path);
-
         fileDataHandler.storagePath = file_path;
 
-
         // Session get
-        input = GameObject.Find("SesInput").GetComponent<TMP_InputField>();
-        int session_num = int.Parse(input.text);
+        session_num = int.Parse(GameObject.Find("SesInput").GetComponent<TMP_InputField>().text);
         Debug.Log("Session number: " + session_num);
 
 
         // ID get
-        input = GameObject.Find("IDInput").GetComponent<TMP_InputField>();
-        int ID_num = int.Parse(input.text);
+        ID_num = int.Parse(GameObject.Find("IDInput").GetComponent<TMP_InputField>().text);
         Debug.Log("ID: " + ID_num);
 
 
@@ -73,27 +126,20 @@ public class ExprSettings : MonoBehaviour
         */
 
         // Voice selection get
-        expr_drop = GameObject.Find("VoiceSelectDropdown").GetComponent<TMP_Dropdown>();
-        int voice_ind = expr_drop.value;
+        voice_ind = GameObject.Find("VoiceSelectDropdown").GetComponent<TMP_Dropdown>().value;
         Debug.Log("Voice index: " + voice_ind);
 
         // Voice pitch slider get (Range from 0 to 1)
-        voice_slider = GameObject.Find("PitchSlider").GetComponent<Slider>();
-        float voice_pitch = voice_slider.value;
+        voice_pitch = GameObject.Find("PitchSlider").GetComponent<Slider>().value;
         Debug.Log("Voice pitch: " + voice_pitch);
 
         // Voice volume slider get (Range from 0 to 1)
-        voice_slider = GameObject.Find("VolSlider").GetComponent<Slider>();
-        float voice_vol = voice_slider.value;
+        voice_vol = GameObject.Find("VolSlider").GetComponent<Slider>().value;
         Debug.Log("Voice pitch: " + voice_vol);
 
 
         // Model selection get
-        model = GameObject.Find("ModelSlctGroup").GetComponent<ModelSelectTracker>();
-        int model_num = model.keyIndex; 
-
-
-
+        model_num = GameObject.Find("ModelSlctGroup").GetComponent<ModelSelectTracker>().keyIndex;
         // Experiment start
         Block attachmentFigureBlock = Session.instance.CreateBlock(1);
         Session.instance.Begin("Experiment 1", part_name, 1);
@@ -110,12 +156,12 @@ public class ExprSettings : MonoBehaviour
 
         // Hard coded model selection for now
         // TODO: 1 -> model_ind eventually
-        Session.instance.settings.SetValue("Model", model_num); 
+        Session.instance.settings.SetValue("Model", model_num);
 
 
         // hard-coded disabling parent, disabling start UI
         // if you move the hierarchy you will need to +/- .parent
-        this.transform.parent.gameObject.SetActive(false); 
+        this.transform.parent.gameObject.SetActive(false);
 
         // For multi-scene experiments
         // SceneManager.LoadScene(expr_ind, LoadSceneMode.Single);

@@ -13,6 +13,7 @@ using UXF;
 
 public class ExperimentPanelController : MonoBehaviour
 {
+
     public InputField distanceField;
     public InputField gazeField;
 

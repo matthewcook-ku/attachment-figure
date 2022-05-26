@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using TMPro;
 
 // Controller for the Chat History UI component
 //
@@ -15,9 +16,10 @@ using UnityEngine.UIElements;
 public class ChatHistoryScollViewController : MonoBehaviour
 {
     public Scrollbar verticalScrollbar;
-    public Scrollbar horizontalScrollbar;
+    // public Scrollbar horizontalScrollbar;
+    private TMP_Text historyText;
 
-    private Text historyText;
+
     public string text
     {
         get
@@ -26,6 +28,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
         }
         set
         {
+            Debug.Log("I'm about to set.");
             updateTextContent(value);
         }
     }
@@ -38,9 +41,10 @@ public class ChatHistoryScollViewController : MonoBehaviour
     void Start()
     {
         if (null == verticalScrollbar) Debug.LogError("Vertical Scrollbar not connected in Chat History Scroll View Controller!");
-        if (null == horizontalScrollbar) Debug.LogError("Hoizontal Scrollbar not connected in Chat History Scroll View Controller!");
+        // if (null == horizontalScrollbar) Debug.LogError("Hoizontal Scrollbar not connected in Chat History Scroll View Controller!");
 
-        historyText = GetComponentInChildren<Text>();
+        historyText = GetComponentInChildren<TMP_Text>();
+        Debug.Log("historyText is currently" + historyText);
 
         scrollRect = GetComponentInChildren<ScrollRect>();
         scrollRect.GetComponentInParent<RectTransform>().pivot = new Vector2(0.0f, 0.0f); // set y pivot to 0 to scroll to bottom.
@@ -48,6 +52,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
 
     void updateTextContent(string value)
     {
+        Debug.Log("Do we ever make it into updateTextContent");
         // set the text
         historyText.text = value;
 
