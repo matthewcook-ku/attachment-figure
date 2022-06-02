@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 namespace UXF.UI
 {
@@ -11,7 +12,7 @@ namespace UXF.UI
     public class TextElementSetup : MonoBehaviour
     {
 
-        public InputField content;
+        public TMP_InputField content;
 
         public string initialText = "";
 
@@ -37,13 +38,13 @@ namespace UXF.UI
                 switch (dType)
                 {
                     case FormDataType.Float:
-                        content.contentType = InputField.ContentType.DecimalNumber;
+                        content.contentType = TMP_InputField.ContentType.DecimalNumber;
                         break;
                     case FormDataType.Int:
-                        content.contentType = InputField.ContentType.IntegerNumber;
+                        content.contentType = TMP_InputField.ContentType.IntegerNumber;
                         break;
                     case FormDataType.String:
-                        content.contentType = InputField.ContentType.Standard;
+                        content.contentType = TMP_InputField.ContentType.Standard;
                         break;
                     default:
                         throw new Exception("Data type incompatible with TextElement");

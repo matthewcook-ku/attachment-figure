@@ -135,7 +135,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 5087228893661929206, guid: f036c205af655364e83fbb1e7fc16cba, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -592,7 +598,21 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: CT_RTV;CT_PROC;CMS_SALSA
+    4: CT_RTV;CT_PROC
+    7: CT_RTV;CT_PROC
+    13: CT_RTV;CT_PROC
+    14: CT_RTV;CT_PROC
+    19: CT_RTV;CT_PROC
+    21: CT_RTV;CT_PROC
+    25: CT_RTV;CT_PROC
+    27: CT_RTV;CT_PROC
+    28: CT_RTV;CT_PROC
+    29: CT_RTV;CT_PROC
+    30: CT_RTV;CT_PROC
+    32: CT_RTV;CT_PROC
+    33: CT_RTV;CT_PROC
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
