@@ -26,4 +26,9 @@ public class AnimationPanelController : MonoBehaviour
     {
         agent.PerformBodyAction(action.BodyAction);
     }
+
+    public void LeanValueSliderChanged(float value)
+    {
+        agent.activeSkin.LeanDegree = value;
+    }
 }

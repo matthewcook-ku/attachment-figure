@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /*
- * Allow swapping of skins.
+ * Management and Swapping of Avatar Skins.
  * 
  * Apply this controller to a base GameObject, with each skin as a child. Use this base to apply any global transforms to all skins. Any root animations will be applied to skins individually.
  * Add each child skin's root GameObject to the AgentSkins list in the editor.
@@ -25,31 +27,6 @@ using UnityEngine;
 
 public class AgentController : MonoBehaviour
 {
-    public enum BodyAction
-    {
-        None = 0,
-        HeadNod = 1,
-        HeadShake = 2,
-        HeadTiltRight = 3,
-        HeadTiltNeutral = 4,
-        HeadTiltLeft = 5,
-        BodyLeanForward = 6,
-        BodyLeanNeutral = 7,
-        BodyLeanBack = 8,
-        Blink = 9
-    };
-    public enum FaceExpression
-    {
-        None = 0,
-        Neutral = 1,
-        Smile = 2,
-        Frown = 3,
-        Concern = 4,
-        Disgust = 5,
-        Anger = 6,
-        Laugh = 7
-    };
-
     // skins
     private int activeSkinIndex = 0;
     public List<AgentSkin> AgentSkins;
@@ -77,24 +54,19 @@ public class AgentController : MonoBehaviour
     private Quaternion spawnRotation = Quaternion.identity;
 
     // control set
-    AgentControls agentControls;
+    InputControls.AgentControlsActions controls;
 
     private void Awake()
     {
-        agentControls = new AgentControls();
-
-        agentControls.Skin.SwapSkins.performed += context => cycleToNextSkin();
-
-        //agentControls.Action.HeadNod.performed += context => return;
-
+        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
     }
     private void OnEnable()
     {
-        agentControls.Enable();
+        controls.SwapSkins.performed += OnSwapSkins;
     }
     private void OnDisable()
     {
-        agentControls.Disable();
+        controls.SwapSkins.performed -= OnSwapSkins;
     }
 
     // Start is called before the first frame update
@@ -118,6 +90,12 @@ public class AgentController : MonoBehaviour
             skin.gameObject.SetActive(false);
         }
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
+    }
+
+    // input event callback
+    private void OnSwapSkins(InputAction.CallbackContext obj)
+    {
+        cycleToNextSkin();
     }
 
     // cycle to the next skin
@@ -176,73 +154,13 @@ public class AgentController : MonoBehaviour
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
     }
 
-    public void PerformBodyAction(BodyAction action)
+    // pass any animation calls on to the skin.
+    public void PerformBodyAction(AgentSkin.BodyAction action)
     {
-        Animator animator = activeSkin.animator;
-        switch(action)
-        {
-            case BodyAction.HeadNod:
-                animator.SetTrigger("HeadNod");
-                break;
-            case BodyAction.HeadShake:
-                animator.SetTrigger("HeadShake");
-                break;
-            case BodyAction.HeadTiltRight:
-                //animator.SetTrigger("HeadTiltRight");
-                break;
-            case BodyAction.HeadTiltNeutral:
-                //animator.SetTrigger("HeadTiltNeutral");
-                break;
-            case BodyAction.HeadTiltLeft:
-                //animator.SetTrigger("HeadTiltLeft");
-                break;
-            case BodyAction.BodyLeanForward:
-                //animator.SetTrigger("BodyLeanForward");
-                break;
-            case BodyAction.BodyLeanNeutral:
-                //animator.SetTrigger("BodyLeanNeutral");
-                break;
-            case BodyAction.BodyLeanBack:
-                //animator.SetTrigger("BodyLeanBack");
-                break;
-            case BodyAction.Blink:
-                //animator.SetTrigger("Blink");
-                break;
-            default:
-                Debug.Log("Unknown BodyAction: " + action);
-                break;
-        }
-
+        activeSkin.PerformBodyAction(action);
     }
-    public void MakeFace(FaceExpression face)
+    public void MakeFace(AgentSkin.FaceExpression face)
     {
-        Animator animator = activeSkin.animator;
-        switch (face)
-        {
-            case FaceExpression.Neutral:
-                animator.SetTrigger("FaceNeutral");
-                break;
-            case FaceExpression.Smile:
-                animator.SetTrigger("FaceSmile");
-                break;
-            case FaceExpression.Frown:
-                animator.SetTrigger("FaceFrown");
-                break;
-            case FaceExpression.Concern:
-                animator.SetTrigger("FaceConcern");
-                break;
-            case FaceExpression.Disgust:
-                animator.SetTrigger("FaceDisgust");
-                break;
-            case FaceExpression.Anger:
-                animator.SetTrigger("FaceAnger");
-                break;
-            case FaceExpression.Laugh:
-                animator.SetTrigger("FaceLaugh");
-                break;
-            default:
-                Debug.Log("Unknown Face: " + face);
-                break;
-        }
+        activeSkin.MakeFace(face);
     }
 }

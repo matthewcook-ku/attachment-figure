@@ -246,6 +246,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RandomLook",
+                    "type": "Button",
+                    "id": "25d1f342-e3e4-4624-b8de-3b060b8efffc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -301,6 +309,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleEyeLookAt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2977c270-884b-4454-853a-e547c34226ff",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RandomLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

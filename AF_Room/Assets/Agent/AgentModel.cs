@@ -31,7 +31,7 @@ public class AgentModel
         public Side Side;
 
         private RigConstraint _Constraint; // backing field
-        public RigConstraint Constraint // don't use to change weights please, use model vars below
+        public RigConstraint Constraint // don't use to change weights please, use ConstraintWeight vars below
         {
             get { return _Constraint; }
             set
@@ -125,6 +125,7 @@ public class AgentModel
     public class HeadModel : SkinComponent<MultiAimConstraint>
     {
         public GameObject GazeTarget;
+        public MultiParentConstraint GazeConstraint;
         public SkinnedMeshRenderer HeadMesh;
         public GameObject Bone;
         public GameObject LookTarget;
@@ -135,6 +136,7 @@ public class AgentModel
             string output = "";
             output += "Head: \n";
             output += "\t GazeTarget - " + GazeTarget.ToString() + "\n";
+            output += "\t GazeConstraint - " + GazeConstraint.ToString() + "\n";
             output += "\t HeadMesh - " + HeadMesh.ToString() + "\n";
             output += "\t Bone - " + Bone.ToString() + "\n";
             output += "\t Constraint - " + this.Constraint.ToString() + "\n";
@@ -201,6 +203,10 @@ public class AgentModel
     }
 
     // Model Components Belonging to the main model object.
+    public GameObject SkinRootBone;
+    public GameObject LookTarget;
+    public Vector3 LookTargetDefaultPosition { get; private set; }
+    public void ResetLookTargetPosition() { LookTarget.transform.position = LookTargetDefaultPosition; }
     public HeadModel Head;
     public EyeModel[] Eye; // indexes are side enum left/right
     public EyeModel EyeLeft
@@ -251,6 +257,7 @@ public class AgentModel
 
     // This is not a monobehavior, but will be associated with a game object, so stash it here
     private GameObject gameObject;
+    private RigBuilder rigBuilder;
 
 
     // Print out the model parts so we can check if they were done correctly
@@ -275,6 +282,7 @@ public class AgentModel
         Debug.Log("Initializing Agent Model...");
 
         gameObject = obj;
+        rigBuilder = obj.GetComponent<RigBuilder>();
 
         Head = new HeadModel(this);
         Eye = new EyeModel[]
@@ -300,6 +308,10 @@ public class AgentModel
 
         // now print it out to check things look OK.
         PrintModel();
+
+        // TODO: would like to set up all the constraint settings for all parts at this point from script so it does not need to be set up in the inspector.
+        // for now will do this by hand in the inspector. 
+        // see: https://forum.unity.com/threads/changing-two-bone-ik-target-at-runtime-gives-many-warnings.972753/
     }
 
     public void Resolve(GameObject obj)
@@ -313,10 +325,6 @@ public class AgentModel
         Transform rig = obj.transform.Find("AgentRig");
         ResolveRig(rig.gameObject);
 
-        // gaze target
-        Transform gazeTarget = obj.transform.Find("Gaze Target");
-        Head.GazeTarget = gazeTarget.gameObject;
-
         // find the skin's meshes
         ResolveMesh(obj);
     }    
@@ -327,7 +335,8 @@ public class AgentModel
         Debug.Log("\tResolving Skeleton...", obj);
         Transform transform = obj.transform;
 
-        Transform spineRootBone = transform.Find("DEF-spine/DEF-spine.001");
+        Transform skinRootBone = transform.Find("DEF-spine");
+        Transform spineRootBone = skinRootBone.Find("DEF-spine.001");
         Transform clavBone = spineRootBone.Find("DEF-spine.002/DEF-spine.003");
         Transform neckBone = clavBone.Find("DEF-spine.004");
 
@@ -343,6 +352,7 @@ public class AgentModel
         Transform armMidBoneL = armRootBoneL.Find("DEF-upper_arm.L.001/DEF-forearm.L");
         Transform handBoneL = armMidBoneL.Find("DEF-forearm.L.001/DEF-hand.L");
 
+        SkinRootBone = skinRootBone.gameObject;
         Spine.RootBone = spineRootBone.gameObject;
         Spine.TipBone = clavBone.gameObject;
         Neck.Bone = neckBone.gameObject;
@@ -364,6 +374,8 @@ public class AgentModel
     {
         Debug.Log("\tResolving Rig...", obj);
         Transform transform = obj.transform;
+
+        Transform GazeTarget = transform.Find("Gaze Target");
 
         Transform LeanIK = transform.Find("LeanIK");
         Transform LeanTarget = LeanIK.Find("LeanTarget");
@@ -397,6 +409,10 @@ public class AgentModel
         HandLeft.Hint = HintL.gameObject;
         ArmLeft.Constraint = HandLeft.Constraint; // shared with hand
 
+        Head.GazeTarget = GazeTarget.gameObject;
+        Head.GazeConstraint = GazeTarget.gameObject.GetComponent<MultiParentConstraint>();
+        this.LookTarget = LookTarget.gameObject;
+        this.LookTargetDefaultPosition = LookTarget.position;
         Head.Constraint = HeadLookAt.GetComponent<MultiAimConstraint>();
         Head.LookTarget = HeadLookTarget.gameObject;
         Neck.Constraint = NeckLookAt.GetComponent<MultiAimConstraint>();
@@ -414,7 +430,9 @@ public class AgentModel
         Debug.Log("\tResolving Mesh...", obj);
         Transform transform = obj.transform;
 
-        Transform HeadTransform = transform.Find("Wolf3D_Head");
+        // Just storing the head for now since that's where the blendshapes are.
+        // TODO: do we need to cache the other mesh parts for any reason?
+        Transform HeadTransform = transform.Find("Head");
         Head.HeadMesh = HeadTransform.GetComponent<SkinnedMeshRenderer>();
     }
 }

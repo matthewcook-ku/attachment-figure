@@ -259,6 +259,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RandomLook"",
+                    ""type"": ""Button"",
+                    ""id"": ""25d1f342-e3e4-4624-b8de-3b060b8efffc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -314,6 +322,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleEyeLookAt"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2977c270-884b-4454-853a-e547c34226ff"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RandomLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -572,6 +591,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_AgentControls_ToggleLean = m_AgentControls.FindAction("ToggleLean", throwIfNotFound: true);
         m_AgentControls_ToggleHeadLookAt = m_AgentControls.FindAction("ToggleHeadLookAt", throwIfNotFound: true);
         m_AgentControls_ToggleEyeLookAt = m_AgentControls.FindAction("ToggleEyeLookAt", throwIfNotFound: true);
+        m_AgentControls_RandomLook = m_AgentControls.FindAction("RandomLook", throwIfNotFound: true);
         // TestingActions
         m_TestingActions = asset.FindActionMap("TestingActions", throwIfNotFound: true);
         m_TestingActions_TestAction1 = m_TestingActions.FindAction("TestAction1", throwIfNotFound: true);
@@ -706,6 +726,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_AgentControls_ToggleLean;
     private readonly InputAction m_AgentControls_ToggleHeadLookAt;
     private readonly InputAction m_AgentControls_ToggleEyeLookAt;
+    private readonly InputAction m_AgentControls_RandomLook;
     public struct AgentControlsActions
     {
         private @InputControls m_Wrapper;
@@ -715,6 +736,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @ToggleLean => m_Wrapper.m_AgentControls_ToggleLean;
         public InputAction @ToggleHeadLookAt => m_Wrapper.m_AgentControls_ToggleHeadLookAt;
         public InputAction @ToggleEyeLookAt => m_Wrapper.m_AgentControls_ToggleEyeLookAt;
+        public InputAction @RandomLook => m_Wrapper.m_AgentControls_RandomLook;
         public InputActionMap Get() { return m_Wrapper.m_AgentControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -739,6 +761,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @ToggleEyeLookAt.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnToggleEyeLookAt;
                 @ToggleEyeLookAt.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnToggleEyeLookAt;
                 @ToggleEyeLookAt.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnToggleEyeLookAt;
+                @RandomLook.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
+                @RandomLook.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
+                @RandomLook.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
             }
             m_Wrapper.m_AgentControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -758,6 +783,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @ToggleEyeLookAt.started += instance.OnToggleEyeLookAt;
                 @ToggleEyeLookAt.performed += instance.OnToggleEyeLookAt;
                 @ToggleEyeLookAt.canceled += instance.OnToggleEyeLookAt;
+                @RandomLook.started += instance.OnRandomLook;
+                @RandomLook.performed += instance.OnRandomLook;
+                @RandomLook.canceled += instance.OnRandomLook;
             }
         }
     }
@@ -915,6 +943,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnToggleLean(InputAction.CallbackContext context);
         void OnToggleHeadLookAt(InputAction.CallbackContext context);
         void OnToggleEyeLookAt(InputAction.CallbackContext context);
+        void OnRandomLook(InputAction.CallbackContext context);
     }
     public interface ITestingActionsActions
     {
