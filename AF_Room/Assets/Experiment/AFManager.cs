@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +21,10 @@ public class AFManager : MonoBehaviour
 
     // connnections to important elements
     public StudyController studyController { get; private set; }
+    public AgentController agent { get { return studyController.agent; } }
+    public SubjectController subject { get { return studyController.subject; } }
+
+    public InputManager InputManager { get; private set; }
 
     private void Awake()
     {
@@ -37,6 +41,7 @@ public class AFManager : MonoBehaviour
         Instance = this;
 
         // collect references here
-        studyController = GetComponentInChildren<StudyController>();
+        studyController = GetComponent<StudyController>();
+        InputManager = GetComponent<InputManager>();
     }
 }
