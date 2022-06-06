@@ -1,34 +1,61 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Controller for the Animation UI Panel
-//
-// Each Button should have an AgentAnimationPanelSelector attached with the desired nehavior set in the inspector. Pass that instance to this class in the OnClick callbacks below.
-//
-//
 
 public class AnimationPanelController : MonoBehaviour
 {
-    private AgentController agent;
-
-    private void Start()
+    public void smileExpButtonPressed()
     {
-        agent = AFManager.Instance.agent;
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
-
-    public void expressionButtonPressed(AgentAnimationPanelSelector action)
+    public void neutralExpButtonPressed()
     {
-        agent.MakeFace(action.FaceExpression);
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
-
-    public void actionButtonPressed(AgentAnimationPanelSelector action)
+    public void concernExpButtonPressed()
     {
-        agent.PerformBodyAction(action.BodyAction);
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
-
-    public void LeanValueSliderChanged(float value)
+    public void frownExpButtonPressed()
     {
-        agent.activeSkin.LeanDegree = value;
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void disgustExpButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void angerExpButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void laughExpButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void shakeHeadButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void nodHeadButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void leanForwardButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void leanNeutralButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void leanBackButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void crossLegsButtonPressed()
+    {
+        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 }

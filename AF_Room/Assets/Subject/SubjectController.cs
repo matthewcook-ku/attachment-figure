@@ -17,15 +17,10 @@ public class SubjectController : MonoBehaviour
     public ProxemicsTracker proxemicsTracker { get; set; }
     public ProxemicsAverageTracker proxemicsAverageTracker { get; set; }
 
-    // Where to look in order to look at the subject
-    public Transform GazeTarget { get; set; }
-
     // Start is called before the first frame update
     void Start()
     {
         proxemicsTracker = GetComponentInChildren<ProxemicsTracker>();
         proxemicsAverageTracker = GetComponentInChildren<ProxemicsAverageTracker>();
-
-        GazeTarget = transform.Find("Main Camera");
     }
 }
