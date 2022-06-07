@@ -139,7 +139,7 @@ public class AgentSkin : MonoBehaviour
     private void OnDisable()
     {
         // stop random blinking
-        StopRandomBlinks();
+        if (RandomBlinks) StopRandomBlinks();
     }
     private IEnumerator RandomBlinkCoroutine()
     {
