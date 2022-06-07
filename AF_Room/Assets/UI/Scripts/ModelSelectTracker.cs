@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class ModelSelectTracker : MonoBehaviour
 {
     public int keyIndex = 0;
+    private Image border;
     private void Start()
     {
         for (int i = 0;  i < transform.childCount; i++)
@@ -20,6 +21,8 @@ public class ModelSelectTracker : MonoBehaviour
             }
             btn.onClick.AddListener(() => OnKeyPressed(j));
         }
+        border = transform.parent.Find("Border").GetComponent<Image>();
+        // border.transform.position = transform.GetChild(0).position;
     }
 
     void Update()
@@ -29,6 +32,7 @@ public class ModelSelectTracker : MonoBehaviour
 
     private void OnKeyPressed(int selectedIndex)
     {
+        border.transform.position = transform.GetChild(selectedIndex).position;
         keyIndex = selectedIndex;
         Debug.Log(selectedIndex);
     }
