@@ -40,6 +40,38 @@ public class AgentSkin : MonoBehaviour
         Laugh = 7
     };
 
+    // Set of flags to note what constraints are on or off to store state.
+    // Make sure all added states are powers of 2
+    // https://stackoverflow.com/questions/3261451/using-a-bitmask-in-c-sharp
+    //
+    // To set a flag:
+    // SkinConstraint state |= SkinConstraint.Lean; // add lean
+    // SkinConstraint state = SkinConstraint.Lean | SkinConstraint.HandRight; // set to lean and RH
+    //
+    // To unset a flag:
+    // state = state & (~SkinConstraint.Lean); // unset lean
+    //
+    // To test a flag:
+    // bool HasLean = (state & SkinConstraint.Lean) != SkinConstraint.None;
+    // bool HasLean = (state & SkinConstraint.Lean) == SkinConstraint.Lean; // also works
+    // bool HasLean = state.HasFlags(SkinConstraint.Lean); // also works
+    [Flags] public enum SkinConstraintFlags
+    {
+        None = 0,
+        Lean = 1,
+        HandRight = 2,
+        HandLeft = 4,
+        NeckLookAt = 8,
+        HeadLookAt = 16,
+        EyeLookAtRight = 32,
+        EyeLookAtLeft = 64,
+    };
+    private SkinConstraintFlags storedActiveConstraints;
+    private bool constraintsPaused = false;
+
+    // constraint transitions
+    public float ConstraintTransitionTime = 1.0f; // time in seconds to go in and out of constraint. 
+
     // structure components
     [HideInInspector]
     public AgentModel Model;
@@ -48,6 +80,7 @@ public class AgentSkin : MonoBehaviour
 
     // pose settings
     // blinking
+    public bool RandomBlinks;
     [Tooltip("Time in sec between blinks.")]
     public float blinkRate = 5.0f;
     [Tooltip("Blink variance random +/- this many sec.")]
@@ -87,19 +120,27 @@ public class AgentSkin : MonoBehaviour
         controls.ToggleEyeLookAt.performed += OnToggleEyeLookAt;
     }
 
+    private void StartRandomBlinks()
+    {
+        BlinkCoroutine = StartCoroutine(RandomBlinkCoroutine());
+    }
+    private void StopRandomBlinks()
+    {
+        StopCoroutine(BlinkCoroutine);
+    }
+
     private void OnEnable()
     {
+        // turn off all constraints
+
         // begin the blink coroutine
-        Debug.Log("Starting Blink Coroutine");
-        BlinkCoroutine = StartCoroutine(RandomBlinkCoroutine());
+        if (RandomBlinks) StartRandomBlinks();
     }
     private void OnDisable()
     {
         // stop random blinking
-        Debug.Log("Stopping Blink Coroutine");
-        StopCoroutine(BlinkCoroutine);
+        StopRandomBlinks();
     }
-
     private IEnumerator RandomBlinkCoroutine()
     {
         float randomWait;
@@ -107,9 +148,82 @@ public class AgentSkin : MonoBehaviour
         {
             randomWait = blinkRate + UnityEngine.Random.Range(-blinkVariance, blinkVariance);
             animator.SetTrigger("Blink");
-            Debug.Log("BLINK! - next blink in " + randomWait + " sec");
+            //Debug.Log("BLINK! - next blink in " + randomWait + " sec");
             yield return new WaitForSeconds(randomWait);
         }
+    }
+
+    private void PrintFlags(SkinConstraintFlags flags, string prompt = "")
+    {
+        string result = "";
+        result += (flags.HasFlag(SkinConstraintFlags.Lean) ? "[Ln]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.HandRight) ? "[HR]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.HandLeft) ? "[HL]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.NeckLookAt) ? "[Nk]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.HeadLookAt) ? "[Hd]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.EyeLookAtRight) ? "[ER]" : "[ ]");
+        result += (flags.HasFlag(SkinConstraintFlags.EyeLookAtLeft) ? "[EL]" : "[ ]");
+        Debug.Log(prompt + result);
+    }
+    private SkinConstraintFlags GetCurrentActiveConstraints()
+    {
+        SkinConstraintFlags active = SkinConstraintFlags.None;
+        if (Model.Spine.ConstraintActive) active |= SkinConstraintFlags.Lean;
+        if (Model.HandRight.ConstraintActive) active |= SkinConstraintFlags.HandRight;
+        if (Model.HandLeft.ConstraintActive) active |= SkinConstraintFlags.HandLeft;
+        if (Model.Neck.ConstraintActive) active |= SkinConstraintFlags.NeckLookAt;
+        if (Model.Head.ConstraintActive) active |= SkinConstraintFlags.HeadLookAt;
+        if (Model.EyeRight.ConstraintActive) active |= SkinConstraintFlags.EyeLookAtRight;
+        if (Model.EyeLeft.ConstraintActive) active |= SkinConstraintFlags.EyeLookAtLeft;
+        return active;
+    }
+    private void ActivateConstraints(SkinConstraintFlags flags)
+    {
+        PrintFlags(flags, "Activating: ");
+
+        if (flags.HasFlag(SkinConstraintFlags.Lean))
+            Model.Spine.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.HandRight))
+            Model.HandRight.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.HandLeft))
+            Model.HandLeft.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.NeckLookAt))
+            Model.Neck.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.HeadLookAt))
+            Model.Head.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.EyeLookAtRight))
+            Model.EyeRight.TweenOnConstraint(ConstraintTransitionTime);
+        if (flags.HasFlag(SkinConstraintFlags.EyeLookAtLeft))
+            Model.EyeLeft.TweenOnConstraint(ConstraintTransitionTime);
+    }
+    private void DeactivateConstraints()
+    {
+            Model.Spine.TweenOffConstraint(ConstraintTransitionTime);
+            Model.HandRight.TweenOffConstraint(ConstraintTransitionTime);
+            Model.HandLeft.TweenOffConstraint(ConstraintTransitionTime);
+            Model.Neck.TweenOffConstraint(ConstraintTransitionTime);
+            Model.Head.TweenOffConstraint(ConstraintTransitionTime);
+            Model.EyeRight.TweenOffConstraint(ConstraintTransitionTime);
+            Model.EyeLeft.TweenOffConstraint(ConstraintTransitionTime);
+    }
+
+    public void PauseConstraintsForAnimation()
+    {
+        if (constraintsPaused) return;
+        constraintsPaused = true;
+
+        //Debug.Log("Pausing constraints to animate");
+        storedActiveConstraints = GetCurrentActiveConstraints();
+        //PrintFlags(storedActiveConstraints, "Turning OFF Constraints: ");
+        DeactivateConstraints();
+    }
+    public void ResumeConstraintsForAnimation()
+    {
+        if (!constraintsPaused) return;
+        constraintsPaused = false;
+
+        //PrintFlags(storedActiveConstraints, "Turning ON Constraints: ");
+        ActivateConstraints(storedActiveConstraints);
     }
 
     /*
@@ -148,8 +262,12 @@ public class AgentSkin : MonoBehaviour
     private void OnToggleHandIK(InputAction.CallbackContext obj)
     {
         Debug.Log("Toggle Hand IK");
-        FixBothHandIKPositions();
-        Model.ToggleBothHandConstraints();
+        //FixBothHandIKPositions();
+        //Model.ToggleBothHandConstraints();
+        //ToggleConstraint(SkinConstraint.HandBoth);
+
+        Model.HandRight.TweenToggleConstraint(ConstraintTransitionTime);
+        Model.HandLeft.TweenToggleConstraint(ConstraintTransitionTime);
     }
     private void OnToggleLean(InputAction.CallbackContext obj)
     {
@@ -309,6 +427,28 @@ public class AgentSkin : MonoBehaviour
         leanTarget.SetPositionAndRotation(leanPosition, leanRotation);
     }
 
+    
+
+
+
+
+
+    private void UpdateLookTargetToSubject()
+    {
+        UpdateLookTarget(AFManager.Instance.subject.GazeTarget);
+    }
+    private void UpdateLookTarget(Transform target)
+    {
+        Model.LookTarget.transform.position = target.position;
+    }
+    private void CenterLookTarget()
+    {
+        Model.ResetLookTargetPosition();
+    }
+
+
+
+    // Useful Utilities
     // place one game object in the same position and rotation of another
     private void alignTransforms(GameObject src, GameObject dst)
     {
@@ -317,18 +457,5 @@ public class AgentSkin : MonoBehaviour
     private void alignTransforms(Transform src, Transform dst)
     {
         dst.SetPositionAndRotation(src.position, src.rotation);
-    }
-
-    void UpdateLookTargetToSubject()
-    {
-        UpdateLookTarget(AFManager.Instance.subject.GazeTarget);
-    }
-    void UpdateLookTarget(Transform target)
-    {
-        Model.LookTarget.transform.position = target.position;
-    }
-    void ClearLookTarget()
-    {
-        Model.ResetLookTargetPosition();
     }
 }

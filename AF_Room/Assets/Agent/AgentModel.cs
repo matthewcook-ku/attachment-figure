@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using DG.Tweening;
 
 // This class represents an organized and easy to navigate map of the character.
 // NOTICE: this is not a MonoBehavior
@@ -27,6 +28,9 @@ public class AgentModel
         // this provides a central spot to go for access to all parts.
         public AgentModel Model;
 
+        // tweener used to control weight
+        Tweener WeightTweener;
+
         // define if this component has a side, or is singular
         public Side Side;
 
@@ -40,7 +44,7 @@ public class AgentModel
                 if(Constraint.weight > 0.0f) StoredConstraintWeight = Constraint.weight;
             }
         }
-        private float StoredConstraintWeight = 1.0f;
+        private float StoredConstraintWeight = 1.0f; // if constraint is read in as 0.0, then default to 1.0 for stored weight
         public float ConstraintWeight
         {
             get { return Constraint.weight; }
@@ -51,6 +55,29 @@ public class AgentModel
                 Constraint.weight = value;
                 //Debug.Log("Constraint Weight is now " + Constraint.weight);
             }
+        }
+        public void TweenToConstraintWeight(float to, float duration)
+        {
+            //Debug.Log("Tweening Constraint Weight from: " + ConstraintWeight + " to: " + to);
+            if (to == ConstraintWeight) return;
+
+            // if there is a tween going, finish it now.
+            if(WeightTweener.IsActive() && WeightTweener.IsPlaying()) WeightTweener.Complete();
+
+            // store the constraint weight here and then change value directly
+            // this way the current weight is stored, and not the last tweened weight before zero
+            StoredConstraintWeight = Constraint.weight;
+            WeightTweener = DOTween.To((value) => Constraint.weight = value, ConstraintWeight, to, duration);
+        }
+        public void TweenOnConstraint(float duration)
+        {
+            if (ConstraintActive) return;
+            TweenToConstraintWeight(StoredConstraintWeight, duration);
+        }
+        public void TweenOffConstraint(float duration)
+        {
+            if (!ConstraintActive) return;
+            TweenToConstraintWeight(0.0f, duration);
         }
         public bool ConstraintActive
         {
@@ -70,6 +97,15 @@ public class AgentModel
                 ConstraintActive = false;
             else
                 ConstraintActive = true;
+        }
+        public void TweenToggleConstraint(float duration)
+        {
+            bool currentlyActive = ConstraintActive;
+            Debug.Log("Tween Toggling Constraint: " + currentlyActive + " -> " + !currentlyActive);
+            if (currentlyActive)
+                TweenToConstraintWeight(0.0f, duration);
+            else
+                TweenToConstraintWeight(StoredConstraintWeight, duration);
         }
 
         // constructor
