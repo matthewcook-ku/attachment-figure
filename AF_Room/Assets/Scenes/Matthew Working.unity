@@ -24101,7 +24101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024694805}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.644}
+  m_LocalPosition: {x: 0, y: 0, z: 0.858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8789818787141408053}
@@ -26148,10 +26148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AgentSkins:
+  - {fileID: 2015102904}
   - {fileID: 48854525}
   - {fileID: 2044366862}
   - {fileID: 896051221}
-  - {fileID: 2015102904}
   spawnLocation: {fileID: 1498791047}
   updateSpawnLocation: 0
 --- !u!1 &2129696446
@@ -26579,7 +26579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7402814106120630684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.44, z: 0}
+  m_LocalPosition: {x: 0, y: 1.158, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
