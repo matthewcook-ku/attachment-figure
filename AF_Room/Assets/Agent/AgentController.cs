@@ -1,9 +1,11 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /*
- * Allow swapping of skins.
+ * Management and Swapping of Avatar Skins.
  * 
  * Apply this controller to a base GameObject, with each skin as a child. Use this base to apply any global transforms to all skins. Any root animations will be applied to skins individually.
  * Add each child skin's root GameObject to the AgentSkins list in the editor.
@@ -23,22 +25,11 @@ using UnityEngine;
  *      additinal rigs (AnimationRigging package, optional)
  */
 
-
-
 public class AgentController : MonoBehaviour
 {
+    // skins
     private int activeSkinIndex = 0;
     public List<AgentSkin> AgentSkins;
-
-    public GameObject gazeTarget 
-    { 
-        get 
-        {
-            
-            return activeSkin.gazeTarget;
-        } 
-    }
-
     public AgentSkin activeSkin
     {
         get
@@ -47,10 +38,36 @@ public class AgentController : MonoBehaviour
         }
     }
 
+    // gaze target
+    public GameObject gazeTarget 
+    { 
+        get 
+        {
+            return activeSkin.gazeTarget;
+        } 
+    }
+
+    // spawn point
     public GameObject spawnLocation = null;
     public bool updateSpawnLocation = false;
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
+
+    // control set
+    InputControls.AgentControlsActions controls;
+
+    private void Awake()
+    {
+        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+    }
+    private void OnEnable()
+    {
+        controls.SwapSkins.performed += OnSwapSkins;
+    }
+    private void OnDisable()
+    {
+        controls.SwapSkins.performed -= OnSwapSkins;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -75,13 +92,10 @@ public class AgentController : MonoBehaviour
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    // input event callback
+    private void OnSwapSkins(InputAction.CallbackContext obj)
     {
-        if(UnityEngine.InputSystem.Keyboard.current.backquoteKey.wasPressedThisFrame)
-        {
-            cycleToNextSkin();
-        }
+        cycleToNextSkin();
     }
 
     // cycle to the next skin
@@ -138,5 +152,15 @@ public class AgentController : MonoBehaviour
         activeSkinIndex = index;
         AgentSkins[activeSkinIndex].transform.SetPositionAndRotation(spawnPosition, spawnRotation);
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
+    }
+
+    // pass any animation calls on to the skin.
+    public void PerformBodyAction(AgentSkin.BodyAction action)
+    {
+        activeSkin.PerformBodyAction(action);
+    }
+    public void MakeFace(AgentSkin.FaceExpression face)
+    {
+        activeSkin.MakeFace(face);
     }
 }
