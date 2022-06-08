@@ -111,8 +111,14 @@ public class AgentSkin : MonoBehaviour
     {
         // collect reference to objects we need
         Model = new AgentModel(this.gameObject);
-        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+        
 
+        
+    }
+    void Start()
+    {
+        // do this here rather than awake, because the singleton might not be ready due to execution order
+        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
         // install input controls
         controls.ToggleHandIK.performed += OnToggleHandIK;
         controls.ToggleLean.performed += OnToggleLean;
