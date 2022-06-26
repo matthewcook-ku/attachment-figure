@@ -5,7 +5,7 @@ using System;
 using UnityEngine.InputSystem;
 
 
-// Observer Pattern
+// Observer Pattern - delegates, events, actions, and funcs
 // https://www.youtube.com/watch?v=UWMmib1RYFE
 // Unity Input System
 // https://www.youtube.com/watch?v=YHC-6I_LSos
@@ -16,7 +16,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    // Static input controls for others to access
+    // input action set for others to access
     public InputControls InputActions;
 
     // Delegate for map changes
@@ -31,8 +31,8 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        ToggleActionMap(InputActions.TestingActions);
-        ToggleActionMap(InputActions.AgentControls);
+        //ToggleActionMap(InputActions.TestingActions);
+        //ToggleActionMap(InputActions.AgentControls);
         ToggleActionMap(InputActions.ExperimenterControls);
     }
 
@@ -45,9 +45,11 @@ public class InputManager : MonoBehaviour
 
 
     // toggle the given action map on or off
+    // raises an event to signal the change to all registered listeners
     public static void ToggleActionMap(InputActionMap actionMap)
     {
         ActionMapChange?.Invoke(actionMap); // raise an event to alert others of change
+        Debug.Log("ActionMap: " + actionMap + " => " + !actionMap.enabled);
         if (actionMap.enabled)
         {
             actionMap.Disable();
@@ -56,5 +58,21 @@ public class InputManager : MonoBehaviour
         {
             actionMap.Enable();
         }
+    }
+    // turn the mapping on or off
+    // raises an event to signal the change to all registered listeners
+    // if state is already set, no action is taken and no event is sent
+    public static void EnableActionMap(InputActionMap actionMap, bool enable)
+    {
+        // ignore if already set
+        if (actionMap.enabled == enable)
+            return;
+
+        ActionMapChange?.Invoke(actionMap); // raise an event to alert others of change
+        Debug.Log("ActionMap: " + actionMap + " => " + enable);
+        if (enable)
+            actionMap.Enable();
+        else
+            actionMap.Disable();
     }
 }

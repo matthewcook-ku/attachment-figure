@@ -14,12 +14,11 @@ using UnityEngine.UI;
 // - a small display text to let you know FPS is on.
 //
 // InputSystem:
-// '=' - toggle FPS on or off.
+// OnFPSTogglePerformed
 
 public class ExperimenterViewController : MonoBehaviour
 {
     public FPSMovementController fps { get; private set; }
-    public UIStartController startUI { get; private set; }
 
     private Text FPSIndicator;
 
@@ -37,6 +36,8 @@ public class ExperimenterViewController : MonoBehaviour
         bool fpsToggledState = !fps.enabled;
         Debug.Log("FPS Controls: " + (fpsToggledState ? "on" : "off"));
         FPSIndicator.enabled = fpsToggledState;
+
+        // turn on/off the FPS controls
         fps.enabled = fpsToggledState;
     }
 
@@ -44,7 +45,6 @@ public class ExperimenterViewController : MonoBehaviour
     void Start()
     {
         fps = GetComponent<FPSMovementController>();
-        startUI = GetComponent<UIStartController>();
         // disable the FPS on startup
         fps.enabled = false;
 
