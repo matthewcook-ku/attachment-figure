@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         //ToggleActionMap(InputActions.TestingActions);
-        //ToggleActionMap(InputActions.AgentControls);
+        ToggleActionMap(InputActions.AgentControls);
         ToggleActionMap(InputActions.ExperimenterControls);
     }
 

@@ -351,6 +351,24 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextSkinTone"",
+                    ""type"": ""Button"",
+                    ""id"": ""d89e7cba-416e-4908-9f7d-5e5b80739eb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevSkinTone"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f4c7fb4-f41f-42af-ba81-1670e142755f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -417,6 +435,28 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RandomLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0450d179-1186-48d9-9e9c-5561d22c56a9"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextSkinTone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74137b2f-d42d-447e-9d14-7589da496c8d"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrevSkinTone"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -677,6 +717,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_AgentControls_ToggleHeadLookAt = m_AgentControls.FindAction("ToggleHeadLookAt", throwIfNotFound: true);
         m_AgentControls_ToggleEyeLookAt = m_AgentControls.FindAction("ToggleEyeLookAt", throwIfNotFound: true);
         m_AgentControls_RandomLook = m_AgentControls.FindAction("RandomLook", throwIfNotFound: true);
+        m_AgentControls_NextSkinTone = m_AgentControls.FindAction("NextSkinTone", throwIfNotFound: true);
+        m_AgentControls_PrevSkinTone = m_AgentControls.FindAction("PrevSkinTone", throwIfNotFound: true);
         // TestingActions
         m_TestingActions = asset.FindActionMap("TestingActions", throwIfNotFound: true);
         m_TestingActions_TestAction1 = m_TestingActions.FindAction("TestAction1", throwIfNotFound: true);
@@ -830,6 +872,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_AgentControls_ToggleHeadLookAt;
     private readonly InputAction m_AgentControls_ToggleEyeLookAt;
     private readonly InputAction m_AgentControls_RandomLook;
+    private readonly InputAction m_AgentControls_NextSkinTone;
+    private readonly InputAction m_AgentControls_PrevSkinTone;
     public struct AgentControlsActions
     {
         private @InputControls m_Wrapper;
@@ -840,6 +884,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @ToggleHeadLookAt => m_Wrapper.m_AgentControls_ToggleHeadLookAt;
         public InputAction @ToggleEyeLookAt => m_Wrapper.m_AgentControls_ToggleEyeLookAt;
         public InputAction @RandomLook => m_Wrapper.m_AgentControls_RandomLook;
+        public InputAction @NextSkinTone => m_Wrapper.m_AgentControls_NextSkinTone;
+        public InputAction @PrevSkinTone => m_Wrapper.m_AgentControls_PrevSkinTone;
         public InputActionMap Get() { return m_Wrapper.m_AgentControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -867,6 +913,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @RandomLook.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
                 @RandomLook.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
                 @RandomLook.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
+                @NextSkinTone.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @NextSkinTone.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @NextSkinTone.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @PrevSkinTone.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
+                @PrevSkinTone.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
+                @PrevSkinTone.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
             }
             m_Wrapper.m_AgentControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -889,6 +941,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @RandomLook.started += instance.OnRandomLook;
                 @RandomLook.performed += instance.OnRandomLook;
                 @RandomLook.canceled += instance.OnRandomLook;
+                @NextSkinTone.started += instance.OnNextSkinTone;
+                @NextSkinTone.performed += instance.OnNextSkinTone;
+                @NextSkinTone.canceled += instance.OnNextSkinTone;
+                @PrevSkinTone.started += instance.OnPrevSkinTone;
+                @PrevSkinTone.performed += instance.OnPrevSkinTone;
+                @PrevSkinTone.canceled += instance.OnPrevSkinTone;
             }
         }
     }
@@ -1048,6 +1106,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnToggleHeadLookAt(InputAction.CallbackContext context);
         void OnToggleEyeLookAt(InputAction.CallbackContext context);
         void OnRandomLook(InputAction.CallbackContext context);
+        void OnNextSkinTone(InputAction.CallbackContext context);
+        void OnPrevSkinTone(InputAction.CallbackContext context);
     }
     public interface ITestingActionsActions
     {
