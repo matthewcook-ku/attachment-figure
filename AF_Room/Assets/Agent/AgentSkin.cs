@@ -40,6 +40,18 @@ public class AgentSkin : MonoBehaviour
         Laugh = 7
     };
 
+    public enum SkinTone
+    {
+        Tone0 = 0,
+        Tone1 = 1,
+        Tone2 = 2,
+        Tone3 = 3,
+        Tone4 = 4,
+        Tone5 = 5,
+        Tone6 = 6,
+        Tone7 = 7
+    };
+
     // Set of flags to note what constraints are on or off to store state.
     // Make sure all added states are powers of 2
     // https://stackoverflow.com/questions/3261451/using-a-bitmask-in-c-sharp
@@ -69,6 +81,10 @@ public class AgentSkin : MonoBehaviour
     private SkinConstraintFlags storedActiveConstraints;
     private bool constraintsPaused = false;
 
+    // prefix to add before mesh game object names
+    [Tooltip("This prefix will be used when looking for the mesh parts like Body and LeftEye.")]
+    public string SkinMeshPrefix = "";
+
     // constraint transitions
     public float ConstraintTransitionTime = 1.0f; // time in seconds to go in and out of constraint. 
 
@@ -77,6 +93,10 @@ public class AgentSkin : MonoBehaviour
     public AgentModel Model;
     public Animator animator { get { return GetComponent<Animator>(); } }
     public GameObject gazeTarget { get { return Model.Head.GazeTarget; } }
+
+    // texture selectors for swapping textures
+    public TextureSelector HeadTextureSelector;
+    public TextureSelector BodyTextureSelector;
 
     // pose settings
     // blinking
@@ -102,28 +122,13 @@ public class AgentSkin : MonoBehaviour
         }
     }
     private float leanScaleFactor = 0.1f; // multiplied by LeanLimit to make LeanLimit a human scale value
-
-    // input controls
-    private InputControls.AgentControlsActions controls;
+    
 
     // Awake
     private void Awake()
     {
         // collect reference to objects we need
-        Model = new AgentModel(this.gameObject);
-        
-
-        
-    }
-    void Start()
-    {
-        // do this here rather than awake, because the singleton might not be ready due to execution order
-        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
-        // install input controls
-        controls.ToggleHandIK.performed += OnToggleHandIK;
-        controls.ToggleLean.performed += OnToggleLean;
-        controls.ToggleHeadLookAt.performed += OnToggleHeadLookAt;
-        controls.ToggleEyeLookAt.performed += OnToggleEyeLookAt;
+        Model = new AgentModel(this.gameObject, SkinMeshPrefix);
     }
 
     private void StartRandomBlinks()
@@ -135,15 +140,55 @@ public class AgentSkin : MonoBehaviour
         StopCoroutine(BlinkCoroutine);
     }
 
+    void Start()
+    {
+        //AddRemoveInputControls(true);
+    }
+
+    void AddRemoveInputControls(bool add)
+    {
+        InputControls.AgentControlsActions controls;
+
+        if (AFManager.Instance == null)
+            return;
+        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+
+        // install input controls
+        if (add)
+        {
+            controls.ToggleHandIK.performed += OnToggleHandIK;
+            controls.ToggleLean.performed += OnToggleLean;
+            controls.ToggleHeadLookAt.performed += OnToggleHeadLookAt;
+            controls.ToggleEyeLookAt.performed += OnToggleEyeLookAt;
+
+            controls.NextSkinTone.performed += OnNextSkinTone;
+            controls.PrevSkinTone.performed += OnPrevSkinTone;
+        }
+        else // remove
+        {
+            controls.ToggleHandIK.performed -= OnToggleHandIK;
+            controls.ToggleLean.performed -= OnToggleLean;
+            controls.ToggleHeadLookAt.performed -= OnToggleHeadLookAt;
+            controls.ToggleEyeLookAt.performed -= OnToggleEyeLookAt;
+
+            controls.NextSkinTone.performed -= OnNextSkinTone;
+            controls.PrevSkinTone.performed -= OnPrevSkinTone;
+        }
+        
+    }
+
     private void OnEnable()
     {
-        // turn off all constraints
+        AddRemoveInputControls(true);
 
         // begin the blink coroutine
         if (RandomBlinks) StartRandomBlinks();
     }
     private void OnDisable()
     {
+        // remove input controls
+        AddRemoveInputControls(false);
+
         // stop random blinking
         if (RandomBlinks) StopRandomBlinks();
     }
@@ -463,5 +508,34 @@ public class AgentSkin : MonoBehaviour
     private void alignTransforms(Transform src, Transform dst)
     {
         dst.SetPositionAndRotation(src.position, src.rotation);
+    }
+
+
+
+
+
+    // switch skintones
+    public void SetSkintone(AgentSkin.SkinTone tone)
+    {
+        SetSkintone((int)tone);
+    }
+    public void SetSkintone(int toneIndex)
+    {
+        // we're assuming that these 2 have matching textures for each index.
+        if (HeadTextureSelector != null) HeadTextureSelector.SetTexture(toneIndex);
+        if (BodyTextureSelector != null) BodyTextureSelector.SetTexture(toneIndex);
+    }
+
+    private void OnNextSkinTone(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Cycle Next Skintone...");
+        if (HeadTextureSelector != null) HeadTextureSelector.CycleNextTexture();
+        if (BodyTextureSelector != null) BodyTextureSelector.CycleNextTexture();
+    }
+    private void OnPrevSkinTone(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Cycle Prev Skintone...");
+        if (HeadTextureSelector != null) HeadTextureSelector.CyclePrevTexture();
+        if (BodyTextureSelector != null) BodyTextureSelector.CyclePrevTexture();
     }
 }

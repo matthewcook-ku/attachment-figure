@@ -11,7 +11,17 @@
                     "id": "06f75c0a-8592-4163-8ce1-16e7f6cf729e",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "VerticalMovement",
+                    "type": "PassThrough",
+                    "id": "ee1145b7-4ef0-417a-a887-fb473a2709e2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -19,7 +29,8 @@
                     "id": "943d7259-daf8-42b9-aee9-5d7781466b2a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Run",
@@ -27,7 +38,8 @@
                     "id": "0eb0f16a-6b5c-466b-8b42-e427383f9e13",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LookX",
@@ -35,7 +47,8 @@
                     "id": "c7ab3ea8-6d62-4840-a8f8-ae54d274ee24",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LookY",
@@ -43,7 +56,8 @@
                     "id": "7ceea07b-6951-422b-88f5-07697a90659e",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -200,6 +214,61 @@
                     "action": "LookY",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "QE",
+                    "id": "abd30c72-6fd6-4a42-91ce-24bc308a5e8d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "e71591ff-a7c9-4263-8d64-89be9e73aafd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e91806a4-9b7b-4c36-b59d-60afbbd0dd48",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "80de08dd-9900-49c8-bd24-3b6a26681db5",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "e7735c21-cc1f-40ec-aca8-d0edb267b492",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -213,7 +282,8 @@
                     "id": "57a6f702-117d-4f23-9d05-0dd382ecd1de",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ToggleHandIK",
@@ -221,7 +291,8 @@
                     "id": "c306be2d-00a8-4a07-8d9b-5668a40ba31e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ToggleLean",
@@ -229,7 +300,8 @@
                     "id": "e1fd6a66-e59c-456f-a3c2-16cf75849c9c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ToggleHeadLookAt",
@@ -237,7 +309,8 @@
                     "id": "64fdc6b6-373a-478d-bcbe-0ad916ad7301",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ToggleEyeLookAt",
@@ -245,7 +318,8 @@
                     "id": "1713e97e-2b15-497a-9e08-0cdaf0852b95",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "RandomLook",
@@ -253,7 +327,26 @@
                     "id": "25d1f342-e3e4-4624-b8de-3b060b8efffc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextSkinTone",
+                    "type": "Button",
+                    "id": "d89e7cba-416e-4908-9f7d-5e5b80739eb8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrevSkinTone",
+                    "type": "Button",
+                    "id": "5f4c7fb4-f41f-42af-ba81-1670e142755f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -322,6 +415,28 @@
                     "action": "RandomLook",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0450d179-1186-48d9-9e9c-5561d22c56a9",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextSkinTone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "74137b2f-d42d-447e-9d14-7589da496c8d",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrevSkinTone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -335,7 +450,8 @@
                     "id": "9c669ee9-30c8-4e35-8cbb-d38038e01c5b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction2",
@@ -343,7 +459,8 @@
                     "id": "5e45974a-57cf-4e95-a506-bcd6402272c5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction3",
@@ -351,7 +468,8 @@
                     "id": "668d913d-b4c0-442d-a0a0-2b6f6ea25a76",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction4",
@@ -359,7 +477,8 @@
                     "id": "af28cfbb-23f7-4b85-9819-dd0b4dee5192",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction5",
@@ -367,7 +486,8 @@
                     "id": "2d528f34-310b-4bc6-b81e-8e8e611048f4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction6",
@@ -375,7 +495,8 @@
                     "id": "d844d8f3-26de-4896-854a-9c881fe50181",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction7",
@@ -383,7 +504,8 @@
                     "id": "b4d6de21-f6aa-48d9-bbbd-715792707249",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction8",
@@ -391,7 +513,8 @@
                     "id": "be3f522c-7ebd-4120-a3fd-4e37d9ea469a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction9",
@@ -399,7 +522,8 @@
                     "id": "98fc5e18-a069-45f2-b75f-5b4fa37c57c3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TestAction0",
@@ -407,7 +531,8 @@
                     "id": "f785faec-7d3b-4530-8901-77cdf480d725",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -533,21 +658,11 @@
                     "id": "bd1b9888-8e98-4881-b6b8-ed9170019b03",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "9a4d9013-d8f7-4de9-b81c-9766f57222f2",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleFPS",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "9811008d-196c-4fb7-b81a-7ed97dd8bff9",

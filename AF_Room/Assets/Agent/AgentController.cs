@@ -53,19 +53,15 @@ public class AgentController : MonoBehaviour
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
 
-    // control set
-    InputControls.AgentControlsActions controls;
-
-    private void Awake()
-    {
-        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
-    }
     private void OnEnable()
     {
+        InputControls.AgentControlsActions controls = AFManager.Instance.InputManager.InputActions.AgentControls;
         controls.SwapSkins.performed += OnSwapSkins;
     }
+
     private void OnDisable()
     {
+        InputControls.AgentControlsActions controls = AFManager.Instance.InputManager.InputActions.AgentControls;
         controls.SwapSkins.performed -= OnSwapSkins;
     }
 

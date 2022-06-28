@@ -37,6 +37,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""VerticalMovement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ee1145b7-4ef0-417a-a887-fb473a2709e2"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""943d7259-daf8-42b9-aee9-5d7781466b2a"",
@@ -227,6 +236,61 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""LookY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""QE"",
+                    ""id"": ""abd30c72-6fd6-4a42-91ce-24bc308a5e8d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e71591ff-a7c9-4263-8d64-89be9e73aafd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e91806a4-9b7b-4c36-b59d-60afbbd0dd48"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""80de08dd-9900-49c8-bd24-3b6a26681db5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e7735c21-cc1f-40ec-aca8-d0edb267b492"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -283,6 +347,24 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""name"": ""RandomLook"",
                     ""type"": ""Button"",
                     ""id"": ""25d1f342-e3e4-4624-b8de-3b060b8efffc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextSkinTone"",
+                    ""type"": ""Button"",
+                    ""id"": ""d89e7cba-416e-4908-9f7d-5e5b80739eb8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevSkinTone"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f4c7fb4-f41f-42af-ba81-1670e142755f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -353,6 +435,28 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RandomLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0450d179-1186-48d9-9e9c-5561d22c56a9"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextSkinTone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74137b2f-d42d-447e-9d14-7589da496c8d"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrevSkinTone"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -583,17 +687,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""9a4d9013-d8f7-4de9-b81c-9766f57222f2"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleFPS"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9811008d-196c-4fb7-b81a-7ed97dd8bff9"",
                     ""path"": ""<Keyboard>/equals"",
                     ""interactions"": """",
@@ -611,6 +704,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         // FPSControls
         m_FPSControls = asset.FindActionMap("FPSControls", throwIfNotFound: true);
         m_FPSControls_HorizontalMovement = m_FPSControls.FindAction("HorizontalMovement", throwIfNotFound: true);
+        m_FPSControls_VerticalMovement = m_FPSControls.FindAction("VerticalMovement", throwIfNotFound: true);
         m_FPSControls_Jump = m_FPSControls.FindAction("Jump", throwIfNotFound: true);
         m_FPSControls_Run = m_FPSControls.FindAction("Run", throwIfNotFound: true);
         m_FPSControls_LookX = m_FPSControls.FindAction("LookX", throwIfNotFound: true);
@@ -623,6 +717,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_AgentControls_ToggleHeadLookAt = m_AgentControls.FindAction("ToggleHeadLookAt", throwIfNotFound: true);
         m_AgentControls_ToggleEyeLookAt = m_AgentControls.FindAction("ToggleEyeLookAt", throwIfNotFound: true);
         m_AgentControls_RandomLook = m_AgentControls.FindAction("RandomLook", throwIfNotFound: true);
+        m_AgentControls_NextSkinTone = m_AgentControls.FindAction("NextSkinTone", throwIfNotFound: true);
+        m_AgentControls_PrevSkinTone = m_AgentControls.FindAction("PrevSkinTone", throwIfNotFound: true);
         // TestingActions
         m_TestingActions = asset.FindActionMap("TestingActions", throwIfNotFound: true);
         m_TestingActions_TestAction1 = m_TestingActions.FindAction("TestAction1", throwIfNotFound: true);
@@ -698,6 +794,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_FPSControls;
     private IFPSControlsActions m_FPSControlsActionsCallbackInterface;
     private readonly InputAction m_FPSControls_HorizontalMovement;
+    private readonly InputAction m_FPSControls_VerticalMovement;
     private readonly InputAction m_FPSControls_Jump;
     private readonly InputAction m_FPSControls_Run;
     private readonly InputAction m_FPSControls_LookX;
@@ -707,6 +804,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         private @InputControls m_Wrapper;
         public FPSControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @HorizontalMovement => m_Wrapper.m_FPSControls_HorizontalMovement;
+        public InputAction @VerticalMovement => m_Wrapper.m_FPSControls_VerticalMovement;
         public InputAction @Jump => m_Wrapper.m_FPSControls_Jump;
         public InputAction @Run => m_Wrapper.m_FPSControls_Run;
         public InputAction @LookX => m_Wrapper.m_FPSControls_LookX;
@@ -723,6 +821,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @HorizontalMovement.started -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnHorizontalMovement;
                 @HorizontalMovement.performed -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnHorizontalMovement;
                 @HorizontalMovement.canceled -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnHorizontalMovement;
+                @VerticalMovement.started -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnVerticalMovement;
+                @VerticalMovement.performed -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnVerticalMovement;
+                @VerticalMovement.canceled -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnVerticalMovement;
                 @Jump.started -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnJump;
@@ -742,6 +843,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @HorizontalMovement.started += instance.OnHorizontalMovement;
                 @HorizontalMovement.performed += instance.OnHorizontalMovement;
                 @HorizontalMovement.canceled += instance.OnHorizontalMovement;
+                @VerticalMovement.started += instance.OnVerticalMovement;
+                @VerticalMovement.performed += instance.OnVerticalMovement;
+                @VerticalMovement.canceled += instance.OnVerticalMovement;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -768,6 +872,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_AgentControls_ToggleHeadLookAt;
     private readonly InputAction m_AgentControls_ToggleEyeLookAt;
     private readonly InputAction m_AgentControls_RandomLook;
+    private readonly InputAction m_AgentControls_NextSkinTone;
+    private readonly InputAction m_AgentControls_PrevSkinTone;
     public struct AgentControlsActions
     {
         private @InputControls m_Wrapper;
@@ -778,6 +884,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @ToggleHeadLookAt => m_Wrapper.m_AgentControls_ToggleHeadLookAt;
         public InputAction @ToggleEyeLookAt => m_Wrapper.m_AgentControls_ToggleEyeLookAt;
         public InputAction @RandomLook => m_Wrapper.m_AgentControls_RandomLook;
+        public InputAction @NextSkinTone => m_Wrapper.m_AgentControls_NextSkinTone;
+        public InputAction @PrevSkinTone => m_Wrapper.m_AgentControls_PrevSkinTone;
         public InputActionMap Get() { return m_Wrapper.m_AgentControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -805,6 +913,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @RandomLook.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
                 @RandomLook.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
                 @RandomLook.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnRandomLook;
+                @NextSkinTone.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @NextSkinTone.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @NextSkinTone.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnNextSkinTone;
+                @PrevSkinTone.started -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
+                @PrevSkinTone.performed -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
+                @PrevSkinTone.canceled -= m_Wrapper.m_AgentControlsActionsCallbackInterface.OnPrevSkinTone;
             }
             m_Wrapper.m_AgentControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -827,6 +941,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @RandomLook.started += instance.OnRandomLook;
                 @RandomLook.performed += instance.OnRandomLook;
                 @RandomLook.canceled += instance.OnRandomLook;
+                @NextSkinTone.started += instance.OnNextSkinTone;
+                @NextSkinTone.performed += instance.OnNextSkinTone;
+                @NextSkinTone.canceled += instance.OnNextSkinTone;
+                @PrevSkinTone.started += instance.OnPrevSkinTone;
+                @PrevSkinTone.performed += instance.OnPrevSkinTone;
+                @PrevSkinTone.canceled += instance.OnPrevSkinTone;
             }
         }
     }
@@ -972,6 +1092,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     public interface IFPSControlsActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
+        void OnVerticalMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnLookX(InputAction.CallbackContext context);
@@ -985,6 +1106,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnToggleHeadLookAt(InputAction.CallbackContext context);
         void OnToggleEyeLookAt(InputAction.CallbackContext context);
         void OnRandomLook(InputAction.CallbackContext context);
+        void OnNextSkinTone(InputAction.CallbackContext context);
+        void OnPrevSkinTone(InputAction.CallbackContext context);
     }
     public interface ITestingActionsActions
     {

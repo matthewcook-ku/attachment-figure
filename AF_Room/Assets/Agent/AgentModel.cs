@@ -239,6 +239,7 @@ public class AgentModel
     }
 
     // Model Components Belonging to the main model object.
+    public SkinnedMeshRenderer BodyMesh;
     public GameObject SkinRootBone;
     public GameObject LookTarget;
     public Vector3 LookTargetDefaultPosition { get; private set; }
@@ -295,6 +296,9 @@ public class AgentModel
     private GameObject gameObject;
     private RigBuilder rigBuilder;
 
+    // Prefix to add when searching for mesh components
+    public string SkinMeshPrefix;
+
 
     // Print out the model parts so we can check if they were done correctly
     private void PrintModel()
@@ -313,12 +317,14 @@ public class AgentModel
 
     // Class Constructor
     // Since this is not a MonoBehavior, we need to do our own allocation.
-    public AgentModel(GameObject obj)
+    public AgentModel(GameObject obj, string prefix="")
     {
-        Debug.Log("Initializing Agent Model...");
+        //Debug.Log("Initializing Agent Model...");
 
         gameObject = obj;
         rigBuilder = obj.GetComponent<RigBuilder>();
+
+        SkinMeshPrefix = prefix;
 
         Head = new HeadModel(this);
         Eye = new EyeModel[]
@@ -343,7 +349,7 @@ public class AgentModel
         Resolve(gameObject);
 
         // now print it out to check things look OK.
-        PrintModel();
+        //PrintModel();
 
         // TODO: would like to set up all the constraint settings for all parts at this point from script so it does not need to be set up in the inspector.
         // for now will do this by hand in the inspector. 
@@ -352,7 +358,7 @@ public class AgentModel
 
     public void Resolve(GameObject obj)
     {
-        Debug.Log("Resolving Model...");
+        //Debug.Log("Resolving Model...");
         // find all the elements of the skeleton
         Transform skeleton = obj.transform.Find("game rig");
         ResolveSkeleton(skeleton.gameObject);
@@ -368,7 +374,7 @@ public class AgentModel
     // These are basically a hard coded mapping of the current model structure and naming.
     private void ResolveSkeleton(GameObject obj)
     {
-        Debug.Log("\tResolving Skeleton...", obj);
+        //Debug.Log("\tResolving Skeleton...", obj);
         Transform transform = obj.transform;
 
         Transform skinRootBone = transform.Find("DEF-spine");
@@ -408,7 +414,7 @@ public class AgentModel
     // These are basically a hard coded mapping of the current model structure and naming.
     private void ResolveRig(GameObject obj)
     {
-        Debug.Log("\tResolving Rig...", obj);
+        //Debug.Log("\tResolving Rig...", obj);
         Transform transform = obj.transform;
 
         Transform GazeTarget = transform.Find("Gaze Target");
@@ -463,12 +469,13 @@ public class AgentModel
     // These are basically a hard coded mapping of the current model structure and naming.
     private void ResolveMesh(GameObject obj)
     {
-        Debug.Log("\tResolving Mesh...", obj);
+        //Debug.Log("\tResolving Mesh...", obj);
         Transform transform = obj.transform;
 
-        // Just storing the head for now since that's where the blendshapes are.
-        // TODO: do we need to cache the other mesh parts for any reason?
-        Transform HeadTransform = transform.Find("Head");
+        Transform HeadTransform = transform.Find(SkinMeshPrefix + "Head");
         Head.HeadMesh = HeadTransform.GetComponent<SkinnedMeshRenderer>();
+
+        Transform BodyTransform = transform.Find(SkinMeshPrefix + "Body");
+        BodyMesh = BodyTransform.GetComponent<SkinnedMeshRenderer>();
     }
 }
