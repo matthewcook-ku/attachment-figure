@@ -22,7 +22,11 @@ public class ExperimentPanelController : MonoBehaviour
         Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         if(Session.instance != null) Session.instance.EndCurrentTrial();
+        
 
+        // screen transition prior to quit
         Application.Quit();
+
+        
     }
 }

@@ -30,6 +30,7 @@ public class VoiceTest : MonoBehaviour
 
     void testVoice()
     {
+        Debug.Log("Is this working?");
         // get voice selection from dropdown
         voice_select = transform.parent.Find("VoiceGrp").Find("VoiceSelectDropdown").GetComponent<TMP_Dropdown>().value;
 

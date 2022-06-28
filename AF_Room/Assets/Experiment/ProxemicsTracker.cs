@@ -107,6 +107,10 @@ public class ProxemicsTracker : Tracker
             sampleCountGaze = 0;
         }
 
+        // updating UXF settings
+        Session.instance.settings.SetValue("AverageGaze", averageGaze);
+        Session.instance.settings.SetValue("AverageDistance", averageDistance);
+
         // now update...
         prevAverageTimeStamp = Time.realtimeSinceStartup;
     }
