@@ -75,6 +75,87 @@ ModelImporter:
   - first:
       74: 2268774347717817976
     second: GAME_head tilt from right
+  - first:
+      74: 4680627923871037534
+    second: GAME_woman1_default
+  - first:
+      74: 1669390241478039283
+    second: GAME_woman1_breathe
+  - first:
+      74: 824293490937002376
+    second: GAME_woman1_nod
+  - first:
+      74: -8938266236564737971
+    second: GAME_woman1_shake
+  - first:
+      74: -6857187943610773663
+    second: GAME_woman1_M_neutral sit 0
+  - first:
+      74: 5916162705286739719
+    second: GAME_woman1_M_neutral sit 1
+  - first:
+      74: 8434244535123921374
+    second: GAME_woman1_M_neutral sit 2
+  - first:
+      74: -1207047618377404515
+    second: GAME_woman1_M_neutral sit 3
+  - first:
+      74: -5681683913379246298
+    second: GAME_woman1_head tilt to left
+  - first:
+      74: -747908728053411424
+    second: GAME_woman1_head tilt to right
+  - first:
+      74: -6216777139198559721
+    second: GAME_woman1_random glance 1
+  - first:
+      74: -6134981896058905171
+    second: GAME_woman1_random glance 2
+  - first:
+      74: 8114043055516408515
+    second: GAME_woman1_random glance 3
+  - first:
+      74: 8408843823323263919
+    second: GAME_woman1_M_stand to sit
+  - first:
+      74: -8747086379194483743
+    second: GAME_woman1_M_Sit 0 to 1
+  - first:
+      74: -3601915023851937836
+    second: GAME_woman1_M_Sit 1 to 2
+  - first:
+      74: -7421645316334359455
+    second: GAME_woman1_M_Sit 2 to 3
+  - first:
+      74: -6091093150723355380
+    second: GAME_woman1_M_Sit 3 to 0
+  - first:
+      74: -6999789233909165272
+    second: GAME_woman1_F_neutral sit 0
+  - first:
+      74: -8294627360303839258
+    second: GAME_woman1_F_neutral sit 1
+  - first:
+      74: 2065595726062627233
+    second: GAME_woman1_F_neutral sit 2
+  - first:
+      74: 993052671070532645
+    second: GAME_woman1_F_neutral sit 3
+  - first:
+      74: -5341372943622069896
+    second: GAME_woman1_F_stand to sit
+  - first:
+      74: -7250215551333496023
+    second: GAME_woman1_F_Sit 0 to 1
+  - first:
+      74: 4139390661019061190
+    second: GAME_woman1_F_Sit 1 to 2
+  - first:
+      74: -7444679684515646927
+    second: GAME_woman1_F_Sit 2 to 3
+  - first:
+      74: -1359030199258089558
+    second: GAME_woman1_F_Sit 3 to 0
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -104,8 +185,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: GAME_default
-      takeName: GAME_default
+      name: GAME_woman1_default
+      takeName: GAME_woman1_default
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -133,8 +214,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_breathe
-      takeName: GAME_breathe
+      name: GAME_woman1_breathe
+      takeName: GAME_woman1_breathe
       internalID: 0
       firstFrame: 0
       lastFrame: 69
@@ -162,8 +243,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_nod
-      takeName: GAME_nod
+      name: GAME_woman1_nod
+      takeName: GAME_woman1_nod
       internalID: 0
       firstFrame: 0
       lastFrame: 29
@@ -191,8 +272,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_shake
-      takeName: GAME_shake
+      name: GAME_woman1_shake
+      takeName: GAME_woman1_shake
       internalID: 0
       firstFrame: 0
       lastFrame: 34
@@ -220,8 +301,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_F_neutral sit 0
-      takeName: GAME_F_neutral sit 0
+      name: GAME_woman1_F_neutral sit 0
+      takeName: GAME_woman1_F_neutral sit 0
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -249,8 +330,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_F_neutral sit 1
-      takeName: GAME_F_neutral sit 1
+      name: GAME_woman1_F_neutral sit 1
+      takeName: GAME_woman1_F_neutral sit 1
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -278,8 +359,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_F_neutral sit 2
-      takeName: GAME_F_neutral sit 2
+      name: GAME_woman1_F_neutral sit 2
+      takeName: GAME_woman1_F_neutral sit 2
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -307,8 +388,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_F_neutral sit 3
-      takeName: GAME_F_neutral sit 3
+      name: GAME_woman1_F_neutral sit 3
+      takeName: GAME_woman1_F_neutral sit 3
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -336,8 +417,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_head tilt to left
-      takeName: GAME_head tilt to left
+      name: GAME_woman1_head tilt to left
+      takeName: GAME_woman1_head tilt to left
       internalID: 0
       firstFrame: 0
       lastFrame: 31
@@ -365,8 +446,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_head tilt to right
-      takeName: GAME_head tilt to right
+      name: GAME_woman1_head tilt to right
+      takeName: GAME_woman1_head tilt to right
       internalID: 0
       firstFrame: 0
       lastFrame: 24
@@ -394,11 +475,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 1
-      takeName: GAME_random glance 1
+      name: GAME_woman1_random glance 1
+      takeName: GAME_woman1_random glance 1
       internalID: 0
       firstFrame: 0
-      lastFrame: 66
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -423,11 +504,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 2
-      takeName: GAME_random glance 2
+      name: GAME_woman1_random glance 2
+      takeName: GAME_woman1_random glance 2
       internalID: 0
       firstFrame: 0
-      lastFrame: 76
+      lastFrame: 49
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -452,153 +533,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 3
-      takeName: GAME_random glance 3
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 76
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: GAME_F_stand to sit
-      takeName: GAME_F_stand to sit
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 111
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: GAME_F_Sit 0 to 1
-      takeName: GAME_F_Sit 0 to 1
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 31
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: GAME_F_Sit 0 to 2
-      takeName: GAME_F_Sit 0 to 2
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 39
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: GAME_F_Sit 1 to 2
-      takeName: GAME_F_Sit 1 to 2
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 37
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: GAME_F_Sit 2 to 3
-      takeName: GAME_F_Sit 2 to 3
+      name: GAME_woman1_random glance 3
+      takeName: GAME_woman1_random glance 3
       internalID: 0
       firstFrame: 0
       lastFrame: 65
@@ -626,8 +562,124 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_F_Sit 3 to 0
-      takeName: GAME_F_Sit 3 to 0
+      name: GAME_woman1_F_stand to sit
+      takeName: GAME_woman1_F_stand to sit
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 111
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GAME_woman1_F_Sit 0 to 1
+      takeName: GAME_woman1_F_Sit 0 to 1
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GAME_woman1_F_Sit 1 to 2
+      takeName: GAME_woman1_F_Sit 1 to 2
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GAME_woman1_F_Sit 2 to 3
+      takeName: GAME_woman1_F_Sit 2 to 3
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: GAME_woman1_F_Sit 3 to 0
+      takeName: GAME_woman1_F_Sit 3 to 0
       internalID: 0
       firstFrame: 0
       lastFrame: 54

@@ -360,7 +360,7 @@ public class AgentModel
     {
         //Debug.Log("Resolving Model...");
         // find all the elements of the skeleton
-        Transform skeleton = obj.transform.Find("game rig");
+        Transform skeleton = obj.transform.Find("GAME_rig-" + SkinMeshPrefix);
         ResolveSkeleton(skeleton.gameObject);
 
         // find all the elements of the Unity rig
@@ -472,10 +472,10 @@ public class AgentModel
         //Debug.Log("\tResolving Mesh...", obj);
         Transform transform = obj.transform;
 
-        Transform HeadTransform = transform.Find(SkinMeshPrefix + "Head");
+        Transform HeadTransform = transform.Find(SkinMeshPrefix + "_Head");
         Head.HeadMesh = HeadTransform.GetComponent<SkinnedMeshRenderer>();
 
-        Transform BodyTransform = transform.Find(SkinMeshPrefix + "Body");
+        Transform BodyTransform = transform.Find(SkinMeshPrefix + "_Body");
         BodyMesh = BodyTransform.GetComponent<SkinnedMeshRenderer>();
     }
 }

@@ -57,6 +57,60 @@ ModelImporter:
   - first:
       74: 3552776706531363648
     second: GAME_random glance 3
+  - first:
+      74: -3924590940244510507
+    second: GAME_man1_default
+  - first:
+      74: -864206266000603572
+    second: GAME_man1_breathe
+  - first:
+      74: -648440538473537678
+    second: GAME_man1_M_neutral sit 0
+  - first:
+      74: 2775540321722152603
+    second: GAME_man1_M_neutral sit 1
+  - first:
+      74: 6026985635499418114
+    second: GAME_man1_M_neutral sit 2
+  - first:
+      74: 8891279507667684821
+    second: GAME_man1_M_neutral sit 3
+  - first:
+      74: -4527096070298516995
+    second: GAME_man1_M_Sit 0 to 1
+  - first:
+      74: 3704756598990542816
+    second: GAME_man1_M_Sit 1 to 2
+  - first:
+      74: 2660374975089828209
+    second: GAME_man1_M_Sit 2 to 3
+  - first:
+      74: -6157661920040672291
+    second: GAME_man1_M_Sit 3 to 0
+  - first:
+      74: -3667028072498031697
+    second: GAME_man1_M_stand to sit
+  - first:
+      74: 5033877991100268776
+    second: GAME_man1_head tilt to left
+  - first:
+      74: 7693750203401028416
+    second: GAME_man1_head tilt to right
+  - first:
+      74: -7753729384490012516
+    second: GAME_man1_nod
+  - first:
+      74: 2142510132594856785
+    second: GAME_man1_shake
+  - first:
+      74: 7858155606730404065
+    second: GAME_man1_random glance 1
+  - first:
+      74: 6396520706932657012
+    second: GAME_man1_random glance 2
+  - first:
+      74: -7808712603570940532
+    second: GAME_man1_random glance 3
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -86,8 +140,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: GAME_default
-      takeName: GAME_default
+      name: GAME_man1_default
+      takeName: GAME_man1_default
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -115,8 +169,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_breathe
-      takeName: GAME_breathe
+      name: GAME_man1_breathe
+      takeName: GAME_man1_breathe
       internalID: 0
       firstFrame: 0
       lastFrame: 69
@@ -144,8 +198,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_neutral sit 0
-      takeName: GAME_M_neutral sit 0
+      name: GAME_man1_M_neutral sit 0
+      takeName: GAME_man1_M_neutral sit 0
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -173,8 +227,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_neutral sit 1
-      takeName: GAME_M_neutral sit 1
+      name: GAME_man1_M_neutral sit 1
+      takeName: GAME_man1_M_neutral sit 1
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -202,8 +256,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_neutral sit 2
-      takeName: GAME_M_neutral sit 2
+      name: GAME_man1_M_neutral sit 2
+      takeName: GAME_man1_M_neutral sit 2
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -231,8 +285,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_neutral sit 3
-      takeName: GAME_M_neutral sit 3
+      name: GAME_man1_M_neutral sit 3
+      takeName: GAME_man1_M_neutral sit 3
       internalID: 0
       firstFrame: 0
       lastFrame: 1
@@ -260,8 +314,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_Sit 0 to 1
-      takeName: GAME_M_Sit 0 to 1
+      name: GAME_man1_M_Sit 0 to 1
+      takeName: GAME_man1_M_Sit 0 to 1
       internalID: 0
       firstFrame: 0
       lastFrame: 69
@@ -289,8 +343,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_Sit 1 to 2
-      takeName: GAME_M_Sit 1 to 2
+      name: GAME_man1_M_Sit 1 to 2
+      takeName: GAME_man1_M_Sit 1 to 2
       internalID: 0
       firstFrame: 0
       lastFrame: 69
@@ -318,8 +372,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_Sit 2 to 3
-      takeName: GAME_M_Sit 2 to 3
+      name: GAME_man1_M_Sit 2 to 3
+      takeName: GAME_man1_M_Sit 2 to 3
       internalID: 0
       firstFrame: 0
       lastFrame: 64
@@ -347,8 +401,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_Sit 3 to 0
-      takeName: GAME_M_Sit 3 to 0
+      name: GAME_man1_M_Sit 3 to 0
+      takeName: GAME_man1_M_Sit 3 to 0
       internalID: 0
       firstFrame: 0
       lastFrame: 74
@@ -376,8 +430,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_M_stand to sit
-      takeName: GAME_M_stand to sit
+      name: GAME_man1_M_stand to sit
+      takeName: GAME_man1_M_stand to sit
       internalID: 0
       firstFrame: 0
       lastFrame: 120
@@ -405,8 +459,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_head tilt to left
-      takeName: GAME_head tilt to left
+      name: GAME_man1_head tilt to left
+      takeName: GAME_man1_head tilt to left
       internalID: 0
       firstFrame: 0
       lastFrame: 31
@@ -434,8 +488,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_head tilt to right
-      takeName: GAME_head tilt to right
+      name: GAME_man1_head tilt to right
+      takeName: GAME_man1_head tilt to right
       internalID: 0
       firstFrame: 0
       lastFrame: 24
@@ -463,8 +517,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_nod
-      takeName: GAME_nod
+      name: GAME_man1_nod
+      takeName: GAME_man1_nod
       internalID: 0
       firstFrame: 0
       lastFrame: 29
@@ -492,8 +546,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_shake
-      takeName: GAME_shake
+      name: GAME_man1_shake
+      takeName: GAME_man1_shake
       internalID: 0
       firstFrame: 0
       lastFrame: 34
@@ -521,11 +575,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 1
-      takeName: GAME_random glance 1
+      name: GAME_man1_random glance 1
+      takeName: GAME_man1_random glance 1
       internalID: 0
       firstFrame: 0
-      lastFrame: 66
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -550,11 +604,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 2
-      takeName: GAME_random glance 2
+      name: GAME_man1_random glance 2
+      takeName: GAME_man1_random glance 2
       internalID: 0
       firstFrame: 0
-      lastFrame: 76
+      lastFrame: 49
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -579,11 +633,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: GAME_random glance 3
-      takeName: GAME_random glance 3
+      name: GAME_man1_random glance 3
+      takeName: GAME_man1_random glance 3
       internalID: 0
       firstFrame: 0
-      lastFrame: 76
+      lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
