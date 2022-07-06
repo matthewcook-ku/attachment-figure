@@ -52,6 +52,7 @@ public class ProxemicsTracker : Tracker
     public override string MeasurementDescriptor => "proxemics";
     public override IEnumerable<string> CustomHeader => new string[]
         {
+            "system time",
             "distance",
             "gaze"
         };
@@ -90,7 +91,7 @@ public class ProxemicsTracker : Tracker
         {
             averageDistance = runningTotalDistance / (float)sampleCountDistance;
 
-            Debug.Log("Average Distance: " + averageDistance + " with " + sampleCountDistance + " samples in " + elapsedTime + " sec.");
+            //Debug.Log("Average Distance: " + averageDistance + " with " + sampleCountDistance + " samples in " + elapsedTime + " sec.");
             
             runningTotalDistance = 0.0f;
             lastSampleCountDistance = sampleCountDistance;
@@ -100,7 +101,7 @@ public class ProxemicsTracker : Tracker
         {
             averageGaze = runningTotalGaze / (float)sampleCountGaze;
 
-            Debug.Log("Average Gaze: " + averageGaze + " with " + sampleCountGaze + " samples in " + elapsedTime + " sec.");
+            //Debug.Log("Average Gaze: " + averageGaze + " with " + sampleCountGaze + " samples in " + elapsedTime + " sec.");
 
             runningTotalGaze = 0.0f;
             lastSampleCountGaze = sampleCountGaze;
@@ -122,6 +123,7 @@ public class ProxemicsTracker : Tracker
 
         var values = new UXFDataRow()
         {
+            ("system time", System.DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fff")),
             ("average distance", averageDistance),
             ("distance samples", lastSampleCountDistance),
             ("average gaze", averageGaze),
@@ -148,6 +150,7 @@ public class ProxemicsTracker : Tracker
 
         var values = new UXFDataRow()
         {
+            ("system time", System.DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fff")),
             ("distance", distance),
             ("gaze", gaze)
         };

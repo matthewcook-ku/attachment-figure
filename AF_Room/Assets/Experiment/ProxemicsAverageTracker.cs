@@ -21,6 +21,7 @@ public class ProxemicsAverageTracker : Tracker
     public override string MeasurementDescriptor => "average proxemics";
     public override IEnumerable<string> CustomHeader => new string[]
         {
+            "system time",
             "average distance",
             "distance samples",
             "average gaze",
