@@ -22,11 +22,10 @@ public class ExperimentPanelController : MonoBehaviour
         Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         if(Session.instance != null) Session.instance.EndCurrentTrial();
-        
 
-        // screen transition prior to quit
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
-
-        
     }
 }
