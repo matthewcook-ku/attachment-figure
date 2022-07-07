@@ -44,7 +44,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
         // if (null == horizontalScrollbar) Debug.LogError("Hoizontal Scrollbar not connected in Chat History Scroll View Controller!");
 
         historyText = GetComponentInChildren<TMP_Text>();
-        Debug.Log("historyText is currently" + historyText);
+        //Debug.Log("historyText is currently" + historyText);
 
         scrollRect = GetComponentInChildren<ScrollRect>();
         scrollRect.GetComponentInParent<RectTransform>().pivot = new Vector2(0.0f, 0.0f); // set y pivot to 0 to scroll to bottom.
