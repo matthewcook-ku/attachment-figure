@@ -24,25 +24,25 @@ using UXF;
 
 public class StudyController : MonoBehaviour
 {
-    [Help("Object representing the subject.")]
+    [Tooltip("Object representing the subject.")]
     public SubjectController subject;
 
-    [Help("Object representing the agent.")]
+    [Tooltip("Object representing the agent.")]
     public AgentController agent;
-    [Help("Layer Mask for proxemics gaze target ray casting.")]
+    [Tooltip("Layer Mask for proxemics gaze target ray casting.")]
     public LayerMask gazeTargetLayerMask;
 
-    [Help("Refs to the UI canvas objects.")]
+    [Tooltip("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
     public SubjectUIController subjectUI;
     // public UIStartController startUI;
 
-    [Help("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
+    [Tooltip("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
 
-    [Help("Frequency of tracking data collection in sec. 0.1 is 1/10 second.")]
+    [Tooltip("Frequency of tracking data collection in sec. 0.1 is 1/10 second.")]
     public float trackingInterval = 0.3f;
-    [Help("Frequency of averaged data collection in sec. 60 is 1 minute.")]
+    [Tooltip("Frequency of averaged data collection in sec. 60 is 1 minute.")]
     public float averageInterval = 60.0f;
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
