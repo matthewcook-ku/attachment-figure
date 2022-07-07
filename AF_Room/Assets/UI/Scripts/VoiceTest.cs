@@ -30,7 +30,7 @@ public class VoiceTest : MonoBehaviour
 
     void testVoice()
     {
-        Debug.Log("Is this working?");
+        //Debug.Log("Is this working?");
         // get voice selection from dropdown
         voice_select = transform.parent.Find("VoiceGrp").Find("VoiceSelectDropdown").GetComponent<TMP_Dropdown>().value;
 
@@ -41,22 +41,25 @@ public class VoiceTest : MonoBehaviour
         // update settings in speaker
         if(voice_select == 0)
         {
-            speaker.GetSpeechCharacteristics().Volume = (int)(voice_vol * 500);
-            speaker.GetSpeechCharacteristics().Pitch = (int)(50 + (voice_pitch * 140));
-            speaker.GetSpeechCharacteristics().Speed = (int)(80 + (voice_speed * 70));
-            speaker.GetComponent<TextSpeaker>().Say(demo_text);
-        }
-        else if(voice_select == 1)
-        {
+            // RTVoice (M)
             string[] rt_args = { demo_text, "", "", (voice_speed * 2).ToString(), (voice_pitch * 2).ToString(), voice_vol.ToString() } ;
 
             rtvoice_speaker.SpeakNativeLive(rt_args);
         }
-        else if(voice_select == 2)
+        else if(voice_select == 1)
         {
+            // RTVoice (F)
             string[] rt_args = { demo_text, "", "Zira", (voice_speed *2).ToString(), (voice_pitch * 2).ToString(), voice_vol.ToString() };
 
             rtvoice_speaker.SpeakNativeLive(rt_args);
+        }
+        else if (voice_select == 2)
+        {
+            // ReadSpeaker
+            speaker.GetSpeechCharacteristics().Volume = (int)(voice_vol * 500);
+            speaker.GetSpeechCharacteristics().Pitch = (int)(50 + (voice_pitch * 140));
+            speaker.GetSpeechCharacteristics().Speed = (int)(80 + (voice_speed * 70));
+            speaker.GetComponent<TextSpeaker>().Say(demo_text);
         }
     }
 }

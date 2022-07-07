@@ -14,12 +14,6 @@ public class Incr : MonoBehaviour
         content.text = "1";
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void incr()
     {
         try
