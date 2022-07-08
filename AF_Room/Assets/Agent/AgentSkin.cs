@@ -429,14 +429,9 @@ public class AgentSkin : MonoBehaviour
     // Use this to move the targets in place before activating the IK so that the limb does not move.
     private void TwoBoneIKTargetsToBones(AgentModel.HandModel hand, AgentModel.ArmModel arm)
     {
-        alignTransforms(arm.TipBone, hand.PlaceTarget);
-        alignTransforms(arm.MidBone, hand.Hint);
+        AFUtilities.alignTransforms(arm.TipBone, hand.PlaceTarget);
+        AFUtilities.alignTransforms(arm.MidBone, hand.Hint);
     }
-
-
-
-
-
 
 
     // place the lean target centered over the skin to a neutral position.
@@ -496,22 +491,6 @@ public class AgentSkin : MonoBehaviour
     {
         Model.ResetLookTargetPosition();
     }
-
-
-
-    // Useful Utilities
-    // place one game object in the same position and rotation of another
-    private void alignTransforms(GameObject src, GameObject dst)
-    {
-        alignTransforms(src.transform, dst.transform);
-    }
-    private void alignTransforms(Transform src, Transform dst)
-    {
-        dst.SetPositionAndRotation(src.position, src.rotation);
-    }
-
-
-
 
 
     // switch skintones
