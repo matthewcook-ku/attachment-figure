@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
     public InputControls InputActions;
 
     // Delegate for map changes
-    // subscribe with actionMapChange += MyFunc in OnEnable, and -= in OnDisable
+    // subscribe with actionMapChange += MyFunc in Start, and -= in OnDisable
     public static event Action<InputActionMap> ActionMapChange;
 
 

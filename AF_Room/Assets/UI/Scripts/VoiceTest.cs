@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using ReadSpeaker;
+//using ReadSpeaker;
 using TMPro;
 
 public class VoiceTest : MonoBehaviour
 {
-    public TTSSpeaker speaker;
+    //public TTSSpeaker speaker;
     public Crosstales.RTVoice.LiveSpeaker rtvoice_speaker; 
     private int voice_select = 0;
     private string demo_text = "Peter piper picked a bunch of pickled peppers.";
@@ -53,6 +53,7 @@ public class VoiceTest : MonoBehaviour
 
             rtvoice_speaker.SpeakNativeLive(rt_args);
         }
+        /* // removed ReadSpeaker plugin
         else if (voice_select == 2)
         {
             // ReadSpeaker
@@ -61,5 +62,6 @@ public class VoiceTest : MonoBehaviour
             speaker.GetSpeechCharacteristics().Speed = (int)(80 + (voice_speed * 70));
             speaker.GetComponent<TextSpeaker>().Say(demo_text);
         }
+        */
     }
 }

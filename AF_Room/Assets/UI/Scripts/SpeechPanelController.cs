@@ -23,7 +23,7 @@ public class SpeechPanelController : MonoBehaviour
 
     public TMP_InputField chatInputField;
     public ChatHistoryScollViewController chatHistory;
-    public GameObject TTSProvider;
+    public TextSpeaker Speaker;
 
     private void Start()
     {
@@ -82,7 +82,7 @@ public class SpeechPanelController : MonoBehaviour
         // add the text to the history box
         chatHistory.text += "\n" + System.DateTime.Now.ToString("[hh:mm:ss]: ") + chatText;
 
-        // on Enter, the filed will be deactivated. so turn it back on
+        // on Enter, the fieled will be deactivated. so turn it back on
         chatInputField.ActivateInputField();
 
         // send the text to the TTS system
@@ -95,7 +95,6 @@ public class SpeechPanelController : MonoBehaviour
         Debug.Log("SPEAK: " + text);
 
         // readspeaker
-        TextSpeaker tts = TTSProvider.GetComponent<TextSpeaker>();
-        tts.Say(text);
+        Speaker.Say(text);
     }
 }

@@ -69,10 +69,4 @@ public class PlayerHeightPanelController : MonoBehaviour
     {
         Subject.ResetSubjectPosition();
     }
-    public void OnDoneButtonPressed()
-    {
-        // dismiss the pannel
-        // this will also disable this component and turn off cameras (if needed)
-        gameObject.SetActive(false);
-    }
 }
