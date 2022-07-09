@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerHeightPanelController : MonoBehaviour
 {
-    Canvas PopUpUICanvas;
+    public Canvas PopUpUICanvas;
     
     public SubjectController Subject;
     public SubscriberCamera SubjectPOVRenderTextureCamera;
@@ -26,17 +26,9 @@ public class PlayerHeightPanelController : MonoBehaviour
         if (SubjectPOVRenderTextureCamera != null) SubjectPOVRenderTextureCamera.Unsubscribe(this);
         if (DesktopPOVRenderTextureCamera != null) DesktopPOVRenderTextureCamera.Unsubscribe(this);
     }
-    public void ClosePanel()
-    {
-        gameObject.SetActive(false);
-        PopUpUICanvas.gameObject.SetActive(false);
-    }
 
     private void Start()
     {
-        // find the PopUp Canvas we are in
-        PopUpUICanvas = gameObject.GetComponentInParent<Canvas>();
-        
         // find references to the UI controls we need
         HeightSlider = gameObject.GetComponentInChildren<Slider>();
         HeightInputField = gameObject.GetComponentInChildren<TMP_InputField>();
@@ -49,6 +41,19 @@ public class PlayerHeightPanelController : MonoBehaviour
         // need to convert the value into the slider range of [0,1].
         HeightSlider.value = Subject.SubjectHeight / (MaxPlayerHeight - FloorHeight);
         HeightInputField.text = Subject.SubjectHeight.ToString("F2"); // 2 sig digits decimal 
+    }
+
+    public void OpenPanel()
+    {
+        // open the popup canvas, and then turn on this panel.
+        PopUpUICanvas.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+    }
+    public void ClosePanel()
+    {
+        // make sure to close the panel AND canvas, as canvas will block other conavas's input.
+        gameObject.SetActive(false);
+        PopUpUICanvas.gameObject.SetActive(false);
     }
 
     public void OnSliderValueChanged(float value)
