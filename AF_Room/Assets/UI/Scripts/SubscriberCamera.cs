@@ -15,7 +15,7 @@ public class SubscriberCamera : MonoBehaviour
         // this allows us to keep the camera ON in the editor
         TargetCamera.enabled = false;
 
-        Debug.Log(gameObject.name + " awake!!!!!!!!!!!!!");
+        //Debug.Log(gameObject.name + " awake!!!!!!!!!!!!!");
     }
 
     public void Subscribe(MonoBehaviour client)
