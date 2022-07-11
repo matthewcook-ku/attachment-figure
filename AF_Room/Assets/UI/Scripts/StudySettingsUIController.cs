@@ -19,7 +19,7 @@ public class StudySettingsUIController : MonoBehaviour
 	 
 	public TMP_InputField FilePathInputField;
 	public Button FileBrowseButton;
-
+	public LocalFileDataHander FileDataHandler;
 
 	public Camera ModelSettingsRenderTextureCamera;
 	public EventToggleGroup ModelToggleGroup;
@@ -45,7 +45,9 @@ public class StudySettingsUIController : MonoBehaviour
 	private void OnDisable()
 	{
 		// turn off the model camera
-		ModelSettingsRenderTextureCamera.gameObject.SetActive(false);
+		// if the program quits, it might be that the camera is destroyed before this object, hence the check. 
+		if(ModelSettingsRenderTextureCamera != null)
+			ModelSettingsRenderTextureCamera.gameObject.SetActive(false);
 	}
 
 	void generateUniqueID()
@@ -89,17 +91,27 @@ public class StudySettingsUIController : MonoBehaviour
 		sessionNumber++;
 		SessionNumberInputField.text = sessionNumber.ToString();
 	}
+	private void SetModelFromCurrentSelection()
+	{
+		int index = ModelToggleGroup.getActiveIndex();
+		Debug.Log("StudySettings: Selecting model: " + index);
+		AFManager.Instance.agent.setActiveSkin(index);
+		// also need to set the skintone of the new model to the current selection
+		SetSkintoneFromCurrentSelection();
+	}
 	public void OnModelSelectionChanged(Toggle selected)
 	{
-		int modelIndex = ModelToggleGroup.getActiveIndex();
-		Debug.Log("StudySettings: Selecting model: " + modelIndex);
-		AFManager.Instance.agent.setActiveSkin(modelIndex);
+		SetModelFromCurrentSelection();
+	}
+	private void SetSkintoneFromCurrentSelection()
+	{
+		int index = SkintoneToggleGroup.getActiveIndex();
+		Debug.Log("StudySettings: Selecting skintone: " + index);
+		AFManager.Instance.agent.activeSkin.SetSkintone(index);
 	}
 	public void OnSkintoneSelectionChanged(Toggle selected)
 	{
-		int skintoneIndex = SkintoneToggleGroup.getActiveIndex();
-		Debug.Log("StudySettings: Selecting skintone: " + skintoneIndex);
-		AFManager.Instance.agent.activeSkin.SetSkintone(skintoneIndex);
+		SetSkintoneFromCurrentSelection();
 	}
 	public void OnExitInfoTooltipSpace()
 	{
@@ -161,6 +173,9 @@ public class StudySettingsUIController : MonoBehaviour
 		//Session.instance.settings.SetValue("Voice_vol", voice_vol);
 		Session.instance.settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
 		Session.instance.settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
+
+		// Set the data path in the FileDataHandler
+		FileDataHandler.storagePath = FilePathInputField.text;
 	}
 	void MarkUIElementError(GameObject uiElement, string errorMessage)
 	{
