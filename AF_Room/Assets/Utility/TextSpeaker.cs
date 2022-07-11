@@ -25,13 +25,54 @@ public class TextSpeaker : MonoBehaviour
 	// Events
 	public static event Action OnInit;
 
-	public float VoiceVolume;   // 0.0 - 1.0, default 1 in RT-Voice
+	// 0.0 - 1.0, default 1 in RT-Voice
+	[SerializeField]
+	[Range(0.0f, 1.0f)]
+	private float _voiceVolume = 1.0f;
+	public float VoiceVolume   
+	{
+		get { return _voiceVolume; }
+		set
+		{
+			_voiceVolume = value;
+			if(UXF.Session.instance.hasInitialised)
+				UXF.Session.instance.settings.SetValue("VoiceName", _voiceVolume);
+		}
+	}
 	public static float VoiceVolumeMin = 0.0f;
 	public static float VoiceVolumeMax = 1.0f;
-	public float VoicePitch;    // 0.0 - 2.0, default 1 in RT-Voice
+
+	// 0.0 - 2.0, default 1 in RT-Voice
+	[SerializeField]
+	[Range(0.0f, 2.0f)]
+	private float _voicePitch = 1.0f;
+	public float VoicePitch
+	{
+		get { return _voicePitch; }
+		set
+		{
+			_voicePitch = value;
+			if (UXF.Session.instance.hasInitialised)
+				UXF.Session.instance.settings.SetValue("VoicePitch", _voicePitch);
+		}
+	}
 	public static float VoicePitchMin = 0.0f;
 	public static float VoicePitchMax = 2.0f;
-	public float VoiceSpeed;    // 0.01 - 3.0, default 1 in RT-Voice
+
+	// 0.01 - 3.0, default 1 in RT-Voice
+	[SerializeField]
+	[Range(0.01f, 3.0f)]
+	private float _voiceSpeed = 1.0f;
+	public float VoiceSpeed
+	{
+		get { return _voiceSpeed; }
+		set
+		{
+			_voiceSpeed = value;
+			if (UXF.Session.instance.hasInitialised)
+				UXF.Session.instance.settings.SetValue("VoiceSpeed", _voiceSpeed);
+		}
+	}
 	public static float VoiceSpeedMin = 0.01f;
 	public static float VoiceSpeedMax = 3.0f;
 
@@ -131,6 +172,14 @@ public class TextSpeaker : MonoBehaviour
 	public void StopSpeaking()
 	{
 		Speaker.Instance.Silence();
+	}
+
+	public void StoreSettingsFromFields()
+	{
+		UXF.Session.instance.settings.SetValue("VoiceName", VoiceName);
+		UXF.Session.instance.settings.SetValue("VoicePitch", VoicePitch);
+		UXF.Session.instance.settings.SetValue("VoiceVolume", VoiceVolume);
+		UXF.Session.instance.settings.SetValue("VoiceSpeed", VoiceSpeed);
 	}
 
 #endif

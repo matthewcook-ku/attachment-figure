@@ -172,9 +172,9 @@ public class StudySettingsUIController : MonoBehaviour
 		Session.instance.settings.SetValue("ID", IDInputField.text);
 		Session.instance.settings.SetValue("Session", SessionNumberInputField.text);
 		Session.instance.settings.SetValue("FilePath", FilePathInputField.text);
-		//Session.instance.settings.SetValue("Voice", voice_ind);
-		//Session.instance.settings.SetValue("Voice_pitch", voice_pitch);
-		//Session.instance.settings.SetValue("Voice_vol", voice_vol);
+
+		AFManager.Instance.agent.Speaker.StoreSettingsFromFields();
+
 		Session.instance.settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
 		Session.instance.settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
 	}

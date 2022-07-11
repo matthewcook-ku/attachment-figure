@@ -53,6 +53,9 @@ public class AgentController : MonoBehaviour
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation = Quaternion.identity;
 
+    // TTS speaker
+    public TextSpeaker Speaker;
+
     private void OnEnable()
     {
         InputControls.AgentControlsActions controls = AFManager.Instance.InputManager.InputActions.AgentControls;
