@@ -104,7 +104,7 @@ public class AgentController : MonoBehaviour
 
     // set the active skin to the skin at the given 0-based index.
     // if index is not on the list, no action is taken. 
-    void setActiveSkin(int index)
+    public void setActiveSkin(int index)
     {
         // check that index is on the list.
         if (index >= 0 && index < AgentSkins.Count)
@@ -116,7 +116,7 @@ public class AgentController : MonoBehaviour
     // set the active skin to the given skinGameObject. skinGameObject must already be on the list.
     // if null, this call is ignored.
     // if this is already the active skin, no action is taken. 
-    void setActiveSkin(AgentSkin skinGameObject)
+    public void setActiveSkin(AgentSkin skinGameObject)
     {
         if (skinGameObject == null) return;
         if (AgentSkins[activeSkinIndex] == skinGameObject) return;
