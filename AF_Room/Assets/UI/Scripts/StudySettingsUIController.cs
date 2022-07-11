@@ -159,6 +159,10 @@ public class StudySettingsUIController : MonoBehaviour
 			MarkUIElementError(FilePathInputField.gameObject, errorMessage);
 			return false;
 		}
+
+		// Set the data path in the FileDataHandler
+		FileDataHandler.storagePath = FilePathInputField.text;
+
 		return true;
 	}
 	private void StoreSettingsFromFields()
@@ -173,9 +177,6 @@ public class StudySettingsUIController : MonoBehaviour
 		//Session.instance.settings.SetValue("Voice_vol", voice_vol);
 		Session.instance.settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
 		Session.instance.settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
-
-		// Set the data path in the FileDataHandler
-		FileDataHandler.storagePath = FilePathInputField.text;
 	}
 	void MarkUIElementError(GameObject uiElement, string errorMessage)
 	{
