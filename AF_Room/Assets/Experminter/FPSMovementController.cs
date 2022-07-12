@@ -81,7 +81,7 @@ public class FPSMovementController : MonoBehaviour
     private void OnEnable()
     {
         // register for input events
-        InputControls.FPSControlsActions actions = AFManager.Instance.InputManager.InputActions.FPSControls;
+        InputControls.FPSControlsActions actions = AFManager.Instance.inputManager.InputActions.FPSControls;
         actions.HorizontalMovement.performed += OnHorizontalInputPerformed;
         actions.VerticalMovement.performed += OnVerticalInputPerformed;
         actions.Jump.performed += OnJumpPerformed;
@@ -99,7 +99,7 @@ public class FPSMovementController : MonoBehaviour
     private void OnDisable()
     {
         // deregister for input events
-        InputControls.FPSControlsActions actions = AFManager.Instance.InputManager.InputActions.FPSControls;
+        InputControls.FPSControlsActions actions = AFManager.Instance.inputManager.InputActions.FPSControls;
         actions.HorizontalMovement.performed -= OnHorizontalInputPerformed;
         actions.VerticalMovement.performed -= OnVerticalInputPerformed;
         actions.Jump.performed -= OnJumpPerformed;

@@ -40,6 +40,8 @@ public class SubjectController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("<color=teal>SubjectController: started</color>");
+
         // collect references to proximics items
         proxemicsTracker = GetComponentInChildren<ProxemicsTracker>();
         proxemicsAverageTracker = GetComponentInChildren<ProxemicsAverageTracker>();

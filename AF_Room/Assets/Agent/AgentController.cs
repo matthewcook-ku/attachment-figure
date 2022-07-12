@@ -58,20 +58,22 @@ public class AgentController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputControls.AgentControlsActions controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+        InputControls.AgentControlsActions controls = AFManager.Instance.inputManager.InputActions.AgentControls;
         controls.SwapSkins.performed += OnSwapSkins;
     }
 
     private void OnDisable()
     {
-        InputControls.AgentControlsActions controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+        InputControls.AgentControlsActions controls = AFManager.Instance.inputManager.InputActions.AgentControls;
         controls.SwapSkins.performed -= OnSwapSkins;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if(AgentSkins.Count == 0)
+        Debug.Log("<color=teal>AgentController: started</color>");
+
+        if (AgentSkins.Count == 0)
         {
             throw new System.Exception("No skins specified for agent.");
         }

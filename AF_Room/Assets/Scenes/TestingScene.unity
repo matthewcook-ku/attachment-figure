@@ -12805,6 +12805,10 @@ MonoBehaviour:
   blinkVariance: 2.8
   LeanLimit: 1
   _LeanDegree: 0
+  DefaultVoiceName: Microsoft Zira Desktop
+  DefaultVoiceVolume: 1
+  DefaultVoicePitch: 1
+  DefaultVoiceSpeed: 1
 --- !u!114 &460827207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24943,7 +24947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: 0, y: -400.00003}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &845767293
@@ -48224,6 +48228,10 @@ MonoBehaviour:
   blinkVariance: 2.8
   LeanLimit: 1
   _LeanDegree: 0
+  DefaultVoiceName: Microsoft David Desktop
+  DefaultVoiceVolume: 1
+  DefaultVoicePitch: 1
+  DefaultVoiceSpeed: 1
 --- !u!137 &1742757260 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -6794554547658232339, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}

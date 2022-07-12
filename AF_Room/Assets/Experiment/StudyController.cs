@@ -50,9 +50,6 @@ public class StudyController : MonoBehaviour
     {
         // collect any needed settings from the trial object here.
 
-        // set up the agent
-        initializeAgent();
-
         // turn on the FPS controller
         //Debug.Log("Turning on FPS controller.");
         //subject.fps.enabled = true;
@@ -68,20 +65,13 @@ public class StudyController : MonoBehaviour
         experimenterUI.gameObject.SetActive(true);
 
         // start subject UI
-        Debug.Log("Load subject UI.");
-        subjectUI.gameObject.SetActive(true);
+        //Debug.Log("Load subject UI.");
+        //subjectUI.gameObject.SetActive(true);
 
         // start the proxemics trackers
-        Debug.Log("Starting proxemics tracker.");
+        Debug.Log("Starting proxemics trackers.");
         StartCoroutine(ProxemicsTrackingManualRecord());
         StartCoroutine(ProxemicsTrackingManualRecordAverage());
-    }
-
-    // set up the agent paramters for this session. 
-    void initializeAgent()
-    {
-        Debug.Log("TODO: Set selected agent model here...");
-        Debug.Log("TODO: Set selected agent voice here...");
     }
 
     // This coroutine method will set up recording and then continue every trackingInterval seconds to manually signal the porixemics tracker to record a row of data.

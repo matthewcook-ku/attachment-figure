@@ -96,6 +96,7 @@ public class StudySettingsUIController : MonoBehaviour
 		int index = ModelToggleGroup.getActiveIndex();
 		Debug.Log("StudySettings: Selecting model: " + index);
 		AFManager.Instance.agent.setActiveSkin(index);
+
 		// also need to set the skintone of the new model to the current selection
 		SetSkintoneFromCurrentSelection();
 	}

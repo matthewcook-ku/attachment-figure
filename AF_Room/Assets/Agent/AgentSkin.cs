@@ -122,7 +122,16 @@ public class AgentSkin : MonoBehaviour
         }
     }
     private float leanScaleFactor = 0.1f; // multiplied by LeanLimit to make LeanLimit a human scale value
-    
+
+
+    // skin voice settings
+    public string DefaultVoiceName;
+    [Range(0.0f, 1.0f)]
+    public float DefaultVoiceVolume = 1.0f;
+    [Range(0.0f, 2.0f)]
+    public float DefaultVoicePitch = 1.0f;
+    [Range(0.01f, 3.0f)]
+    public float DefaultVoiceSpeed = 1.0f;
 
     // Awake
     private void Awake()
@@ -140,18 +149,13 @@ public class AgentSkin : MonoBehaviour
         StopCoroutine(BlinkCoroutine);
     }
 
-    void Start()
-    {
-        //AddRemoveInputControls(true);
-    }
-
     void AddRemoveInputControls(bool add)
     {
         InputControls.AgentControlsActions controls;
 
         if (AFManager.Instance == null)
             return;
-        controls = AFManager.Instance.InputManager.InputActions.AgentControls;
+        controls = AFManager.Instance.inputManager.InputActions.AgentControls;
 
         // install input controls
         if (add)
@@ -177,13 +181,55 @@ public class AgentSkin : MonoBehaviour
         
     }
 
+    void ActivateDefulatVoiceForSkin()
+    {
+        // do...while(false) will run once, and allow me to break at any point
+        // this syntax avoids a lot of nested if's to check if things are null
+        do
+        {
+            if (AFManager.Instance == null)
+                break;
+            if (AFManager.Instance.agent == null)
+                break;
+            if (AFManager.Instance.agent.Speaker == null)
+                break;
+
+            TextSpeaker Speaker = AFManager.Instance.agent.Speaker;
+            if (Speaker.Ready)
+            {
+                Speaker.VoiceName = DefaultVoiceName;
+                Speaker.VoiceVolume = DefaultVoiceVolume;
+                Speaker.VoicePitch = DefaultVoicePitch;
+                Speaker.VoiceSpeed = DefaultVoiceSpeed;
+
+                // in case we had to use the callback
+                TextSpeaker.OnInit -= ActivateDefulatVoiceForSkin;
+
+                return;
+            }
+
+        } while (false);
+
+        // if anything above failed, then we'll be dumped here
+        Debug.Log("AgentSkin: Unable to activate default voice, speaker not ready. Registering for callback.");
+        TextSpeaker.OnInit += ActivateDefulatVoiceForSkin;
+    }
+
+    // called each time this skin is activated
     private void OnEnable()
     {
+        Debug.Log("<color=olive>Activating Agent Skin: " + name + "</color>");
+
         AddRemoveInputControls(true);
 
         // begin the blink coroutine
         if (RandomBlinks) StartRandomBlinks();
+
+        // activate the associated voice for this skin
+        // note that this call may fail if this OnEnable is happening before other components have loaded.
+        ActivateDefulatVoiceForSkin();
     }
+    // called each time this skin is deactivated
     private void OnDisable()
     {
         // remove input controls
@@ -191,6 +237,11 @@ public class AgentSkin : MonoBehaviour
 
         // stop random blinking
         if (RandomBlinks) StopRandomBlinks();
+
+        // in case we were still waiting to activate voice
+        TextSpeaker.OnInit -= ActivateDefulatVoiceForSkin;
+
+        Debug.Log("<color=olive>Deactivating Agent Skin: " + name + "</color>");
     }
     private IEnumerator RandomBlinkCoroutine()
     {

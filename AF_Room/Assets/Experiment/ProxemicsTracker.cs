@@ -61,7 +61,7 @@ public class ProxemicsTracker : Tracker
     void Start()
     {
         // collect a local reference to the agent from the AFManager
-        agent = AFManager.Instance.studyController.agent;
+        agent = AFManager.Instance.agent;
         if (null == agent) Debug.LogError("agent null in ProxemicsTracker!");
         HMDFieldOfView = AFManager.Instance.studyController.HMDFieldOfView;
         gazeTargetLayerMask = AFManager.Instance.studyController.gazeTargetLayerMask;

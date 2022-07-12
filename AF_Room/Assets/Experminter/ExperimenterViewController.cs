@@ -24,11 +24,11 @@ public class ExperimenterViewController : MonoBehaviour
 
     private void OnEnable()
     {
-        AFManager.Instance.InputManager.InputActions.ExperimenterControls.ToggleFPS.performed += OnFPSTogglePerformed;
+        AFManager.Instance.inputManager.InputActions.ExperimenterControls.ToggleFPS.performed += OnFPSTogglePerformed;
     }
     private void OnDisable()
     {
-        AFManager.Instance.InputManager.InputActions.ExperimenterControls.ToggleFPS.performed -= OnFPSTogglePerformed;
+        AFManager.Instance.inputManager.InputActions.ExperimenterControls.ToggleFPS.performed -= OnFPSTogglePerformed;
     }
 
     private void OnFPSTogglePerformed(InputAction.CallbackContext obj)

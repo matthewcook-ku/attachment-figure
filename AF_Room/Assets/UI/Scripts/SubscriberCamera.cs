@@ -21,24 +21,24 @@ public class SubscriberCamera : MonoBehaviour
     public void Subscribe(MonoBehaviour client)
     {
         bool present = subscribers.Add(client);
-        if (!present) Debug.Log(gameObject.name + ": " + client + " is already subscribed to this camera.");
-        else Debug.Log(gameObject.name + ": Client Added, " + subscribers.Count + " total clients.");
+        //if (!present) Debug.Log(gameObject.name + ": " + client + " is already subscribed to this camera.");
+        //else Debug.Log(gameObject.name + ": Client Added, " + subscribers.Count + " total clients.");
 
         if (subscribers.Count != 0)
         {
-            Debug.Log(gameObject.name + ": switching camera on.");
+            //Debug.Log(gameObject.name + ": switching camera on.");
             TargetCamera.enabled = true;
         }
     }
     public void Unsubscribe(MonoBehaviour client)
     {
         bool present = subscribers.Remove(client);
-        if (!present) Debug.Log(gameObject.name + ": " + client + " was not subscribed to this camera.");
-        else Debug.Log(gameObject.name + ": Client Removed, " + subscribers.Count + " total clients.");
+        //if (!present) Debug.Log(gameObject.name + ": " + client + " was not subscribed to this camera.");
+        //else Debug.Log(gameObject.name + ": Client Removed, " + subscribers.Count + " total clients.");
 
         if (subscribers.Count == 0)
         {
-            Debug.Log(gameObject.name + ": switching camera off.");
+            //Debug.Log(gameObject.name + ": switching camera off.");
             TargetCamera.enabled = false;
         }
     }

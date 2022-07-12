@@ -42,14 +42,19 @@ public class InputManager : MonoBehaviour
         InputActions.Disable();
     }
 
+	private void Start()
+	{
+        Debug.Log("<color=teal>InputManager: started</color>");
+    }
 
 
-    // toggle the given action map on or off
-    // raises an event to signal the change to all registered listeners
-    public static void ToggleActionMap(InputActionMap actionMap)
+
+	// toggle the given action map on or off
+	// raises an event to signal the change to all registered listeners
+	public static void ToggleActionMap(InputActionMap actionMap)
     {
         ActionMapChange?.Invoke(actionMap); // raise an event to alert others of change
-        Debug.Log("ActionMap: " + actionMap + " => " + !actionMap.enabled);
+        Debug.Log("<color=orange>ActionMap: " + actionMap + " => " + !actionMap.enabled + "</color>");
         if (actionMap.enabled)
         {
             actionMap.Disable();
@@ -69,7 +74,7 @@ public class InputManager : MonoBehaviour
             return;
 
         ActionMapChange?.Invoke(actionMap); // raise an event to alert others of change
-        Debug.Log("ActionMap: " + actionMap + " => " + enable);
+        Debug.Log("<color=orange>ActionMap: " + actionMap + " => " + enable + "</color>");
         if (enable)
             actionMap.Enable();
         else
