@@ -14,4 +14,19 @@ public class HeadsetReadoutController : MonoBehaviour
 {
     public InputField distanceField;
     public InputField gazeField;
+
+	private void OnEnable()
+	{
+		ProxemicsTracker.OnTakeMeasurement += UpdateHeadsetReadout;
+	}
+	private void OnDisable()
+	{
+		ProxemicsTracker.OnTakeMeasurement -= UpdateHeadsetReadout;
+	}
+
+	void UpdateHeadsetReadout(ProxemicsTracker tracker)
+	{
+		distanceField.SetTextWithoutNotify(tracker.distance.ToString());
+		gazeField.SetTextWithoutNotify(tracker.gaze.ToString());
+	}
 }

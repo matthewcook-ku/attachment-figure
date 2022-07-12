@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UXF;
+using System;
 
 // UXF Tracker for proximity data
 // 
@@ -21,6 +22,10 @@ using UXF;
 
 public class ProxemicsTracker : Tracker
 {
+
+    // events
+    public static event Action<ProxemicsTracker> OnTakeMeasurement;
+    public static event Action<bool> OnTrackerRaycast;
 
     // collect from StudyController
     private AgentController agent = null;
@@ -155,6 +160,9 @@ public class ProxemicsTracker : Tracker
             ("gaze", gaze)
         };
 
+        // notify that a measurement was taken
+        OnTakeMeasurement?.Invoke(this);
+
         return values;
     }
 
@@ -206,11 +214,13 @@ public class ProxemicsTracker : Tracker
         if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, gazeTargetLayerMask, QueryTriggerInteraction.Collide))
         {
             Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.yellow, 2.0f, true);
+            OnTrackerRaycast?.Invoke(true);
             //Debug.Log("Raycast Hit ***** !!");
         }
         else
         {
             Debug.DrawRay(transform.position, transform.forward * 10.0f, Color.white, 2.0f, true);
+            OnTrackerRaycast?.Invoke(false);
             //Debug.Log("Raycast Miss");
         }
     }

@@ -101,8 +101,8 @@ public class StudyController : MonoBehaviour
             experimenterUI.experimentPanelController.distanceField.SetTextWithoutNotify(distance.ToString());
             experimenterUI.experimentPanelController.gazeField.SetTextWithoutNotify(gaze.ToString());
 
-            subjectUI.headsetReadoutController.distanceField.SetTextWithoutNotify(distance.ToString());
-            subjectUI.headsetReadoutController.gazeField.SetTextWithoutNotify(gaze.ToString());
+            //subjectUI.headsetReadoutController.distanceField.SetTextWithoutNotify(distance.ToString());
+            //subjectUI.headsetReadoutController.gazeField.SetTextWithoutNotify(gaze.ToString());
 
             // pause for the tracking interval
             yield return new WaitForSeconds(trackingInterval);

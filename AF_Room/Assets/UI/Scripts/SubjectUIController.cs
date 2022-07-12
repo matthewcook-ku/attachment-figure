@@ -6,5 +6,5 @@ using UnityEngine;
 
 public class SubjectUIController : MonoBehaviour
 {
-    public HeadsetReadoutController headsetReadoutController; 
+    public HeadsetReadoutController headsetReadoutController;
 }
