@@ -858,6 +858,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleSubjectUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""32e1697d-bf77-4338-bdda-c71508d68292"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -891,6 +900,39 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleFPS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""5a9afc66-04d2-46e0-9182-7ebbca9a4b6e"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSubjectUI"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""f50f4387-6838-423f-9553-3a8f2e39a0e7"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSubjectUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a67b3926-3138-4f36-bbb5-922732c19d59"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSubjectUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -932,6 +974,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         // ExperimenterControls
         m_ExperimenterControls = asset.FindActionMap("ExperimenterControls", throwIfNotFound: true);
         m_ExperimenterControls_ToggleFPS = m_ExperimenterControls.FindAction("ToggleFPS", throwIfNotFound: true);
+        m_ExperimenterControls_ToggleSubjectUI = m_ExperimenterControls.FindAction("ToggleSubjectUI", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1259,11 +1302,13 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_ExperimenterControls;
     private IExperimenterControlsActions m_ExperimenterControlsActionsCallbackInterface;
     private readonly InputAction m_ExperimenterControls_ToggleFPS;
+    private readonly InputAction m_ExperimenterControls_ToggleSubjectUI;
     public struct ExperimenterControlsActions
     {
         private @InputControls m_Wrapper;
         public ExperimenterControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @ToggleFPS => m_Wrapper.m_ExperimenterControls_ToggleFPS;
+        public InputAction @ToggleSubjectUI => m_Wrapper.m_ExperimenterControls_ToggleSubjectUI;
         public InputActionMap Get() { return m_Wrapper.m_ExperimenterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1276,6 +1321,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @ToggleFPS.started -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleFPS;
                 @ToggleFPS.performed -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleFPS;
                 @ToggleFPS.canceled -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleFPS;
+                @ToggleSubjectUI.started -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleSubjectUI;
+                @ToggleSubjectUI.performed -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleSubjectUI;
+                @ToggleSubjectUI.canceled -= m_Wrapper.m_ExperimenterControlsActionsCallbackInterface.OnToggleSubjectUI;
             }
             m_Wrapper.m_ExperimenterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1283,6 +1331,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @ToggleFPS.started += instance.OnToggleFPS;
                 @ToggleFPS.performed += instance.OnToggleFPS;
                 @ToggleFPS.canceled += instance.OnToggleFPS;
+                @ToggleSubjectUI.started += instance.OnToggleSubjectUI;
+                @ToggleSubjectUI.performed += instance.OnToggleSubjectUI;
+                @ToggleSubjectUI.canceled += instance.OnToggleSubjectUI;
             }
         }
     }
@@ -1323,5 +1374,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     public interface IExperimenterControlsActions
     {
         void OnToggleFPS(InputAction.CallbackContext context);
+        void OnToggleSubjectUI(InputAction.CallbackContext context);
     }
 }
