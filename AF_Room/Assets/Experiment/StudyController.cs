@@ -98,8 +98,8 @@ public class StudyController : MonoBehaviour
             //if (experimenterUI.experimentPanelController == null) Debug.Log("experimentPanelController null in manual record.");
             //if (experimenterUI.experimentPanelController.distanceField == null) Debug.Log("distanceField null in manual record.");
 
-            experimenterUI.experimentPanelController.distanceField.SetTextWithoutNotify(distance.ToString());
-            experimenterUI.experimentPanelController.gazeField.SetTextWithoutNotify(gaze.ToString());
+            //experimenterUI.experimentPanelController.distanceField.SetTextWithoutNotify(distance.ToString());
+            //experimenterUI.experimentPanelController.gazeField.SetTextWithoutNotify(gaze.ToString());
 
             //subjectUI.headsetReadoutController.distanceField.SetTextWithoutNotify(distance.ToString());
             //subjectUI.headsetReadoutController.gazeField.SetTextWithoutNotify(gaze.ToString());
