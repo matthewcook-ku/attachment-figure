@@ -35,7 +35,7 @@ public class TextSpeaker : MonoBehaviour
 		set
 		{
 			_voiceVolume = value;
-			if(UXF.Session.instance.hasInitialised)
+			if((UXF.Session.instance != null) && UXF.Session.instance.hasInitialised)
 				UXF.Session.instance.settings.SetValue("VoiceName", _voiceVolume);
 		}
 	}
@@ -52,7 +52,7 @@ public class TextSpeaker : MonoBehaviour
 		set
 		{
 			_voicePitch = value;
-			if (UXF.Session.instance.hasInitialised)
+			if ((UXF.Session.instance != null) && UXF.Session.instance.hasInitialised)
 				UXF.Session.instance.settings.SetValue("VoicePitch", _voicePitch);
 		}
 	}
@@ -69,7 +69,7 @@ public class TextSpeaker : MonoBehaviour
 		set
 		{
 			_voiceSpeed = value;
-			if (UXF.Session.instance.hasInitialised)
+			if ((UXF.Session.instance != null) && UXF.Session.instance.hasInitialised)
 				UXF.Session.instance.settings.SetValue("VoiceSpeed", _voiceSpeed);
 		}
 	}
