@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
-using DG.Tweening;
+using CrazyMinnow.SALSA;
 
 /*
  * Structure and Animation Control of a Skin
@@ -94,18 +94,66 @@ public class AgentSkin : MonoBehaviour
     public Animator animator { get { return GetComponent<Animator>(); } }
     public GameObject gazeTarget { get { return Model.Head.GazeTarget; } }
 
+    private Eyes LookController;
+    public bool currentlyLooking
+	{
+		get
+		{
+            return (LookController.lookTarget != null);
+		}
+        set
+		{
+            Debug.Log(gameObject.name + ": setting currentlyLooking: " + value);
+            if (value)
+            {
+                Debug.Log(gameObject.name + ": setting currentlyLooking: true");
+                //LookController.lookTarget = Model.LookTarget.transform;
+                Model.LookTargetConstraint.weight = 1.0f;
+
+
+                LookController.EnableHead(true);
+                LookController.EnableEye(true);
+            }
+            else
+            {
+                Debug.Log(gameObject.name + ": setting currentlyLooking: false");
+                //LookController.lookTarget = null;
+                Model.LookTargetConstraint.weight = 0.0f;
+                CenterLookTarget();
+
+
+				try
+				{
+					LookController.EnableHead(false);
+					LookController.EnableEye(false);
+				}
+				catch (NullReferenceException)
+				{
+                    // SALSA EYES throws this exception on the first init for some reason, just ignore it
+                    Debug.Log("Caught SALSA Exception");
+				}
+            }
+        }
+	}
+    private void CenterLookTarget()
+    {
+        Model.ResetLookTargetPosition();
+    }
+
     // texture selectors for swapping textures
     public TextureSelector HeadTextureSelector;
     public TextureSelector BodyTextureSelector;
 
     // pose settings
+
     // blinking
-    public bool RandomBlinks;
-    [Tooltip("Time in sec between blinks.")]
-    public float blinkRate = 5.0f;
-    [Tooltip("Blink variance random +/- this many sec.")]
-    public float blinkVariance = 2.8f;
-    private Coroutine BlinkCoroutine;
+    // Now using SALSA's EYE for blinks and head movement
+    //public bool RandomBlinks;
+    //[Tooltip("Time in sec between blinks.")]
+    //public float blinkRate = 5.0f;
+    //[Tooltip("Blink variance random +/- this many sec.")]
+    //public float blinkVariance = 2.8f;
+    //private Coroutine BlinkCoroutine;
 
 
     // leaning
@@ -138,18 +186,11 @@ public class AgentSkin : MonoBehaviour
     {
         // collect reference to objects we need
         Model = new AgentModel(this.gameObject, SkinMeshPrefix);
+
+        LookController = GetComponent<Eyes>();
     }
 
-    private void StartRandomBlinks()
-    {
-        BlinkCoroutine = StartCoroutine(RandomBlinkCoroutine());
-    }
-    private void StopRandomBlinks()
-    {
-        StopCoroutine(BlinkCoroutine);
-    }
-
-    void AddRemoveInputControls(bool add)
+	void AddRemoveInputControls(bool add)
     {
         InputControls.AgentControlsActions controls;
 
@@ -223,11 +264,14 @@ public class AgentSkin : MonoBehaviour
         AddRemoveInputControls(true);
 
         // begin the blink coroutine
-        if (RandomBlinks) StartRandomBlinks();
+        //if (RandomBlinks) StartRandomBlinks();
 
         // activate the associated voice for this skin
         // note that this call may fail if this OnEnable is happening before other components have loaded.
         ActivateDefulatVoiceForSkin();
+
+        // when model starts up, make sure look constraint is off
+        currentlyLooking = false;
     }
     // called each time this skin is deactivated
     private void OnDisable()
@@ -236,26 +280,39 @@ public class AgentSkin : MonoBehaviour
         AddRemoveInputControls(false);
 
         // stop random blinking
-        if (RandomBlinks) StopRandomBlinks();
+        //if (RandomBlinks) StopRandomBlinks();
 
         // in case we were still waiting to activate voice
         TextSpeaker.OnInit -= ActivateDefulatVoiceForSkin;
 
+        // when model shuts down, make sure look constraint is off
+        currentlyLooking = false;
+
         Debug.Log("<color=olive>Deactivating Agent Skin: " + name + "</color>");
     }
-    private IEnumerator RandomBlinkCoroutine()
-    {
-        float randomWait;
-        while (true)
-        {
-            randomWait = blinkRate + UnityEngine.Random.Range(-blinkVariance, blinkVariance);
-            animator.SetTrigger("Blink");
-            //Debug.Log("BLINK! - next blink in " + randomWait + " sec");
-            yield return new WaitForSeconds(randomWait);
-        }
-    }
 
-    private void PrintFlags(SkinConstraintFlags flags, string prompt = "")
+	//private void StartRandomBlinks()
+	//{
+	//    Debug.Log("starting random blink coroutine");
+	//    BlinkCoroutine = StartCoroutine(RandomBlinkCoroutine());
+	//}
+	//private void StopRandomBlinks()
+	//{
+	//    StopCoroutine(BlinkCoroutine);
+	//}
+	//private IEnumerator RandomBlinkCoroutine()
+	//{
+	//    float randomWait;
+	//    while (true)
+	//    {
+	//        randomWait = blinkRate + UnityEngine.Random.Range(-blinkVariance, blinkVariance);
+	//        animator.SetTrigger("Blink");
+	//        Debug.Log("BLINK! - next blink in " + randomWait + " sec");
+	//        yield return new WaitForSeconds(randomWait);
+	//    }
+	//}
+
+	private void PrintFlags(SkinConstraintFlags flags, string prompt = "")
     {
         string result = "";
         result += (flags.HasFlag(SkinConstraintFlags.Lean) ? "[Ln]" : "[ ]");
@@ -329,12 +386,14 @@ public class AgentSkin : MonoBehaviour
     }
 
     /*
+    // Now Replaced with SALSA EYE system
+    //
     // TODO: Have the eyes point in a random direction when blinking.
     // needs to play nice with the eye constraints.
     //
     // this code tries to effect the bones, but prob better to move the eye constraint itself
-
     // eye darts
+    //
     public bool DartEyes = true;
     [Tooltip("Deflection in degrees.")]
     public float EyeDartVerticalDeflection = 15.0f;
@@ -344,7 +403,6 @@ public class AgentSkin : MonoBehaviour
     public float EyeDartPercent = 0.2f;
     [Tooltip("Time to look away before darting back.")]
     public float EyeDartDelay = 1.0f;
-
     private void ShiftEyes()
     {
         float vertical = UnityEngine.Random.Range(-EyeDartVerticalDeflection, EyeDartVerticalDeflection);
@@ -522,25 +580,6 @@ public class AgentSkin : MonoBehaviour
         leanPosition += (leanRotation * Vector3.forward) * ((LeanLimit * leanScaleFactor) * degree);
 
         leanTarget.SetPositionAndRotation(leanPosition, leanRotation);
-    }
-
-    
-
-
-
-
-
-    private void UpdateLookTargetToSubject()
-    {
-        UpdateLookTarget(AFManager.Instance.subject.GazeTarget);
-    }
-    private void UpdateLookTarget(Transform target)
-    {
-        Model.LookTarget.transform.position = target.position;
-    }
-    private void CenterLookTarget()
-    {
-        Model.ResetLookTargetPosition();
     }
 
 

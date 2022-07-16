@@ -242,6 +242,7 @@ public class AgentModel
     public SkinnedMeshRenderer BodyMesh;
     public GameObject SkinRootBone;
     public GameObject LookTarget;
+    public MultiPositionConstraint LookTargetConstraint;
     public Vector3 LookTargetDefaultPosition { get; private set; }
     public void ResetLookTargetPosition() { LookTarget.transform.position = LookTargetDefaultPosition; }
     public HeadModel Head;
@@ -455,6 +456,8 @@ public class AgentModel
         Head.GazeConstraint = GazeTarget.gameObject.GetComponent<MultiParentConstraint>();
         this.LookTarget = LookTarget.gameObject;
         this.LookTargetDefaultPosition = LookTarget.position;
+        LookTargetConstraint = LookTarget.gameObject.GetComponent<MultiPositionConstraint>();
+
         Head.Constraint = HeadLookAt.GetComponent<MultiAimConstraint>();
         Head.LookTarget = HeadLookTarget.gameObject;
         Neck.Constraint = NeckLookAt.GetComponent<MultiAimConstraint>();

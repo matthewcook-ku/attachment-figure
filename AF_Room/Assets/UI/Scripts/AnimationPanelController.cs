@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Controller for the Animation UI Panel
 
 public class AnimationPanelController : MonoBehaviour
 {
-    public void smileExpButtonPressed()
+    public Toggle LookingToggle;
+    
+    private void Start()
+	{
+        // Read any settings from the system to reflect in the UI
+        //LookingToggle.SetIsOnWithoutNotify(AFManager.Instance.agent.activeSkin.currentlyLooking);
+    }
+
+	public void smileExpButtonPressed()
     {
         Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         AFManager.Instance.agent.activeSkin.MakeFace(AgentSkin.FaceExpression.Smile);
@@ -50,6 +59,11 @@ public class AnimationPanelController : MonoBehaviour
     {
         Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         AFManager.Instance.agent.activeSkin.PerformBodyAction(AgentSkin.BodyAction.HeadNod);
+    }
+    public void attentionToggleChanged(bool value)
+	{
+        Debug.Log("Toggle Changed: " + System.Reflection.MethodBase.GetCurrentMethod().Name + " : " + value);
+        AFManager.Instance.agent.activeSkin.currentlyLooking = value;
     }
     public void tiltLeftButtonPressed()
     {
