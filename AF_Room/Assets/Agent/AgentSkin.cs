@@ -99,7 +99,7 @@ public class AgentSkin : MonoBehaviour
 	{
 		get
 		{
-            return (LookController.lookTarget != null);
+            return (LookController.headEnabled && LookController.eyeEnabled);
 		}
         set
 		{
@@ -284,9 +284,6 @@ public class AgentSkin : MonoBehaviour
 
         // in case we were still waiting to activate voice
         TextSpeaker.OnInit -= ActivateDefulatVoiceForSkin;
-
-        // when model shuts down, make sure look constraint is off
-        currentlyLooking = false;
 
         Debug.Log("<color=olive>Deactivating Agent Skin: " + name + "</color>");
     }
