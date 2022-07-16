@@ -27,6 +27,9 @@ using UnityEngine.InputSystem;
 
 public class AgentController : MonoBehaviour
 {
+    // events
+    public static event Action ActiveSkinChanged;
+
     // skins
     private int activeSkinIndex = 0;
     public List<AgentSkin> AgentSkins;
@@ -153,6 +156,9 @@ public class AgentController : MonoBehaviour
         activeSkinIndex = index;
         AgentSkins[activeSkinIndex].transform.SetPositionAndRotation(spawnPosition, spawnRotation);
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
+
+        // let folks know the skin changed
+        ActiveSkinChanged?.Invoke();
     }
 
     // pass any animation calls on to the skin.

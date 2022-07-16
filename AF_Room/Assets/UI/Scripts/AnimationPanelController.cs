@@ -12,8 +12,20 @@ public class AnimationPanelController : MonoBehaviour
     private void Start()
 	{
         // Read any settings from the system to reflect in the UI
-        //LookingToggle.SetIsOnWithoutNotify(AFManager.Instance.agent.activeSkin.currentlyLooking);
+        updateLookingToggle();
+
+        // register for updates
+        AgentController.ActiveSkinChanged += updateLookingToggle;
     }
+	private void OnDisable()
+	{
+        AgentController.ActiveSkinChanged -= updateLookingToggle;
+    }
+
+	private void updateLookingToggle()
+	{
+        LookingToggle.SetIsOnWithoutNotify(AFManager.Instance.agent.activeSkin.currentlyLooking);
+	}
 
 	public void smileExpButtonPressed()
     {
