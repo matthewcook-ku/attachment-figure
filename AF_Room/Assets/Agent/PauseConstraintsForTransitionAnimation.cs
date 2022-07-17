@@ -10,7 +10,7 @@ public class PauseConstraintsForTransitionAnimation : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log("Starting Animation...");
+        Debug.Log("Starting Animation...");
         animator.GetComponent<AgentSkin>().PauseConstraintsForAnimation();
     }
 
@@ -23,7 +23,7 @@ public class PauseConstraintsForTransitionAnimation : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Debug.Log("Animation Complete");
+        Debug.Log("Animation Complete");
         animator.GetComponent<AgentSkin>().ResumeConstraintsForAnimation();
     }
 

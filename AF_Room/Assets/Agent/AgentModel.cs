@@ -89,6 +89,10 @@ public class AgentModel
                 //Debug.Log("Weight is now: " + Constraint.weight);
             }
         }
+        public bool ConstraintInTransition
+		{
+            get { return (WeightTweener.IsActive() && WeightTweener.IsPlaying()); }
+		}
         public void ToggleConstraint()
         {
             bool currentlyActive = ConstraintActive;

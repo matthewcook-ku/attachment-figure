@@ -84,13 +84,11 @@ public class AgentSkin : MonoBehaviour
     };
     private SkinConstraintFlags storedActiveConstraints;
     private bool constraintsPaused = false;
+    public float ConstraintTransitionTime = 1.0f; // time in seconds to go in and out of constraint. 
 
     // prefix to add before mesh game object names
     [Tooltip("This prefix will be used when looking for the mesh parts like Body and LeftEye.")]
     public string SkinMeshPrefix = "";
-
-    // constraint transitions
-    public float ConstraintTransitionTime = 1.0f; // time in seconds to go in and out of constraint. 
 
     // structure components
     [HideInInspector]
@@ -342,24 +340,38 @@ public class AgentSkin : MonoBehaviour
         if (Model.EyeLeft.ConstraintActive) active |= SkinConstraintFlags.EyeLookAtLeft;
         return active;
     }
-    private void ActivateConstraints(SkinConstraintFlags flags)
+    private void ActivateConstraintsFromFlags(SkinConstraintFlags flags)
     {
-        PrintFlags(flags, "Activating: ");
-
         if (flags.HasFlag(SkinConstraintFlags.Lean))
-            Model.Spine.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.HandRight))
+		{
+			Model.Spine.TweenOnConstraint(ConstraintTransitionTime);
+		}
+		if (flags.HasFlag(SkinConstraintFlags.HandRight))
+		{
+            FixHandIKPosition(AgentModel.Side.right);
             Model.HandRight.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.HandLeft))
+		}
+		if (flags.HasFlag(SkinConstraintFlags.HandLeft))
+		{
+            FixHandIKPosition(AgentModel.Side.left);
             Model.HandLeft.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.NeckLookAt))
-            Model.Neck.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.HeadLookAt))
-            Model.Head.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.EyeLookAtRight))
-            Model.EyeRight.TweenOnConstraint(ConstraintTransitionTime);
-        if (flags.HasFlag(SkinConstraintFlags.EyeLookAtLeft))
-            Model.EyeLeft.TweenOnConstraint(ConstraintTransitionTime);
+		}
+		if (flags.HasFlag(SkinConstraintFlags.NeckLookAt))
+		{
+			Model.Neck.TweenOnConstraint(ConstraintTransitionTime);
+		}
+		if (flags.HasFlag(SkinConstraintFlags.HeadLookAt))
+		{
+			Model.Head.TweenOnConstraint(ConstraintTransitionTime);
+		}
+		if (flags.HasFlag(SkinConstraintFlags.EyeLookAtRight))
+		{
+			Model.EyeRight.TweenOnConstraint(ConstraintTransitionTime);
+		}
+		if (flags.HasFlag(SkinConstraintFlags.EyeLookAtLeft))
+		{
+			Model.EyeLeft.TweenOnConstraint(ConstraintTransitionTime);
+		}
     }
     private void DeactivateConstraints()
     {
@@ -377,9 +389,9 @@ public class AgentSkin : MonoBehaviour
         if (constraintsPaused) return;
         constraintsPaused = true;
 
-        //Debug.Log("Pausing constraints to animate");
+        Debug.Log("Pausing constraints to animate");
         storedActiveConstraints = GetCurrentActiveConstraints();
-        //PrintFlags(storedActiveConstraints, "Turning OFF Constraints: ");
+        PrintFlags(storedActiveConstraints, "Turning OFF Constraints: ");
         DeactivateConstraints();
     }
     public void ResumeConstraintsForAnimation()
@@ -387,8 +399,9 @@ public class AgentSkin : MonoBehaviour
         if (!constraintsPaused) return;
         constraintsPaused = false;
 
-        //PrintFlags(storedActiveConstraints, "Turning ON Constraints: ");
-        ActivateConstraints(storedActiveConstraints);
+        Debug.Log("Resuming constraints");
+        PrintFlags(storedActiveConstraints, "Turning ON Constraints: ");
+        ActivateConstraintsFromFlags(storedActiveConstraints);
     }
 
     /*
@@ -428,28 +441,34 @@ public class AgentSkin : MonoBehaviour
     private void OnToggleHandIK(InputAction.CallbackContext obj)
     {
         Debug.Log("Toggle Hand IK");
-        //FixBothHandIKPositions();
-        //Model.ToggleBothHandConstraints();
-        //ToggleConstraint(SkinConstraint.HandBoth);
 
+        FixBothHandIKPositions();
         Model.HandRight.TweenToggleConstraint(ConstraintTransitionTime);
         Model.HandLeft.TweenToggleConstraint(ConstraintTransitionTime);
+
+        PrintFlags(GetCurrentActiveConstraints(), "Currently Active Constraints: ");
     }
     private void OnToggleLean(InputAction.CallbackContext obj)
     {
         Debug.Log("Toggle Lean Constraint");
         CenterLeanTarget();
         Model.Spine.ToggleConstraint();
+
+        PrintFlags(GetCurrentActiveConstraints(), "Currently Active Constraints: ");
     }
     private void OnToggleHeadLookAt(InputAction.CallbackContext obj)
     {
         Debug.Log("Toggle Head Look At");
         Model.Head.ToggleConstraint();
+
+        PrintFlags(GetCurrentActiveConstraints(), "Currently Active Constraints: ");
     }
     private void OnToggleEyeLookAt(InputAction.CallbackContext obj)
     {
         Debug.Log("Toggle Eye Look At");
         Model.ToggleBothEyeConstraints();
+
+        PrintFlags(GetCurrentActiveConstraints(), "Currently Active Constraints: ");
     }
 
     public void PerformBodyAction(BodyAction action)
