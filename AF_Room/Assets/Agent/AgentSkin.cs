@@ -28,6 +28,8 @@ public class AgentSkin : MonoBehaviour
         Blink = 9
     };
 
+    private BodyAction currentHeadTilt;
+
     public enum FaceExpression
     {
         None = 0,
@@ -39,6 +41,8 @@ public class AgentSkin : MonoBehaviour
         Anger = 6,
         Laugh = 7
     };
+
+    private FaceExpression currentExpression;
 
     public enum SkinTone
     {
@@ -272,6 +276,11 @@ public class AgentSkin : MonoBehaviour
 
         // when model starts up, make sure look constraint is off
         currentlyLooking = false;
+
+        // head tilt always starts neutral
+        currentHeadTilt = BodyAction.HeadTiltNeutral;
+        // expression always starts neutral
+        currentExpression = FaceExpression.Neutral;
     }
     // called each time this skin is deactivated
     private void OnDisable()
@@ -454,12 +463,18 @@ public class AgentSkin : MonoBehaviour
                 animator.SetTrigger("HeadShake");
                 break;
             case BodyAction.HeadTiltRight:
+                if (currentHeadTilt == BodyAction.HeadTiltRight) break;
+                currentHeadTilt = BodyAction.HeadTiltRight;
                 animator.SetTrigger("HeadTiltRight");
                 break;
             case BodyAction.HeadTiltNeutral:
+                if (currentHeadTilt == BodyAction.HeadTiltNeutral) break;
+                currentHeadTilt = BodyAction.HeadTiltNeutral;
                 animator.SetTrigger("HeadTiltNeutral");
                 break;
             case BodyAction.HeadTiltLeft:
+                if (currentHeadTilt == BodyAction.HeadTiltLeft) break;
+                currentHeadTilt = BodyAction.HeadTiltLeft;
                 animator.SetTrigger("HeadTiltLeft");
                 break;
             case BodyAction.SitShift:
@@ -479,6 +494,9 @@ public class AgentSkin : MonoBehaviour
 
     public void MakeFace(FaceExpression face)
     {
+        if (currentExpression == face) return;
+        currentExpression = face;
+
         switch (face)
         {
             case FaceExpression.Neutral:
