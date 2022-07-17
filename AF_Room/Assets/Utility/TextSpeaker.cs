@@ -25,6 +25,8 @@ public class TextSpeaker : MonoBehaviour
 	// Events
 	public static event Action OnInit;
 
+	public AudioSource SpeakerAudioSource;
+
 	// 0.0 - 1.0, default 1 in RT-Voice
 	[SerializeField]
 	[Range(0.0f, 1.0f)]
@@ -169,7 +171,10 @@ public class TextSpeaker : MonoBehaviour
 			Debug.LogError("TextSpeaker: The voice system is not ready to speak.");
 			return;
 		}
-		Speaker.Instance.SpeakNative(text, Voice, VoiceSpeed, VoicePitch, VoiceVolume, true);
+		// use SpeakNative to play audio throguh the OS
+		//Speaker.Instance.SpeakNative(text, Voice, VoiceSpeed, VoicePitch, VoiceVolume, true);
+		// use Speak to play through an audio source
+		Speaker.Instance.Speak(text, SpeakerAudioSource, Voice, true, VoiceSpeed, VoicePitch, VoiceVolume);
 	}
 
 	public void StopSpeaking()
