@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 // Controller for the Speech UI
 //
@@ -15,14 +16,17 @@ using UnityEngine.UI;
 // 'ENTER' - sends chat data when focus is on chat field.
 
 public class SpeechPanelController : MonoBehaviour
-{
+{   
     // collection of stock phrase buttons
     // using this array means buttons can be added easily in the inspector.
     // the system will use the button's text component as the phrase to say.
     public Button[] phraseButtons;
+    public event Action<string> OnPhraseButtonClick;
 
     public TMP_InputField chatInputField;
     public ChatHistoryScollViewController chatHistory;
+    public event Action<string> OnSendChat;
+
     public TextSpeaker Speaker;
 
     private void Start()
@@ -39,7 +43,10 @@ public class SpeechPanelController : MonoBehaviour
 
     public void phraseButtonPressed(Button sender)
     {
+        string message = sender.GetComponentInChildren<TMP_Text>().text;
+        
         speak(sender.GetComponentInChildren<TMP_Text>().text);
+        OnPhraseButtonClick?.Invoke(message);
     }
 
     // called when the text in the chat field changes. 
@@ -87,6 +94,8 @@ public class SpeechPanelController : MonoBehaviour
 
         // send the text to the TTS system
         speak(chatText);
+
+        OnSendChat?.Invoke(chatText);
     }
 
     // send the given text to the TTS system

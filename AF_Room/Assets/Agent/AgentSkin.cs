@@ -27,9 +27,32 @@ public class AgentSkin : MonoBehaviour
         GlanceShift = 7,
         Blink = 9
     };
-
     private BodyAction currentHeadTilt;
-
+    public static string BodyActionToString(BodyAction item)
+	{
+        switch(item)
+		{
+            case BodyAction.None:
+                return "none";
+            case BodyAction.HeadNod:
+                return "head nod";
+            case BodyAction.HeadShake:
+                return "head shake";
+            case BodyAction.HeadTiltRight:
+                return "head tilt right";
+            case BodyAction.HeadTiltNeutral:
+                return "head tile neutral";
+            case BodyAction.HeadTiltLeft:
+                return "head tile left";
+            case BodyAction.SitShift:
+                return "shift sitting position";
+            case BodyAction.GlanceShift:
+                return "random glance";
+            case BodyAction.Blink:
+                return "blink";
+		}
+        return "unknow body action";
+	}
     public enum FaceExpression
     {
         None = 0,
@@ -41,9 +64,31 @@ public class AgentSkin : MonoBehaviour
         Anger = 6,
         Laugh = 7
     };
-
     private FaceExpression currentExpression;
-
+    public static string FaceExpressionToString(FaceExpression item)
+    {
+        switch (item)
+        {
+            case FaceExpression.None:
+                return "none";
+            case FaceExpression.Neutral:
+                return "neutral";
+            case FaceExpression.Smile:
+                return "smile";
+            case FaceExpression.Frown:
+                return "frown";
+            case FaceExpression.Concern:
+                return "concern";
+            case FaceExpression.Disgust:
+                return "disgust";
+            case FaceExpression.Anger:
+                return "anger";
+            case FaceExpression.Laugh:
+                return "laugh";
+            default:
+                return "unknow expression";
+        }
+    }
     public enum SkinTone
     {
         Tone0 = 0,

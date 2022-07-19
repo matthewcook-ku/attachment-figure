@@ -28,7 +28,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
         }
         set
         {
-            Debug.Log("I'm about to set.");
+            //Debug.Log("I'm about to set.");
             updateTextContent(value);
         }
     }
@@ -52,7 +52,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
 
     void updateTextContent(string value)
     {
-        Debug.Log("Do we ever make it into updateTextContent");
+        //Debug.Log("Do we ever make it into updateTextContent");
         // set the text
         historyText.text = value;
 
