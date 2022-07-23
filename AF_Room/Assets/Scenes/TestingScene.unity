@@ -11600,6 +11600,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8006565061258047947, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6808392945621484918, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3402627195229395469, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1696405516878674302, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 721898371749712242, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 721898371749712242, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 72
@@ -11646,6 +11666,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3847793822774031147, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3847793822774031147, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
@@ -11783,6 +11807,22 @@ PrefabInstance:
     - target: {fileID: 3847793822774031147, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[63]
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039025383730874738, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690038061594464698, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995999290886894821, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798651728539101898, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8626154274752587844, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
@@ -44509,6 +44549,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6794554547658232339, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6794554547658232339, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 63
       objectReference: {fileID: 0}
@@ -44524,6 +44568,30 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[53]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5853284746696221421, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3624790394776337399, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3050844721139250003, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2925757910210057245, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1060274637659693153, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -301708292813105528, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
       propertyPath: m_Name
       value: man_skin1
@@ -44532,6 +44600,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5930978874088952621, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6658767787695408819, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6658767787695408819, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 63
@@ -44539,6 +44615,10 @@ PrefabInstance:
     - target: {fileID: 6658767787695408819, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422937434834147602, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e7043447a2d4653bd077bb4bf9355b, type: 3}
