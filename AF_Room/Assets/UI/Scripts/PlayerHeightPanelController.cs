@@ -61,7 +61,7 @@ public class PlayerHeightPanelController : MonoBehaviour
         // convert the [0,1] slider value to a distance in range
         float newHeight = Mathf.Lerp(FloorHeight, MaxPlayerHeight, value);
 
-        Debug.Log("Updating Height: " + value + " -> " + newHeight);
+        //Debug.Log("Updating Height: " + value + " -> " + newHeight);
         HeightInputField.text = newHeight.ToString("F2"); // 2 sig digits decimal 
         Subject.SubjectHeight = newHeight;
     }

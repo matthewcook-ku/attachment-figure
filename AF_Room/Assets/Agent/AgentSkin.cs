@@ -27,7 +27,8 @@ public class AgentSkin : MonoBehaviour
         GlanceShift = 7,
         Blink = 9
     };
-    private BodyAction currentHeadTilt;
+    public BodyAction currentHeadTilt { get; private set; }
+    public static BodyAction defaultHeadTilt = BodyAction.HeadTiltNeutral;
     public static string BodyActionToString(BodyAction item)
 	{
         switch(item)
@@ -64,7 +65,8 @@ public class AgentSkin : MonoBehaviour
         Anger = 6,
         Laugh = 7
     };
-    private FaceExpression currentExpression;
+    public FaceExpression currentExpression { get; private set; }
+    public static FaceExpression defaultExpression = FaceExpression.Neutral;
     public static string FaceExpressionToString(FaceExpression item)
     {
         switch (item)
@@ -150,10 +152,10 @@ public class AgentSkin : MonoBehaviour
 		}
         set
 		{
-            Debug.Log(gameObject.name + ": setting currentlyLooking: " + value);
+            //Debug.Log(gameObject.name + ": setting currentlyLooking: " + value);
             if (value)
             {
-                Debug.Log(gameObject.name + ": setting currentlyLooking: true");
+                //Debug.Log(gameObject.name + ": setting currentlyLooking: true");
                 //LookController.lookTarget = Model.LookTarget.transform;
                 Model.LookTargetConstraint.weight = 1.0f;
 
@@ -163,7 +165,7 @@ public class AgentSkin : MonoBehaviour
             }
             else
             {
-                Debug.Log(gameObject.name + ": setting currentlyLooking: false");
+                //Debug.Log(gameObject.name + ": setting currentlyLooking: false");
                 //LookController.lookTarget = null;
                 Model.LookTargetConstraint.weight = 0.0f;
                 CenterLookTarget();
@@ -177,7 +179,7 @@ public class AgentSkin : MonoBehaviour
 				catch (NullReferenceException)
 				{
                     // SALSA EYES throws this exception on the first init for some reason, just ignore it
-                    Debug.Log("Caught SALSA Exception");
+                    //Debug.Log("Caught SALSA Exception");
 				}
             }
         }
@@ -185,6 +187,16 @@ public class AgentSkin : MonoBehaviour
     private void CenterLookTarget()
     {
         Model.ResetLookTargetPosition();
+    }
+    public bool randomGlances
+    {
+        get { return LookController.useAffinity; }
+        set { LookController.useAffinity = value; }
+    }
+    public float affinityPercent
+    {
+        get { return LookController.affinityPercentage; }
+        set { LookController.affinityPercentage = value; }
     }
 
     // texture selectors for swapping textures
@@ -299,7 +311,7 @@ public class AgentSkin : MonoBehaviour
         } while (false);
 
         // if anything above failed, then we'll be dumped here
-        Debug.Log("AgentSkin: Unable to activate default voice, speaker not ready. Registering for callback.");
+        //Debug.Log("AgentSkin: Unable to activate default voice, speaker not ready. Registering for callback.");
         TextSpeaker.OnInit += ActivateDefulatVoiceForSkin;
     }
 
@@ -321,9 +333,9 @@ public class AgentSkin : MonoBehaviour
         currentlyLooking = false;
 
         // head tilt always starts neutral
-        currentHeadTilt = BodyAction.HeadTiltNeutral;
+        currentHeadTilt = AgentSkin.defaultHeadTilt;
         // expression always starts neutral
-        currentExpression = FaceExpression.Neutral;
+        currentExpression = AgentSkin.defaultExpression;
     }
     // called each time this skin is deactivated
     private void OnDisable()
@@ -337,7 +349,7 @@ public class AgentSkin : MonoBehaviour
         // in case we were still waiting to activate voice
         TextSpeaker.OnInit -= ActivateDefulatVoiceForSkin;
 
-        Debug.Log("<color=olive>Deactivating Agent Skin: " + name + "</color>");
+        Debug.Log(ColorString.Colorize("Deactivating Agent Skin: " + name, "olive"));
     }
 
 	//private void StartRandomBlinks()
@@ -434,9 +446,9 @@ public class AgentSkin : MonoBehaviour
         if (constraintsPaused) return;
         constraintsPaused = true;
 
-        Debug.Log("Pausing constraints to animate");
+        //Debug.Log("Pausing constraints to animate");
         storedActiveConstraints = GetCurrentActiveConstraints();
-        PrintFlags(storedActiveConstraints, "Turning OFF Constraints: ");
+        //PrintFlags(storedActiveConstraints, "Turning OFF Constraints: ");
         DeactivateConstraints();
     }
     public void ResumeConstraintsForAnimation()
@@ -444,9 +456,9 @@ public class AgentSkin : MonoBehaviour
         if (!constraintsPaused) return;
         constraintsPaused = false;
 
-        Debug.Log("Resuming constraints");
-        PrintFlags(storedActiveConstraints, "Turning ON Constraints: ");
+        //Debug.Log("Resuming constraints");
         ActivateConstraintsFromFlags(storedActiveConstraints);
+        //PrintFlags(storedActiveConstraints, "Turning ON Constraints: ");
     }
 
     /*

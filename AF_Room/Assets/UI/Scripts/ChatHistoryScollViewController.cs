@@ -47,7 +47,7 @@ public class ChatHistoryScollViewController : MonoBehaviour
         //Debug.Log("historyText is currently" + historyText);
 
         scrollRect = GetComponentInChildren<ScrollRect>();
-        scrollRect.GetComponentInParent<RectTransform>().pivot = new Vector2(0.0f, 0.0f); // set y pivot to 0 to scroll to bottom.
+        //scrollRect.GetComponentInParent<RectTransform>().pivot = new Vector2(0.0f, 0.0f); // set y pivot to 0 to scroll to bottom.
     }
 
     void updateTextContent(string value)

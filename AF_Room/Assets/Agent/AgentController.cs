@@ -74,7 +74,7 @@ public class AgentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("<color=teal>AgentController: started</color>");
+        Debug.Log(ColorString.Colorize("AgentController: started", "teal"));
 
         if (AgentSkins.Count == 0)
         {
@@ -89,10 +89,12 @@ public class AgentController : MonoBehaviour
         }
 
         // turn off all skins, activate current skin
+        Debug.Log(ColorString.Colorize("AgentController: deactivating all agent skins...", "olive"));
         foreach (AgentSkin skin in AgentSkins)
         {
             skin.gameObject.SetActive(false);
         }
+        Debug.Log(ColorString.Colorize("AgentController: activating current agent skin...", "olive"));
         AgentSkins[activeSkinIndex].gameObject.SetActive(true);
     }
 

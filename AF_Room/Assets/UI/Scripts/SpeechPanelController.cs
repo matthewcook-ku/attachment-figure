@@ -101,7 +101,7 @@ public class SpeechPanelController : MonoBehaviour
     // send the given text to the TTS system
     void speak(string text)
     {
-        Debug.Log("SPEAK: " + text);
+        Debug.Log("Speak: " + text);
 
         // readspeaker
         Speaker.Say(text);

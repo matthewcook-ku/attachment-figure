@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class ErrorBoxToggle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void DisplayError()
     {
         transform.gameObject.SetActive(true);

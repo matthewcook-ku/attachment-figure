@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UXF;
+using TMPro;
+using UnityEngine.InputSystem;
 
 // Controller for the Experiment UI
 //
@@ -17,30 +16,40 @@ public class ExperimentPanelController : MonoBehaviour
     public InputField distanceField;
     public InputField gazeField;
 
+	public FPSMovementController fps;
+	public TMP_Text FPSIndicator;
+
 	private void OnEnable()
 	{
 		ProxemicsTracker.OnTakeMeasurement += UpdateHeadsetReadout;
+		AFManager.Instance.inputManager.InputActions.ExperimenterControls.ToggleFPS.performed += OnFPSTogglePerformed;
 	}
 	private void OnDisable()
 	{
 		ProxemicsTracker.OnTakeMeasurement -= UpdateHeadsetReadout;
+		AFManager.Instance.inputManager.InputActions.ExperimenterControls.ToggleFPS.performed -= OnFPSTogglePerformed;
 	}
 
-	void UpdateHeadsetReadout(ProxemicsTracker tracker)
+	private void UpdateHeadsetReadout(ProxemicsTracker tracker)
 	{
 		distanceField.SetTextWithoutNotify(tracker.distance.ToString());
 		gazeField.SetTextWithoutNotify(tracker.gaze.ToString());
 	}
 
-	public void endTrialButtonPressed()
-    {
-        Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+	private void OnFPSTogglePerformed(InputAction.CallbackContext obj)
+	{
+		bool fpsToggledState = !fps.enabled;
+		Debug.Log("FPS Controls: " + (fpsToggledState ? "on" : "off"));
+		FPSIndicator.enabled = fpsToggledState;
 
-        if(Session.instance != null) Session.instance.EndCurrentTrial();
+		// turn on/off the FPS controls
+		fps.enabled = fpsToggledState;
+	}
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-        Application.Quit();
-    }
+	void Start()
+	{
+		// disable the FPS on startup
+		fps.enabled = false;
+		FPSIndicator.enabled = false;
+	}
 }

@@ -104,7 +104,7 @@ public class TextSpeaker : MonoBehaviour
 			Crosstales.RTVoice.Model.Voice foundVoice = Speaker.Instance.VoiceForName(value);
 			if(foundVoice != null)
 			{
-				Debug.Log("Voice found! Setting voice to: " + value);
+				//Debug.Log("Voice found! Setting voice to: " + value);
 				_voicename = value;
 				Voice = foundVoice;
 			}
@@ -142,11 +142,11 @@ public class TextSpeaker : MonoBehaviour
 
 	private void OnVoicesReady()
 	{
-		Debug.Log("<color=teal>TextSpeaker: Voices are ready!</color>");
+		Debug.Log(ColorString.Colorize("TextSpeaker: Voices are ready.", "#4287f5"));
 
 		// set the default voice
-		Debug.Log("TextSpeaker: Setting default voice!");
-		VoiceName = Speaker.Instance.DefaultVoiceName;
+		//Debug.Log(ColorString.Colorize("TextSpeaker: Setting system default voice.", "#4287f5"));
+		//VoiceName = Speaker.Instance.DefaultVoiceName;
 
 		// select the default voice to start
 		//Debug.Log("startup speech test");

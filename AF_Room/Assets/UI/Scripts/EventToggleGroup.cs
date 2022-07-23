@@ -46,13 +46,13 @@ public class EventToggleGroup : MonoBehaviour
     // Event handler will be called when one of the toggles is toggled
     void HandleToggleValueChanged(bool isOn)
     {
-        // we'll get an event from every toggle, since they all change, but only one is now true
+        // we'll get an event from the activated toggle, and the deacrtivated toggle, but only one is now true
         // wait for the event from the one that turned true, then send our own event
         // NOTE: this does not handle the case when all are off, which can occur if the toggle group allows
         if (isOn)
         {
             Toggle activeToggle = _toggleGroup.ActiveToggles().FirstOrDefault(); // will be null if none
-            Debug.Log("Active Toggle:" + activeToggle);
+            //Debug.Log("EventToggleGroup: Active Toggle = " + activeToggle);
             onActiveTogglesChanged?.Invoke(activeToggle);
         }
     }
@@ -79,5 +79,21 @@ public class EventToggleGroup : MonoBehaviour
     public int getIndexForToggle(Toggle item)
 	{
         return System.Array.IndexOf(_toggles, item);
+	}
+
+    public void setActiveIndex(int index)
+	{
+        _toggles[index].isOn = true;
+    }
+
+    public void setActiveIndexWithoutNotify(int index)
+	{
+        _toggles[index].SetIsOnWithoutNotify(true);
+	}
+
+    // return a shadow copy of the array for searching purposes
+    public Toggle[] getToggles()
+	{
+        return (Toggle[])_toggles.Clone();
 	}
 }

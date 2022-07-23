@@ -96,7 +96,8 @@ public class ProxemicsTracker : Tracker
         {
             averageDistance = runningTotalDistance / (float)sampleCountDistance;
 
-            Debug.Log("Average Distance: " + averageDistance + " with " + sampleCountDistance + " samples in " + elapsedTime + " sec.");
+            string logstring = "Average Distance: " + averageDistance + " with " + sampleCountDistance + " samples in " + elapsedTime + " sec.";
+            Debug.Log(ColorString.Colorize(logstring, "#55d99f"));
             
             runningTotalDistance = 0.0f;
             lastSampleCountDistance = sampleCountDistance;
@@ -106,7 +107,8 @@ public class ProxemicsTracker : Tracker
         {
             averageGaze = runningTotalGaze / (float)sampleCountGaze;
 
-            Debug.Log("Average Gaze: " + averageGaze + " with " + sampleCountGaze + " samples in " + elapsedTime + " sec.");
+            string logstring = "Average Gaze: " + averageGaze + " with " + sampleCountGaze + " samples in " + elapsedTime + " sec.";
+            Debug.Log(ColorString.Colorize(logstring, "#55d99f"));
 
             runningTotalGaze = 0.0f;
             lastSampleCountGaze = sampleCountGaze;

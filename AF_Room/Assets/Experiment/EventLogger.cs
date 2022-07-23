@@ -35,8 +35,8 @@ public class EventLogger : MonoBehaviour
 
 	private void OnEnable()
 	{
-        Debug.Log("animationPanel = " + animationPanel);
-        Debug.Log("speechPanel = " + speechPanel);
+        //Debug.Log("animationPanel = " + animationPanel);
+        //Debug.Log("speechPanel = " + speechPanel);
 
         animationPanel.OnExpressionButtonClick += OnExpressionEvent;
         animationPanel.OnGestureButtonClick += OnGestureEvent;
@@ -113,7 +113,6 @@ public class EventLogger : MonoBehaviour
     }
     void OnExpressionEvent(int item)
     {
-        Debug.Log("Expression Event Handler.");
         Log(AgentSkin.FaceExpressionToString((AgentSkin.FaceExpression)item), EventType.Expression);
     }
     void OnGestureEvent(int item)
