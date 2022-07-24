@@ -8,7 +8,9 @@ using UnityEngine.InputSystem;
 
 public class SubjectUIController : MonoBehaviour
 {
-    public HeadsetReadoutController headsetReadoutController;
+	bool showUI;
+	public GameObject HeadsetReadoutPanel;
+	public GameObject Reticle;
 
 	/*
 	private void OnEnable()
@@ -19,15 +21,17 @@ public class SubjectUIController : MonoBehaviour
 	{
 		AFManager.Instance.inputManager.InputActions.ExperimenterControls.ToggleSubjectUI.performed -= OnToggleInputAction;
 	}
-	*/
-
 	void OnToggleInputAction(InputAction.CallbackContext obj)
 	{
 		ToggleSubjectUI();
-	}
+	}*/
+
+	
 	public void ToggleSubjectUI()
 	{
-		Canvas uiCanvas = gameObject.GetComponent<Canvas>();
-		uiCanvas.enabled = !(uiCanvas.enabled);
+		showUI = !showUI;
+		
+		HeadsetReadoutPanel.SetActive(showUI);
+		Reticle.SetActive(showUI);
 	}
 }
