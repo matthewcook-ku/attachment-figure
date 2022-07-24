@@ -11686,7 +11686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3847793822774031147, guid: 171d2e076e6ba476db517a5df3cf204a, type: 3}
       propertyPath: m_UpdateWhenOffscreen
@@ -13417,14 +13417,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 0
+        inspFoldout: 1
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -13439,7 +13439,7 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
@@ -13461,7 +13461,7 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
@@ -13483,7 +13483,7 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
@@ -13505,7 +13505,7 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
@@ -13527,7 +13527,7 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
@@ -13786,7 +13786,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -13794,7 +13794,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -13811,12 +13811,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13833,12 +13833,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13855,12 +13855,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13877,12 +13877,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13899,12 +13899,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13921,12 +13921,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13943,12 +13943,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13965,12 +13965,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -13987,12 +13987,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14009,12 +14009,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14031,12 +14031,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14053,12 +14053,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14075,12 +14075,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14097,12 +14097,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14119,12 +14119,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14141,12 +14141,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14163,12 +14163,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14874,7 +14874,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -14882,7 +14882,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -14899,12 +14899,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14921,12 +14921,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14943,12 +14943,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14965,12 +14965,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -14987,12 +14987,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15009,12 +15009,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15269,7 +15269,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -15277,7 +15277,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -15294,12 +15294,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15316,12 +15316,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15338,12 +15338,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15360,12 +15360,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15382,12 +15382,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15404,12 +15404,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15426,12 +15426,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15448,12 +15448,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15470,12 +15470,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15492,12 +15492,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15514,12 +15514,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15536,12 +15536,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15558,12 +15558,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15580,12 +15580,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15602,12 +15602,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15624,12 +15624,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -15646,12 +15646,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16357,7 +16357,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -16365,7 +16365,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -16382,12 +16382,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16404,12 +16404,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16426,12 +16426,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16448,12 +16448,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16470,12 +16470,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16492,15 +16492,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -16514,15 +16514,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -16536,12 +16536,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16558,12 +16558,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -16580,12 +16580,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17004,7 +17004,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -17012,7 +17012,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -17029,12 +17029,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17051,12 +17051,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17073,12 +17073,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17095,12 +17095,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17117,12 +17117,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17139,12 +17139,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17161,12 +17161,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17183,12 +17183,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17205,12 +17205,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17227,12 +17227,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17249,12 +17249,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17271,12 +17271,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17293,12 +17293,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17315,12 +17315,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17337,12 +17337,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -17359,12 +17359,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -18029,7 +18029,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -18037,7 +18037,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -28074,7 +28074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -696.77856}
+  m_AnchoredPosition: {x: 0, y: -696.3066}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &845767293
@@ -30890,7 +30890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 30, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &960644121
@@ -50865,14 +50865,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -50887,14 +50887,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -50909,14 +50909,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -50931,14 +50931,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -50953,14 +50953,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -50975,14 +50975,14 @@ MonoBehaviour:
         durationHold: 0.5
         durationOff: 0.5
         isSmoothDisable: 1
-        isPersistent: 0
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
         isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -51234,7 +51234,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -51242,7 +51242,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -51259,12 +51259,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51281,12 +51281,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51303,12 +51303,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51325,12 +51325,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51347,12 +51347,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51369,12 +51369,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51391,12 +51391,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51413,12 +51413,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51435,12 +51435,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51457,12 +51457,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51479,12 +51479,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51501,12 +51501,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51523,12 +51523,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51545,12 +51545,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51567,12 +51567,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51589,12 +51589,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -51611,12 +51611,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52322,7 +52322,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -52330,7 +52330,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -52347,12 +52347,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52369,12 +52369,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52391,12 +52391,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52413,12 +52413,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52435,12 +52435,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52457,12 +52457,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -52717,7 +52717,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -52725,7 +52725,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -52742,15 +52742,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52764,15 +52764,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52786,15 +52786,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52808,15 +52808,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52830,15 +52830,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52852,15 +52852,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52874,15 +52874,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52896,15 +52896,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52918,15 +52918,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52940,15 +52940,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52962,15 +52962,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -52984,15 +52984,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53006,15 +53006,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53028,15 +53028,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53050,15 +53050,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53072,15 +53072,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53094,15 +53094,15 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
-        inspFoldout: 1
+        inspFoldout: 0
         enabled: 1
         isBonePreviewUpdated: 0
         frac: 1
@@ -53805,7 +53805,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -53813,7 +53813,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -53830,12 +53830,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53852,12 +53852,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53874,12 +53874,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53896,12 +53896,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53918,12 +53918,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53940,12 +53940,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53962,12 +53962,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -53984,12 +53984,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54006,12 +54006,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54028,12 +54028,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54452,7 +54452,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -54460,7 +54460,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -54477,12 +54477,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54499,12 +54499,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54521,12 +54521,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54543,12 +54543,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54565,12 +54565,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54587,12 +54587,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54609,12 +54609,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54631,12 +54631,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54653,12 +54653,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54675,12 +54675,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54697,12 +54697,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54719,12 +54719,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54741,12 +54741,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54763,12 +54763,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54785,12 +54785,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -54807,12 +54807,12 @@ MonoBehaviour:
         durationOn: 0.5
         durationHold: 0.5
         durationOff: 0.5
-        isSmoothDisable: 0
-        isPersistent: 0
+        isSmoothDisable: 1
+        isPersistent: 1
         expressionType: 1
         easing: 4
         expressionHandler: 1
-        isAnimatorControlled: 0
+        isAnimatorControlled: 1
         useOffset: 0
         useOffsetFollow: 1
         inspFoldout: 0
@@ -55477,7 +55477,7 @@ MonoBehaviour:
         textures: []
         materialRenderer: {fileID: 0}
         materials: []
-      inspFoldout: 0
+      inspFoldout: 1
       previewDisplayMode: 0
       collectionExpand: 0
     isRandomEmote: 0
@@ -55485,7 +55485,7 @@ MonoBehaviour:
     isRepeaterEmote: 0
     repeaterDelay: 0
     startDelay: 0
-    isPersistent: 0
+    isPersistent: 1
     isHoldVariationExempt: 0
     isAlwaysEmphasisEmote: 0
     hasBeenFired: 0
@@ -60027,7 +60027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1969568052

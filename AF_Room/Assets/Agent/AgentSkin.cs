@@ -67,6 +67,7 @@ public class AgentSkin : MonoBehaviour
     };
     public FaceExpression currentExpression { get; private set; }
     public static FaceExpression defaultExpression = FaceExpression.Neutral;
+    private Emoter ExpressionController;
     public static string FaceExpressionToString(FaceExpression item)
     {
         switch (item)
@@ -247,6 +248,7 @@ public class AgentSkin : MonoBehaviour
         Model = new AgentModel(this.gameObject, SkinMeshPrefix);
 
         LookController = GetComponent<Eyes>();
+        ExpressionController = GetComponent<Emoter>();
     }
 
 	void AddRemoveInputControls(bool add)
@@ -573,28 +575,39 @@ public class AgentSkin : MonoBehaviour
         if (currentExpression == face) return;
         currentExpression = face;
 
+        
+        // expressions are now triggered from the SALSA emoter.
+        // if you want to go back to using animation triggers, remeber to turn the expressions layer in the 
+        // animation controller for this skin back on. It's currently set to weight 0 to turn it off.
         switch (face)
         {
             case FaceExpression.Neutral:
-                animator.SetTrigger("FaceNeutral");
+                //animator.SetTrigger("FaceNeutral");
+                ExpressionController.TurnOffAll();
                 break;
             case FaceExpression.Smile:
-                animator.SetTrigger("FaceSmile");
+                //animator.SetTrigger("FaceSmile");
+                ExpressionController.ManualEmote("Smile", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             case FaceExpression.Frown:
-                animator.SetTrigger("FaceFrown");
+                //animator.SetTrigger("FaceFrown");
+                ExpressionController.ManualEmote("Frown", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             case FaceExpression.Concern:
-                animator.SetTrigger("FaceConcern");
+                //animator.SetTrigger("FaceConcern");
+                ExpressionController.ManualEmote("Concern", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             case FaceExpression.Disgust:
-                animator.SetTrigger("FaceDisgust");
+                //animator.SetTrigger("FaceDisgust");
+                ExpressionController.ManualEmote("Disgust", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             case FaceExpression.Anger:
-                animator.SetTrigger("FaceAnger");
+                //animator.SetTrigger("FaceAnger");
+                ExpressionController.ManualEmote("Anger", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             case FaceExpression.Laugh:
-                animator.SetTrigger("FaceLaugh");
+                //animator.SetTrigger("FaceLaugh");
+                ExpressionController.ManualEmote("Laugh", ExpressionComponent.ExpressionHandler.OneWay, 0, true, 1.0f);
                 break;
             default:
                 Debug.Log("Unknown Face: " + face);
