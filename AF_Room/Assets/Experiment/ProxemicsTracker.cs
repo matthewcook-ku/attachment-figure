@@ -53,6 +53,10 @@ public class ProxemicsTracker : Tracker
     // time value for the last time average was calculated
     private float prevAverageTimeStamp = 0.0f;
 
+    // global session average
+    private uint globalSampleCount;
+    public float globalAverageDistance { get; private set; }
+    public float globalAverageGaze { get; private set; }
 
     public override string MeasurementDescriptor => "proxemics";
     public override IEnumerable<string> CustomHeader => new string[]
@@ -83,6 +87,10 @@ public class ProxemicsTracker : Tracker
         averageDistance = 0.0f;
         averageGaze = 0.0f;
         prevAverageTimeStamp = 0.0f;
+
+        globalSampleCount = 0;
+        globalAverageDistance = 0.0f;
+        globalAverageGaze = 0.0f;
     }
 
     // Calculate the average of recorded data since the last average was calcualted.
@@ -114,10 +122,6 @@ public class ProxemicsTracker : Tracker
             lastSampleCountGaze = sampleCountGaze;
             sampleCountGaze = 0;
         }
-
-        // updating UXF settings
-        Session.instance.settings.SetValue("AverageGaze", averageGaze);
-        Session.instance.settings.SetValue("AverageDistance", averageDistance);
 
         // now update...
         prevAverageTimeStamp = Time.realtimeSinceStartup;
@@ -151,6 +155,8 @@ public class ProxemicsTracker : Tracker
         sampleCountGaze++;
         runningTotalGaze += gaze;
 
+        updateGlobalAverage(distance, gaze);
+
         //Debug.Log("Writing data row...\n" +
         //   "distance: " + distance + " " + "gaze: " + gaze
         //  );
@@ -166,6 +172,21 @@ public class ProxemicsTracker : Tracker
         OnTakeMeasurement?.Invoke(this);
 
         return values;
+    }
+
+    // update the global average
+    // using Scott's algo from https://stackoverflow.com/questions/28820904/how-to-efficiently-compute-average-on-the-fly-moving-average
+    private void updateGlobalAverage(float distance, float gaze)
+	{
+        globalSampleCount++;
+        float a = 1.0f / globalSampleCount;
+        float b = 1.0f - a;
+
+        // distance
+        globalAverageDistance = (a * distance) + (b * globalAverageDistance);
+
+        // gaze
+        globalAverageGaze = (a * gaze) + (b * globalAverageGaze);
     }
 
     // calcualte the distance between agent and subject

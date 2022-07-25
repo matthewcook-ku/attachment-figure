@@ -34,9 +34,12 @@ public class StudySettingsUIController : MonoBehaviour
 		// set some default values
 		NameInputField.text = "";
 		IDInputField.text = "";
+		generateUniqueID();
+		Session.instance.ppid = getPPID();
 		SessionNumberInputField.text = sessionNumber.ToString();
+		Session.instance.number = sessionNumber;
+		FileDataHandler.storagePath = FilePathInputField.text;
 		defaultInfoText = InfoText.text;
-
 
 		// make sure all error indicators are off
 		ClearAllUIElementErrors();
@@ -50,17 +53,31 @@ public class StudySettingsUIController : MonoBehaviour
 			ModelSettingsRenderTextureCamera.gameObject.SetActive(false);
 	}
 
+	public string getPPID()
+	{
+		return id + "_" + NameInputField.text;
+	}
+
+	public void OnEndEditName()
+	{
+		Session.instance.ppid = getPPID();
+	}
+	public void OnEndEditID()
+	{
+		Session.instance.ppid = getPPID();
+	}
 	void generateUniqueID()
 	{
 		// create a number from the current date and time
 		// this way the number will always be unique
-		id = System.DateTime.Now.ToString("yyMMddHHmmssfff");
+		id = System.DateTime.Now.ToString("yyMMddHHmmss");   // yyMMddHHmmssfff
+		IDInputField.text = id;
 		Debug.Log("StudySettings: setting ID number to generated value: " + id);
 	}
 	public void OnIDRandomButtonPressed()
 	{
 		generateUniqueID();
-		IDInputField.text = id;
+		Session.instance.ppid = getPPID();
 	}
 	public bool ParseSessionNumber()
 	{
@@ -84,12 +101,14 @@ public class StudySettingsUIController : MonoBehaviour
 			Debug.Log("StudySettings: Session number input not valid, setting back to previous value.");
 			SessionNumberInputField.text = sessionNumber.ToString();
 		}
+		Session.instance.number = sessionNumber;
 	}
 	public void OnSessionNumberIncButtonPressed()
 	{
 		Debug.Log("StudySettings: incrementing session number");
 		sessionNumber++;
 		SessionNumberInputField.text = sessionNumber.ToString();
+		Session.instance.number = sessionNumber;
 	}
 	private void SetModelFromCurrentSelection()
 	{
@@ -123,13 +142,53 @@ public class StudySettingsUIController : MonoBehaviour
 		if (!CheckFields()) 
 			return; // if there is a field with an error, then stop
 
-		// Experiment start
+		// check if this session exists, and we might overwrite data
+		// borrowed from example code and needs to be rewritten
+		/*bool exists = session.CheckSessionExists(
+				localFilePath,
+				newExperimentName,
+				newPpid,
+				sessionNum
+			);
+
+		if (exists)
+		{
+			Popup newPopup = new Popup()
+			{
+				message = string.Format(
+					"{0} - {1} - Session #{2} already exists! Press OK to start the session anyway, data may be overwritten.",
+					newExperimentName,
+					newPpid,
+					sessionNum
+				),
+				messageType = MessageType.Warning,
+				onOK = () => {
+					gameObject.SetActive(false);
+					// BEGIN!
+					session.Begin(
+						newExperimentName,
+						newPpid,
+						sessionNum,
+						newParticipantDetails,
+						newSettings
+					);
+				}
+			};
+			popupController.DisplayPopup(newPopup);
+		}*/
+
+		Debug.Log(ColorString.Colorize("Session.number = " + Session.instance.number, Color.red));
+		Debug.Log(ColorString.Colorize("sessionNumber = " + sessionNumber, Color.red));
+
+		// Create the session
+		// this requires the file path to be set before calling.
 		Block attachmentFigureBlock = Session.instance.CreateBlock(1);
-		Session.instance.Begin("Experiment 1", NameInputField.text, 1);
+		Session.instance.Begin("Experiment 1", Session.instance.ppid, Session.instance.number);
+		// that will trigger the OnSessionBegin event from UXF
 
 		StoreSettingsFromFields();
 
-		// close the UI
+		// close the startUI
 		gameObject.SetActive(false);
 	}
 
@@ -161,9 +220,6 @@ public class StudySettingsUIController : MonoBehaviour
 			return false;
 		}
 
-		// Set the data path in the FileDataHandler
-		FileDataHandler.storagePath = FilePathInputField.text;
-
 		return true;
 	}
 	private void StoreSettingsFromFields()
@@ -171,7 +227,15 @@ public class StudySettingsUIController : MonoBehaviour
 		// Store settings to the UXF object
 		Session.instance.settings.SetValue("SubjectName", NameInputField.text);
 		Session.instance.settings.SetValue("ID", IDInputField.text);
+		Session.instance.ppid = IDInputField.text;
 		Session.instance.settings.SetValue("Session", SessionNumberInputField.text);
+
+		int parsed;
+		if (int.TryParse(SessionNumberInputField.text, out parsed))
+			Session.instance.number = parsed;
+		else
+			Debug.LogError("StudySettingsController: Unable to parse session number as int.");
+
 		Session.instance.settings.SetValue("FilePath", FilePathInputField.text);
 
 		AFManager.Instance.agent.Speaker.StoreSettingsFromFields();

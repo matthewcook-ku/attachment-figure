@@ -48,6 +48,8 @@ public class StudyController : MonoBehaviour
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialStart(Trial trial)
     {
+        Debug.Log("StudyController: Starting Trial...");
+        
         // collect any needed settings from the trial object here.
 
         // turn on the FPS controller
@@ -127,12 +129,20 @@ public class StudyController : MonoBehaviour
 
 
     // This method should be called by the OnTrialEnd event in the UXF rig.
-    public void TrialEnd()
+    public void TrialEnd(Trial trial)
     {
         Debug.Log("Ending Trial...");
         
         // stop the tracking
         StopAllCoroutines();
+
+        // write the trial tracking averages to the results
+        Debug.Log("Session Average Distance: " + subject.proxemicsTracker.globalAverageDistance);
+        Debug.Log("Session Average Gaze: " + subject.proxemicsTracker.globalAverageGaze);
+
+        trial.result["session average distance"] = subject.proxemicsTracker.globalAverageDistance;
+        trial.result["session average gaze score"] = subject.proxemicsTracker.globalAverageGaze;
+
     }
     // This method should be called by the PreSessionEnd event in the UXF rig.
     public void PreSessionEnd()
