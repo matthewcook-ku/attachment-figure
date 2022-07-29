@@ -11,19 +11,25 @@ public class StudySettingsUIController : MonoBehaviour
 	public TMP_InputField NameInputField;
 	public TMP_InputField IDInputField;
 	public Button IDRandomButton;
+	string name;
 	string id;
+	string expName = "Experiment 1";
+	string ppid { get { return id + "_" + NameInputField.text; } }
 	 
 	public TMP_InputField SessionNumberInputField;
 	public Button SessionNumberIncButton;
-	int sessionNumber = 1;
+	int sessionNumber;
 	 
 	public TMP_InputField FilePathInputField;
 	public Button FileBrowseButton;
 	public LocalFileDataHander FileDataHandler;
+	string filepath;
 
 	public Camera ModelSettingsRenderTextureCamera;
 	public EventToggleGroup ModelToggleGroup;
 	public EventToggleGroup SkintoneToggleGroup;
+
+	public OverwriteWarningPanelController OverwriteWarning;
 
 	// Start is called before the first frame update
 	void Start()
@@ -32,14 +38,20 @@ public class StudySettingsUIController : MonoBehaviour
 		ModelSettingsRenderTextureCamera.gameObject.SetActive(true);
 
 		// set some default values
+		name = "";
 		NameInputField.text = "";
+		id = "";
 		IDInputField.text = "";
-		generateUniqueID();
-		Session.instance.ppid = getPPID();
+		sessionNumber = 1;
 		SessionNumberInputField.text = sessionNumber.ToString();
-		Session.instance.number = sessionNumber;
-		FileDataHandler.storagePath = FilePathInputField.text;
+		filepath = FilePathInputField.text;	// filled in from user prefs, so grab it
 		defaultInfoText = InfoText.text;
+
+		// update UXF data
+		Session.instance.name = name;
+		Session.instance.ppid = ppid;
+		Session.instance.number = sessionNumber;
+		FileDataHandler.storagePath = FilePathInputField.text; // filled in from user prefs, so grab it
 
 		// make sure all error indicators are off
 		ClearAllUIElementErrors();
@@ -53,18 +65,16 @@ public class StudySettingsUIController : MonoBehaviour
 			ModelSettingsRenderTextureCamera.gameObject.SetActive(false);
 	}
 
-	public string getPPID()
-	{
-		return id + "_" + NameInputField.text;
-	}
-
 	public void OnEndEditName()
 	{
-		Session.instance.ppid = getPPID();
+		name = NameInputField.text;
+		Session.instance.name = name;
+		Session.instance.ppid = ppid; // uses name
 	}
 	public void OnEndEditID()
 	{
-		Session.instance.ppid = getPPID();
+		id = IDInputField.text;
+		Session.instance.ppid = ppid; // uses ID
 	}
 	void generateUniqueID()
 	{
@@ -72,18 +82,19 @@ public class StudySettingsUIController : MonoBehaviour
 		// this way the number will always be unique
 		id = System.DateTime.Now.ToString("yyMMddHHmmss");   // yyMMddHHmmssfff
 		IDInputField.text = id;
+		Session.instance.ppid = ppid; // uses ID
 		Debug.Log("StudySettings: setting ID number to generated value: " + id);
 	}
 	public void OnIDRandomButtonPressed()
 	{
 		generateUniqueID();
-		Session.instance.ppid = getPPID();
 	}
 	public bool ParseSessionNumber()
 	{
 		try
 		{
 			sessionNumber = System.Convert.ToInt32(SessionNumberInputField.text);
+			Session.instance.number = sessionNumber;
 			Debug.Log("StudySettings: setting session number to: " + sessionNumber);
 		}
 		catch (System.FormatException)
@@ -101,7 +112,6 @@ public class StudySettingsUIController : MonoBehaviour
 			Debug.Log("StudySettings: Session number input not valid, setting back to previous value.");
 			SessionNumberInputField.text = sessionNumber.ToString();
 		}
-		Session.instance.number = sessionNumber;
 	}
 	public void OnSessionNumberIncButtonPressed()
 	{
@@ -142,48 +152,10 @@ public class StudySettingsUIController : MonoBehaviour
 		if (!CheckFields()) 
 			return; // if there is a field with an error, then stop
 
-		// check if this session exists, and we might overwrite data
-		// borrowed from example code and needs to be rewritten
-		/*bool exists = session.CheckSessionExists(
-				localFilePath,
-				newExperimentName,
-				newPpid,
-				sessionNum
-			);
-
-		if (exists)
-		{
-			Popup newPopup = new Popup()
-			{
-				message = string.Format(
-					"{0} - {1} - Session #{2} already exists! Press OK to start the session anyway, data may be overwritten.",
-					newExperimentName,
-					newPpid,
-					sessionNum
-				),
-				messageType = MessageType.Warning,
-				onOK = () => {
-					gameObject.SetActive(false);
-					// BEGIN!
-					session.Begin(
-						newExperimentName,
-						newPpid,
-						sessionNum,
-						newParticipantDetails,
-						newSettings
-					);
-				}
-			};
-			popupController.DisplayPopup(newPopup);
-		}*/
-
-		Debug.Log(ColorString.Colorize("Session.number = " + Session.instance.number, Color.red));
-		Debug.Log(ColorString.Colorize("sessionNumber = " + sessionNumber, Color.red));
-
 		// Create the session
 		// this requires the file path to be set before calling.
 		Block attachmentFigureBlock = Session.instance.CreateBlock(1);
-		Session.instance.Begin("Experiment 1", Session.instance.ppid, Session.instance.number);
+		Session.instance.Begin(expName, Session.instance.ppid, Session.instance.number);
 		// that will trigger the OnSessionBegin event from UXF
 
 		StoreSettingsFromFields();
@@ -221,21 +193,70 @@ public class StudySettingsUIController : MonoBehaviour
 		}
 
 		return true;
+
+		// check if this session exists, and we might overwrite data
+		// borrowed from example code and needs to be rewritten
+		/*bool exists = session.CheckSessionExists(
+				localFilePath,
+				newExperimentName,
+				newPpid,
+				sessionNum
+			);
+
+		if (exists)
+		{
+			Popup newPopup = new Popup()
+			{
+				message = string.Format(
+					"{0} - {1} - Session #{2} already exists! Press OK to start the session anyway, data may be overwritten.",
+					newExperimentName,
+					newPpid,
+					sessionNum
+				),
+				messageType = MessageType.Warning,
+				onOK = () => {
+					gameObject.SetActive(false);
+					// BEGIN!
+					session.Begin(
+						newExperimentName,
+						newPpid,
+						sessionNum,
+						newParticipantDetails,
+						newSettings
+					);
+				}
+			};
+			popupController.DisplayPopup(newPopup);
+		}*/
+
+		/* // working on mine
+		// check if there is already data at this save location
+		bool exists = Session.instance.CheckSessionExists(
+				filepath,
+				expName,
+				ppid,
+				sessionNumber
+			);
+
+		if (exists)
+		{
+			OverwriteWarning.OpenPanel();
+			OverwriteWarning.OnUserSelection += OverwriteOK;
+			return false;
+		}*/
 	}
+
+	void OverwriteOK(bool userSelection)
+	{
+		Debug.Log("User said: " + userSelection);
+	}
+
 	private void StoreSettingsFromFields()
 	{ 
 		// Store settings to the UXF object
 		Session.instance.settings.SetValue("SubjectName", NameInputField.text);
 		Session.instance.settings.SetValue("ID", IDInputField.text);
-		Session.instance.ppid = IDInputField.text;
 		Session.instance.settings.SetValue("Session", SessionNumberInputField.text);
-
-		int parsed;
-		if (int.TryParse(SessionNumberInputField.text, out parsed))
-			Session.instance.number = parsed;
-		else
-			Debug.LogError("StudySettingsController: Unable to parse session number as int.");
-
 		Session.instance.settings.SetValue("FilePath", FilePathInputField.text);
 
 		AFManager.Instance.agent.Speaker.StoreSettingsFromFields();
