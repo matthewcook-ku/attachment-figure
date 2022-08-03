@@ -11,7 +11,7 @@ public class StudySettingsUIController : MonoBehaviour
 	public TMP_InputField NameInputField;
 	public TMP_InputField IDInputField;
 	public Button IDRandomButton;
-	string name;
+	string subject_name;
 	string id;
 	string expName = "Experiment 1";
 	string ppid { get { return id + "_" + NameInputField.text; } }
@@ -38,7 +38,7 @@ public class StudySettingsUIController : MonoBehaviour
 		ModelSettingsRenderTextureCamera.gameObject.SetActive(true);
 
 		// set some default values
-		name = "";
+		subject_name = "";
 		NameInputField.text = "";
 		id = "";
 		IDInputField.text = "";
@@ -48,7 +48,7 @@ public class StudySettingsUIController : MonoBehaviour
 		defaultInfoText = InfoText.text;
 
 		// update UXF data
-		Session.instance.name = name;
+		Session.instance.name = subject_name;
 		Session.instance.ppid = ppid;
 		Session.instance.number = sessionNumber;
 		FileDataHandler.storagePath = FilePathInputField.text; // filled in from user prefs, so grab it
@@ -67,8 +67,8 @@ public class StudySettingsUIController : MonoBehaviour
 
 	public void OnEndEditName()
 	{
-		name = NameInputField.text;
-		Session.instance.name = name;
+		subject_name = NameInputField.text;
+		Session.instance.name = subject_name;
 		Session.instance.ppid = ppid; // uses name
 	}
 	public void OnEndEditID()

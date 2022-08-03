@@ -9,9 +9,14 @@ public class ApplicationQuitUIController : MonoBehaviour
     {
         Debug.Log("UI: Application Quit Button Pressed.");
 
-        Debug.Log("UI: Ending current trial.");
         if (Session.instance != null)
+        {
+            //Debug.Log("UI: Ending current trial.");
             Session.instance.EndCurrentTrial();
+
+            //Debug.Log("UI: Ending session.");
+            Session.instance.End();
+        }
         else
             Debug.LogWarning("UI: session was null!!");
 

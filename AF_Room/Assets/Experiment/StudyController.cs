@@ -45,6 +45,12 @@ public class StudyController : MonoBehaviour
     [Tooltip("Frequency of averaged data collection in sec. 60 is 1 minute.")]
     public float averageInterval = 60.0f;
 
+    // This method should be called by the OnSessionBegin event in the UXF rig.
+    public void SessionBegin(Session session)
+	{
+        Debug.Log("StudyController: Starting Session...");
+    }
+
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialStart(Trial trial)
     {
@@ -87,8 +93,8 @@ public class StudyController : MonoBehaviour
                 subject.proxemicsTracker.RecordRow();
             }
 
-            float distance = subject.proxemicsTracker.AgentSubjectDistance();
-            float gaze = subject.proxemicsTracker.GazeScore();
+            //float distance = subject.proxemicsTracker.AgentSubjectDistance();
+            //float gaze = subject.proxemicsTracker.GazeScore();
 
             // display the new data in the UI
             //Debug.Log("Updating UI with tracking data.\n" +
@@ -132,25 +138,34 @@ public class StudyController : MonoBehaviour
     public void TrialEnd(Trial trial)
     {
         Debug.Log("Ending Trial...");
-        
-        // stop the tracking
-        StopAllCoroutines();
+
+
 
         // write the trial tracking averages to the results
-        Debug.Log("Session Average Distance: " + subject.proxemicsTracker.globalAverageDistance);
-        Debug.Log("Session Average Gaze: " + subject.proxemicsTracker.globalAverageGaze);
+        //Debug.Log("Session Average Distance: " + subject.proxemicsTracker.globalAverageDistance);
+        //Debug.Log("Session Average Gaze: " + subject.proxemicsTracker.globalAverageGaze);
 
-        trial.result["session average distance"] = subject.proxemicsTracker.globalAverageDistance;
-        trial.result["session average gaze score"] = subject.proxemicsTracker.globalAverageGaze;
+        //trial.result["session average distance"] = subject.proxemicsTracker.globalAverageDistance;
+        //trial.result["session average gaze score"] = subject.proxemicsTracker.globalAverageGaze;
 
+        // write out the stats for this trial
+        subject.proxemicsTracker.closeCurrentTrial();
+
+        // if this is the last trial, save the global data as well.
+        // if we wait to do this until PreSessionEnd the results file will already have been writen.
+        if(trial == Session.instance.LastTrial)
+            subject.proxemicsTracker.closeSession();
     }
     // This method should be called by the PreSessionEnd event in the UXF rig.
-    public void PreSessionEnd()
+    public void PreSessionEnd(Session session)
     {
         Debug.Log("Ending Session...");
+
+        // stop the tracking
+        StopAllCoroutines();
     }
     // This method should be called by the OnSessionEnd event in the UXF rig.
-    public void SessionEnd()
+    public void SessionEnd(Session session)
     {
         Debug.Log("Session Ended ... Safe to Quit");
     }

@@ -206,7 +206,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 339200689}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.00000026291644
+  m_Size: 0.00000017521216
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -28210,7 +28210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -696.4397}
+  m_AnchoredPosition: {x: 0, y: -696.7}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &845767293
@@ -44286,8 +44286,18 @@ MonoBehaviour:
   storeSessionSettings: 0
   storeParticipantDetails: 0
   customHeaders:
-  - session average distance
-  - session average gaze score
+  - trial average distance
+  - trial median distance
+  - trial standard deviation distance
+  - trial average gaze
+  - trial median gaze
+  - trial standard deviation gaze
+  - global average distance
+  - global median distance
+  - global standard deviation distance
+  - global average gaze
+  - global median gaze
+  - global standard deviation gaze
   settingsToLog:
   - SubjectName
   - ID
@@ -44310,6 +44320,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: 
         m_MethodName: BeginNextTrial
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 537808023}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: SessionBegin
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -44378,7 +44400,7 @@ MonoBehaviour:
       - m_Target: {fileID: 537808023}
         m_TargetAssemblyTypeName: 
         m_MethodName: PreSessionEnd
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -44405,7 +44427,7 @@ MonoBehaviour:
       - m_Target: {fileID: 537808023}
         m_TargetAssemblyTypeName: 
         m_MethodName: SessionEnd
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
