@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UXF;
+using System.IO;
+using System;
+using System.Text.RegularExpressions;
 
 // UXF Session Driver
 //
@@ -49,6 +52,33 @@ public class StudyController : MonoBehaviour
     public void SessionBegin(Session session)
 	{
         Debug.Log("StudyController: Starting Session...");
+
+        // tell the system where to look for the settings file
+        session.settings.SetValue("trial_specification_name", "question set.csv");
+
+        // process the file
+        /*
+        try
+        {
+            // !!! there is already a block with 1 trial in the session. need to see what happens to that trial. 
+            // !!! ALSO, this method does not handle items in the CSV with commas. Will need to address this somehow...
+            BuildExperimentFromCSV(session, "trial_specification_name");
+        }
+        catch(System.Exception e)
+		{
+            // will error if no file sepcificed by the settings key, or if file does not exist.
+            Debug.LogError("StudyController: Error reading study setting from file: " + e.Message);
+            return;
+		}
+        */
+
+        string settingsString = "";
+        settingsString += "StudyController: session settings from file: " + session.settings.GetString("trial_specification_name") + " ";
+        for(int i = 0; i < session.blocks.Count; i++)
+		{
+            settingsString += "Block[" + i + "]: " + session.blocks[i].trials.Count + " trials";
+		}
+        Debug.Log(settingsString);
     }
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
@@ -169,4 +199,116 @@ public class StudyController : MonoBehaviour
     {
         Debug.Log("Session Ended ... Safe to Quit");
     }
+
+
+
+
+
+
+    // Replace the CSVExperimentBuilder build function 
+    // This does the exact same thing, but uses our CSV parsing rather than the standard.
+    public void BuildExperimentFromCSV(Session session, string csvFileKey)
+    {
+        // check if settings contains the csv file name
+        if (!session.settings.ContainsKey(csvFileKey))
+        {
+            throw new Exception($"CSV file name not specified in settings. Please specify a CSV file name in the settings with key \"{csvFileKey}\".");
+        }
+
+        // get the csv file name
+        string csvName = session.settings.GetString(csvFileKey);
+
+        // check if the file exists
+        string csvPath = Path.GetFullPath(Path.Combine(Application.streamingAssetsPath, csvName));
+        if (!File.Exists(csvPath))
+        {
+            throw new Exception($"CSV file at \"{csvPath}\" does not exist!");
+        }
+
+        // read the csv file
+        string[] csvLines = File.ReadAllLines(csvPath);
+
+        // parse as table
+        var table = ParseCSV(csvLines);
+
+        // build the experiment.
+        // this adds a new trial to the session for each row in the table
+        // the trial will be created with the settings from the values from the table
+        // if "block_num" is specified in the table, the trial will be added to the block with that number
+        session.BuildFromTable(table, true);
+    }
+
+
+    // Build a table from lines of CSV text. This function replaces the function FromCSV from UXFDataTable
+    // The original function does not handle CSV files with data containing commas or quotes.
+    // This function will properly process those inputs.
+    public static UXFDataTable ParseCSV(string[] csvLines)
+    {
+        // in a CSV file:
+        // - if the field contains a comma, the field will be surrounded by ""
+        //      a comma here, and then stuff  -->  "a comma here, and then stuff"
+        // - if the field contains a quote, then the field will be surrounded by "" and the internal quotes will be doubled
+        //      a field with "quotes" in it  -->  "a field with ""quotes"" in it"
+
+        Regex regexCSV = new Regex(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", RegexOptions.ExplicitCapture); 
+        // ,                    match a comma followed by...
+        // (?= ... )            positive lookahead - match items in parens, but don't consume them (i.e. find the match, but don't split the string on it)
+        // ([^\"]*\"[^\"]*\")*  match this zero or more times
+        //                          [^\"]*  zero or more items NOT a quote
+        //                          \"      then a quote
+        //                          [^\"]*  zero or more items NOT a quote (again)
+        //                          \"      quote again (again)
+        // [^\"]*               zero or more items NOT a quote
+        // $                    end of string
+
+        string[] headers = regexCSV.Split(csvLines[0]);
+        UXFDataTable table = new UXFDataTable(csvLines.Length - 1, headers);
+        Debug.Log("StudyController: CSVHeaders: \n" + stringArrayToString(headers, "\n"));
+
+        // traverse down rows
+        for (int i = 1; i < csvLines.Length; i++)
+        {
+            string[] values = regexCSV.Split(csvLines[i]);
+            Debug.Log("StudyController: CSVRow[" + i + "]: \n" + stringArrayToString(values, "\n"));
+
+            // if last line, just 1 item in the row, and it is blank, then ignore it
+            if (i == csvLines.Length - 1 && values.Length == 1 && values[0].Trim() == string.Empty) break;
+
+            // check if number of columns is correct
+            if (values.Length != headers.Length) throw new System.Exception($"CSV line {i} has {values.Length} columns, but expected {headers.Length}");
+
+            // build across the row
+            var row = new UXFDataRow();
+            for (int j = 0; j < values.Length; j++)
+                row.Add((headers[j], values[j].Trim('\"')));
+
+            Debug.Log("StudyController: data row [" + i + "]: \n" + dataRowToString(row, "\n"));
+            
+            table.AddCompleteRow(row);
+        }
+
+        return table;
+    }
+
+    // helper function for debugging
+    public static string stringArrayToString(string[] strings, string delem, char trim = '\0')
+    {
+        string result = "";
+        for(int i = 0; i < strings.Length; i++)
+		{
+            result += strings[i].Trim(trim) + delem;
+		}
+        return result;
+	}
+
+    // helper function for debugging
+    public static string dataRowToString(UXFDataRow row, string delem)
+	{
+        string result = "";
+        for(int i = 0; i < row.Count; i++)
+		{
+            result += "row[\"" + row[i].Item1 + "\"]: " + row[i].Item2 + delem;
+		}
+        return result;
+	}
 }
