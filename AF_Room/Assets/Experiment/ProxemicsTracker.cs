@@ -66,6 +66,7 @@ public class ProxemicsTracker : Tracker
 
     // time value for the start of the current trial
     private float trialStartTimeStamp;
+    private int currentTrial;   // UXF trials my be run in random order (I think), so we'll keep track of this ourselves since we use it as an index into the count and index lists.
 
     // global session average
     private int globalSampleCount;
@@ -87,7 +88,6 @@ public class ProxemicsTracker : Tracker
     private List<int> trialIndexes; // indexes[i] = index in samples[] of first value of i'th trial
                                     // note that this item in smaples[] will be out of range until first sample is recorded.
     private List<int> trialCounts;  // number of samples in the i'th trial
-    private int currentTrial;
 
     public override string MeasurementDescriptor => "proxemics";
     public override IEnumerable<string> CustomHeader => new string[]
@@ -129,8 +129,8 @@ public class ProxemicsTracker : Tracker
         prevAverageInternvalTimeStamp = 0.0f;
 
         // trial
-        currentTrial = 0;
-        initNewTrial();
+        currentTrial = -1; // this allows us to inc on init to zero
+        // we will initialize the trial just before a new trial start
 
         // global
         globalSampleCount = 0;
@@ -144,16 +144,19 @@ public class ProxemicsTracker : Tracker
         globalSDGaze = 0.0;
     }
 
-    public void initNewTrial()
+    public void initNextTrial(Trial trial)
 	{
+        // set the current trial index
+        currentTrial++;
+        
         // collect the time stamp
         trialStartTimeStamp = Time.realtimeSinceStartup;
 
         // store the index and zero the count of the start of this trial data
-        trialIndexes.Add(distanceSamples.Count); // will be zero at start
+        trialIndexes.Add(distanceSamples.Count); 
         trialCounts.Add(0); // zero the counter
 
-        Debug.Log("Trial[" + currentTrial + "]: start index " + trialIndexes[currentTrial]);
+        Debug.Log("Tracker: Trial[" + currentTrial + "]: start index " + trialIndexes[currentTrial]);
 
         // zero out the trial stats
         trialAverageDistance = 0.0f;
@@ -168,12 +171,11 @@ public class ProxemicsTracker : Tracker
 
     // Compute stats for the current trial that has just ended.
     // write the stats to the UXF trial results
-    public void closeCurrentTrial()
+    public void closeCurrentTrial(Trial trial)
 	{
-        Session session = Session.instance;
+        Debug.Log("Tracker: Trial[" + currentTrial + "]: " + trialCounts[currentTrial] + " samples starting at index " + trialIndexes[currentTrial]);
 
-        //Debug.Log("Trial[" + currentTrial + "]: " + trialCounts[currentTrial] + " samples starting at index " + trialIndexes[currentTrial]);
-
+        // print all data for debugging
         //string dataString = "";
         //for(int i = 0; i < distanceSamples.Count; i++)
 		//{
@@ -185,28 +187,24 @@ public class ProxemicsTracker : Tracker
         trialMedianDistance = median(distanceSamples, trialIndexes[currentTrial], trialCounts[currentTrial], false);
         trialMedianGaze = median(gazeSamples, trialIndexes[currentTrial], trialCounts[currentTrial], false);
 
-        /*
+        // print the stats for debugging
         string statsString = "";
-        statsString += "\n" + "trial average distance = " + trialAverageDistance;
-        statsString += "\n" + "trial median distance = " + trialMedianDistance;
-        statsString += "\n" + "trial standard deviation distance = " + trialSDDistance;
-        statsString += "\n" + "trial average gaze = " + trialAverageGaze;
-        statsString += "\n" + "trial median gaze = " + trialMedianGaze;
-        statsString += "\n" + "trial standard deviation gaze = " + trialSDGaze;
-        Debug.Log("Trial[" + currentTrial + "] stats: " + statsString);
-        */
-
+        statsString += "\n\t" + "trial average distance = " + trialAverageDistance;
+        statsString += "\n\t" + "trial median distance = " + trialMedianDistance;
+        statsString += "\n\t" + "trial standard deviation distance = " + trialSDDistance;
+        statsString += "\n\t" + "trial average gaze = " + trialAverageGaze;
+        statsString += "\n\t" + "trial median gaze = " + trialMedianGaze;
+        statsString += "\n\t" + "trial standard deviation gaze = " + trialSDGaze;
+        Debug.Log("Tracker: Trial[" + currentTrial + "] stats: " + statsString);
+        
         // write out trial stats
-        session.CurrentTrial.result["trial average distance"] = trialAverageDistance;
-        session.CurrentTrial.result["trial median distance"] = trialMedianDistance;
-        session.CurrentTrial.result["trial standard deviation distance"] = trialSDDistance;
-
-        session.CurrentTrial.result["trial average gaze"] = trialAverageGaze;
-        session.CurrentTrial.result["trial median gaze"] = trialMedianGaze;
-        session.CurrentTrial.result["trial standard deviation gaze"] = trialSDGaze;
-
-        // init next trial?
-        currentTrial++; // get this from the trial object??
+        trial.result["trial average distance"] = trialAverageDistance;
+        trial.result["trial median distance"] = trialMedianDistance;
+        trial.result["trial standard deviation distance"] = trialSDDistance;
+        
+        trial.result["trial average gaze"] = trialAverageGaze;
+        trial.result["trial median gaze"] = trialMedianGaze;
+        trial.result["trial standard deviation gaze"] = trialSDGaze;
     }
 
     // sort of extension method to find the number of trials in a session over all blocks
@@ -224,11 +222,9 @@ public class ProxemicsTracker : Tracker
     // Compute global stats
     // write the stats to the UXF session results
     // *** WARNING: this will sort the data arrays, so make sure you are done with them.
-    public void closeSession()
+    public void closeSession(Session session)
 	{
-        Session session = Session.instance;
-
-        Debug.Log("Session: " + globalSampleCount + " total samples in " + TrialsInSession(session) + " trials");
+        Debug.Log("Tracker: Session: " + globalSampleCount + " total samples in " + TrialsInSession(session) + " trials");
 
         // calculate the global medians.
         // *** WARNING ***
@@ -236,16 +232,15 @@ public class ProxemicsTracker : Tracker
         globalMedianDistance = median(distanceSamples, 0, distanceSamples.Count, true);
         globalMedianGaze = median(gazeSamples, 0, gazeSamples.Count, true);
 
-        /*
+        // print the stats for debugging
         string statsString = "";
-        statsString += "\n" + "global average distance = " + globalAverageDistance;
-        statsString += "\n" + "global median distance = " + globalMedianDistance;
-        statsString += "\n" + "global standard deviation distance = " + globalSDDistance;
-        statsString += "\n" + "global average gaze = " + globalAverageGaze;
-        statsString += "\n" + "global median gaze = " + globalMedianGaze;
-        statsString += "\n" + "global standard deviation gaze = " + globalSDGaze;
+        statsString += "\n\t" + "global average distance = " + globalAverageDistance;
+        statsString += "\n\t" + "global median distance = " + globalMedianDistance;
+        statsString += "\n\t" + "global standard deviation distance = " + globalSDDistance;
+        statsString += "\n\t" + "global average gaze = " + globalAverageGaze;
+        statsString += "\n\t" + "global median gaze = " + globalMedianGaze;
+        statsString += "\n\t" + "global standard deviation gaze = " + globalSDGaze;
         Debug.Log("Session stats: " + statsString);
-        */
 
         // write out the global stats
         // we need to add these stats to all trials 

@@ -29,7 +29,7 @@ public class StudySettingsUIController : MonoBehaviour
 	public EventToggleGroup ModelToggleGroup;
 	public EventToggleGroup SkintoneToggleGroup;
 
-	public OverwriteWarningPanelController OverwriteWarning;
+	public OverwriteWarningPanelController OverwriteWarning; // not currently hooked up
 
 	// Start is called before the first frame update
 	void Start()
@@ -152,13 +152,14 @@ public class StudySettingsUIController : MonoBehaviour
 		if (!CheckFields()) 
 			return; // if there is a field with an error, then stop
 
-		// Create the session
-		// this requires the file path to be set before calling.
-		Block attachmentFigureBlock = Session.instance.CreateBlock(1);
-		Session.instance.Begin(expName, Session.instance.ppid, Session.instance.number);
-		// that will trigger the OnSessionBegin event from UXF
+		// create a settings object to hold settings from the UI
+		// record the UI data into settings
+		Settings sessionSettings = new Settings();
+		StoreSettingsFromFields(sessionSettings);
 
-		StoreSettingsFromFields();
+		// initialize the session
+		// this will trigger the OnSessionBegin event
+		Session.instance.Begin(expName, Session.instance.ppid, Session.instance.number, null, sessionSettings);
 
 		// close the startUI
 		gameObject.SetActive(false);
@@ -251,18 +252,20 @@ public class StudySettingsUIController : MonoBehaviour
 		Debug.Log("User said: " + userSelection);
 	}
 
-	private void StoreSettingsFromFields()
+	// Store the settings from the UI into the given settings object
+	// note this will overwrite any exisiting values in settings
+	private void StoreSettingsFromFields(Settings settings)
 	{ 
 		// Store settings to the UXF object
-		Session.instance.settings.SetValue("SubjectName", NameInputField.text);
-		Session.instance.settings.SetValue("ID", IDInputField.text);
-		Session.instance.settings.SetValue("Session", SessionNumberInputField.text);
-		Session.instance.settings.SetValue("FilePath", FilePathInputField.text);
+		settings.SetValue("SubjectName", NameInputField.text);
+		settings.SetValue("ID", IDInputField.text);
+		settings.SetValue("Session", SessionNumberInputField.text);
+		settings.SetValue("FilePath", FilePathInputField.text);
 
-		AFManager.Instance.agent.Speaker.StoreSettingsFromFields();
+		AFManager.Instance.agent.Speaker.StoreSettingsFromFields(settings);
 
-		Session.instance.settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
-		Session.instance.settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
+		settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
+		settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
 	}
 	void MarkUIElementError(GameObject uiElement, string errorMessage)
 	{

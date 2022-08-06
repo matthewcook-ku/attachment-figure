@@ -11,10 +11,9 @@ public class ApplicationQuitUIController : MonoBehaviour
 
         if (Session.instance != null)
         {
-            //Debug.Log("UI: Ending current trial.");
+            // this will trigger OnTrialEnd
             Session.instance.EndCurrentTrial();
-
-            //Debug.Log("UI: Ending session.");
+            // this will trigger PreSessionEnd and then OnSessionEnd
             Session.instance.End();
         }
         else

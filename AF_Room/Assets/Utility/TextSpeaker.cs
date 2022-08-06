@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Crosstales.RTVoice.Model;
+using UXF;
 
 #if READSPEAKER
 //using ReadSpeaker;
@@ -182,12 +183,12 @@ public class TextSpeaker : MonoBehaviour
 		Speaker.Instance.Silence();
 	}
 
-	public void StoreSettingsFromFields()
+	public void StoreSettingsFromFields(Settings settings)
 	{
-		UXF.Session.instance.settings.SetValue("VoiceName", VoiceName);
-		UXF.Session.instance.settings.SetValue("VoicePitch", VoicePitch);
-		UXF.Session.instance.settings.SetValue("VoiceVolume", VoiceVolume);
-		UXF.Session.instance.settings.SetValue("VoiceSpeed", VoiceSpeed);
+		settings.SetValue("VoiceName", VoiceName);
+		settings.SetValue("VoicePitch", VoicePitch);
+		settings.SetValue("VoiceVolume", VoiceVolume);
+		settings.SetValue("VoiceSpeed", VoiceSpeed);
 	}
 
 #endif
