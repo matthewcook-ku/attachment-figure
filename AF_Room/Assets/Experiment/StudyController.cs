@@ -122,7 +122,7 @@ public class StudyController : MonoBehaviour
     // This method should be called by the OnTrialEnd event in the UXF rig.
     public void TrialEnd(Trial trial)
     {
-        Debug.Log("Ending Trial...");
+        Debug.Log("Ending Trial[" + (trial.number - 1) + "]...");
 
         // write out the stats for this trial
         subject.proxemicsTracker.closeCurrentTrial(trial);
