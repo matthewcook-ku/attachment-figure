@@ -20,8 +20,6 @@ public class ExperimentPanelController : MonoBehaviour
 	public FPSMovementController fps;
 	public TMP_Text FPSIndicator;
 
-	public DialogueBoxController DialogueBox;
-
 	private void OnEnable()
 	{
 		ProxemicsTracker.OnTakeMeasurement += UpdateHeadsetReadout;
@@ -64,7 +62,7 @@ public class ExperimentPanelController : MonoBehaviour
 			messageType = DialogueBoxController.MessageType.Warning,
 			onOK = () => { EndExperimentAction(); }
 		};
-		DialogueBox.DisplayPopup(quitPopup);
+		DialogueBoxController.Instance().DisplayPopup(quitPopup);
 	}
 
 	public void EndExperimentAction()

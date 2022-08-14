@@ -33,7 +33,7 @@ public class StudySettingsUIController : MonoBehaviour
 	public EventToggleGroup ModelToggleGroup;
 	public EventToggleGroup SkintoneToggleGroup;
 
-	public OverwriteWarningPanelController OverwriteWarning; // not currently hooked up
+	//public DialogueBoxController DialogueBox;
 
 	// Start is called before the first frame update
 	void Start()
@@ -159,6 +159,40 @@ public class StudySettingsUIController : MonoBehaviour
 		if (!CheckFields()) 
 			return; // if there is a field with an error, then stop
 
+		// check if this session exists, and we might overwrite data
+		bool exists = Session.instance.CheckSessionExists(
+				filepath,
+				experiment_name,
+				ppid,
+				sessionNumber
+			);
+
+		if (exists)
+		{
+			DialogueBoxController.Popup overwritePopup = new DialogueBoxController.Popup()
+			{
+				message = string.Format(
+					"A session results file already exists for\n" +
+					"Subject: {0} - ID:{1} \n" +
+					"Session #: {2} \n" +
+					"at the specified data location! Press OK to start the session anyway, data may be overwritten.",
+					subject_name,
+					id,
+					sessionNumber
+				),
+				messageType = DialogueBoxController.MessageType.Warning,
+				onOK = () => { BeginExperiment(); }
+			};
+			DialogueBoxController.Instance().DisplayPopup(overwritePopup);
+			return;
+		}
+
+		// if we got this far, then all is good so go for it!
+		BeginExperiment();
+	}
+
+	private void BeginExperiment()
+	{
 		// create a settings object to hold settings from the UI
 		// record the UI data into settings
 		Settings sessionSettings = new Settings();
@@ -207,57 +241,6 @@ public class StudySettingsUIController : MonoBehaviour
 		}
 
 		return true;
-
-		// check if this session exists, and we might overwrite data
-		// borrowed from example code and needs to be rewritten
-		/*bool exists = session.CheckSessionExists(
-				localFilePath,
-				newExperimentName,
-				newPpid,
-				sessionNum
-			);
-
-		if (exists)
-		{
-			Popup newPopup = new Popup()
-			{
-				message = string.Format(
-					"{0} - {1} - Session #{2} already exists! Press OK to start the session anyway, data may be overwritten.",
-					newExperimentName,
-					newPpid,
-					sessionNum
-				),
-				messageType = MessageType.Warning,
-				onOK = () => {
-					gameObject.SetActive(false);
-					// BEGIN!
-					session.Begin(
-						newExperimentName,
-						newPpid,
-						sessionNum,
-						newParticipantDetails,
-						newSettings
-					);
-				}
-			};
-			popupController.DisplayPopup(newPopup);
-		}*/
-
-		/* // working on mine
-		// check if there is already data at this save location
-		bool exists = Session.instance.CheckSessionExists(
-				filepath,
-				expName,
-				ppid,
-				sessionNumber
-			);
-
-		if (exists)
-		{
-			OverwriteWarning.OpenPanel();
-			OverwriteWarning.OnUserSelection += OverwriteOK;
-			return false;
-		}*/
 	}
 
 	void OverwriteOK(bool userSelection)

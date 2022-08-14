@@ -16,6 +16,18 @@ public class DialogueBoxController : MonoBehaviour
 
 	Action OKAction;
 
+	private static DialogueBoxController DialogueBox; 
+	public static DialogueBoxController Instance()
+	{
+		if(null == DialogueBox)
+		{
+			DialogueBox = FindObjectOfType<DialogueBoxController>(true);
+			if(null == DialogueBox)
+				Debug.LogError("There needs to be one active messageBox script on a GameObject in your scene.");
+		}
+		return DialogueBox;
+	}
+
 	public void DisplayPopup(Popup popup)
 	{
 		Title.text = popup.messageType.ToString(); // ToString on an enum will use the enum label
