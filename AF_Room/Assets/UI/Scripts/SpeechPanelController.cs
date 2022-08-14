@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UXF;
 
 // Controller for the Speech UI
 //
@@ -16,7 +17,12 @@ using System;
 // 'ENTER' - sends chat data when focus is on chat field.
 
 public class SpeechPanelController : MonoBehaviour
-{   
+{
+    public Button CurrentPromptButton;
+    public Button NextButton;
+    public TMP_Text PromptCounter;
+    public const string PromptCounterFormat = "Current Prompt: {0} / {1}";
+    
     // collection of stock phrase buttons
     // using this array means buttons can be added easily in the inspector.
     // the system will use the button's text component as the phrase to say.
@@ -38,8 +44,36 @@ public class SpeechPanelController : MonoBehaviour
         {
             b.onClick.AddListener(delegate { phraseButtonPressed(b); });
         }
-
+        
+        // wire the current phrase button as well.
+        CurrentPromptButton.onClick.AddListener(delegate { phraseButtonPressed(CurrentPromptButton); });
     }
+
+    // This will be called by the UXF OnTrialBegin event
+    public void updatePromptGroup(Trial trial)
+	{
+        // phrase button
+        CurrentPromptButton.GetComponentInChildren<TMP_Text>().text = trial.settings.GetString("prompt");
+        // counter label
+        PromptCounter.text = string.Format(PromptCounterFormat, trial.numberInBlock, trial.block.trials.Count);
+
+        if(trial == Session.instance.CurrentBlock.lastTrial)
+		{
+            NextButton.interactable = false;
+		}
+    }
+
+    public void nextPromptButtonPressed()
+	{
+        Session session = Session.instance;
+
+        // Each prompt is a trial, so go to the next trial
+        // this will end the current trial and send the OnTrialEnd event
+        session.BeginNextTrialSafe();
+
+        // update the UI
+        updatePromptGroup(session.CurrentTrial);
+	}
 
     public void phraseButtonPressed(Button sender)
     {
@@ -82,6 +116,7 @@ public class SpeechPanelController : MonoBehaviour
         // Debug.Log("Now we are in sendChatText(), and " + chatInputField.text);
         // Debug.Log(chatInputField);
         string chatText = chatInputField.text;
+        if (string.IsNullOrEmpty(chatText)) return;
 
         // clear the chat box
         chatInputField.text = "";
