@@ -8,13 +8,17 @@ public class StudySettingsUIController : MonoBehaviour
 	public Button BeginExperimentButton;
 	public TMP_Text InfoText;
 	string defaultInfoText;
-	public TMP_InputField NameInputField;
+
+	public TMP_InputField ExperimenterInputField;
+
+	public TMP_InputField SubjectNameInputField;
 	public TMP_InputField IDInputField;
 	public Button IDRandomButton;
 	string subject_name;
 	string id;
-	string expName = "Experiment 1";
-	string ppid { get { return id + "_" + NameInputField.text; } }
+	string ppid { get { return id + "_" + SubjectNameInputField.text; } }
+
+	string experiment_name = "Experiment 1";
 	 
 	public TMP_InputField SessionNumberInputField;
 	public Button SessionNumberIncButton;
@@ -38,8 +42,9 @@ public class StudySettingsUIController : MonoBehaviour
 		ModelSettingsRenderTextureCamera.gameObject.SetActive(true);
 
 		// set some default values
+		ExperimenterInputField.text = "";
 		subject_name = "";
-		NameInputField.text = "";
+		SubjectNameInputField.text = "";
 		id = "";
 		IDInputField.text = "";
 		sessionNumber = 1;
@@ -65,9 +70,11 @@ public class StudySettingsUIController : MonoBehaviour
 			ModelSettingsRenderTextureCamera.gameObject.SetActive(false);
 	}
 
+	// We keep track of when the name or ID fields change because they are used to build the PPID
+	// but this is probably not needed for most of the other data
 	public void OnEndEditName()
 	{
-		subject_name = NameInputField.text;
+		subject_name = SubjectNameInputField.text;
 		Session.instance.name = subject_name;
 		Session.instance.ppid = ppid; // uses name
 	}
@@ -159,7 +166,7 @@ public class StudySettingsUIController : MonoBehaviour
 
 		// initialize the session
 		// this will trigger the OnSessionBegin event
-		Session.instance.Begin(expName, Session.instance.ppid, Session.instance.number, null, sessionSettings);
+		Session.instance.Begin(experiment_name, Session.instance.ppid, Session.instance.number, null, sessionSettings);
 
 		// close the startUI
 		gameObject.SetActive(false);
@@ -168,10 +175,16 @@ public class StudySettingsUIController : MonoBehaviour
 	private bool CheckFields()
 	{
 		string errorMessage;
-		if (string.IsNullOrWhiteSpace(NameInputField.text))
+		if (string.IsNullOrWhiteSpace(ExperimenterInputField.text))
+		{
+			errorMessage = "ERROR: Experimenter field cannot be blank!!";
+			MarkUIElementError(ExperimenterInputField.gameObject, errorMessage);
+			return false;
+		}
+		if (string.IsNullOrWhiteSpace(SubjectNameInputField.text))
 		{
 			errorMessage = "ERROR: Name field cannot be blank!!";
-			MarkUIElementError(NameInputField.gameObject, errorMessage);
+			MarkUIElementError(SubjectNameInputField.gameObject, errorMessage);
 			return false;
 		}
 		if (string.IsNullOrWhiteSpace(IDInputField.text))
@@ -255,9 +268,10 @@ public class StudySettingsUIController : MonoBehaviour
 	// Store the settings from the UI into the given settings object
 	// note this will overwrite any exisiting values in settings
 	private void StoreSettingsFromFields(Settings settings)
-	{ 
+	{
 		// Store settings to the UXF object
-		settings.SetValue("SubjectName", NameInputField.text);
+		settings.SetValue("ExperimenterName", ExperimenterInputField.text);
+		settings.SetValue("SubjectName", SubjectNameInputField.text);
 		settings.SetValue("ID", IDInputField.text);
 		settings.SetValue("Session", SessionNumberInputField.text);
 		settings.SetValue("FilePath", FilePathInputField.text);
@@ -283,7 +297,8 @@ public class StudySettingsUIController : MonoBehaviour
 	}
 	void ClearAllUIElementErrors()
 	{
-		ClearUIElementError(NameInputField.gameObject);
+		ClearUIElementError(ExperimenterInputField.gameObject);
+		ClearUIElementError(SubjectNameInputField.gameObject);
 		ClearUIElementError(IDInputField.gameObject);
 		ClearUIElementError(SessionNumberInputField.gameObject);
 		ClearUIElementError(FilePathInputField.gameObject);
