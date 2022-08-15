@@ -246,6 +246,11 @@ public class ProxemicsTracker : Tracker
         // we need to add these stats to all trials 
         foreach (Trial trial in session.Trials)
         {
+            if(trial.status == TrialStatus.NotDone)
+			{
+                //Debug.Log("No data recorded for trial " + trial.number);
+                continue;
+			}
             trial.result["global average distance"] = globalAverageDistance;
             trial.result["global median distance"] = globalMedianDistance;
             trial.result["global standard deviation distance"] = globalSDDistance;
@@ -459,12 +464,23 @@ public class ProxemicsTracker : Tracker
     //      the data will be shallow copied to a new list, sorted, and median value returned. 
     //      the original list is not changed, but note this will incur a O(n) copy, O(nlogn) sort
     // if in_place == true
-    //      the data will be sorted in place, changing the order of the original list.
+    //      the data will be sorted in place O(nlogn), changing the order of the original list.
     //      this will avoid the memory and processing cost of the copy.
+    //
+    // If count == 0, median is Single.NaN
+    // If start_index < 1, median is Single.NaN
     private float median(List<float> dataset, int start_index, int count, bool in_place = false)
 	{
-        if (count <= 0) throw new IndexOutOfRangeException("count is <= 0");
-        if (start_index < 0) throw new IndexOutOfRangeException("start_index is < 0");
+        if (count <= 0)
+        {
+            Debug.LogWarning("median calucaltion: count is <= 0");
+            return Single.NaN;
+        }
+        if (start_index < 0)
+        {
+            Debug.LogWarning("median calucaltion: start index is < 0");
+            return Single.NaN;
+        }
 
         int median_index = count / 2; // note int division here : a list of 7 items will return (7 / 2) = 3, index of the 4th item
 

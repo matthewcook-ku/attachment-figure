@@ -54,7 +54,7 @@ public class ExperimentPanelController : MonoBehaviour
 		FPSIndicator.enabled = false;
 	}
 
-	public void OnEndTrialButtonPressed()
+	public void OnEndExperimentButtonPressed()
 	{
 		DialogueBoxController.Popup quitPopup = new DialogueBoxController.Popup()
 		{
@@ -71,9 +71,7 @@ public class ExperimentPanelController : MonoBehaviour
 
 		if (Session.instance != null)
 		{
-			// this will trigger OnTrialEnd
-			Session.instance.EndCurrentTrial();
-			// this will trigger PreSessionEnd and then OnSessionEnd
+			// this will set isEnding = true, and trigger OnTrialEnd, PreSessionEnd and then OnSessionEnd
 			Session.instance.End();
 		}
 		else

@@ -127,9 +127,9 @@ public class StudyController : MonoBehaviour
         // write out the stats for this trial
         subject.proxemicsTracker.closeCurrentTrial(trial);
 
-        // if this is the last trial, save the global data as well.
+        // if this is the last trial, or if we are ending, save the global data as well.
         // if we wait to do this until PreSessionEnd the results file will already have been writen.
-        if (trial == trial.session.LastTrial)
+        if (trial.session.isEnding || trial == trial.session.LastTrial)
         {
             subject.proxemicsTracker.closeSession(trial.session);
         }
