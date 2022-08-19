@@ -56,10 +56,12 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Building trails...");
         
         // tell the system where to look for the settings file
-        session.settings.SetValue("trial_specification_name", "question set.csv");
+		string taskfile = session.settings.GetString("Task") + " " + session.settings.GetString("TaskSet") + ".csv";
+		//session.settings.SetValue("trial_specification_name", "question set.csv");
+		session.settings.SetValue("trial_specification_name", taskfile);
 
-        // read and process the settings file to create blocks and trials
-        BuildExperimentFromCSV(session, "trial_specification_name");
+		// read and process the settings file to create blocks and trials
+		BuildExperimentFromCSV(session, "trial_specification_name");
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UXF;
+using System;
 
 public class StudySettingsUIController : MonoBehaviour
 {
@@ -33,7 +34,9 @@ public class StudySettingsUIController : MonoBehaviour
 	public EventToggleGroup ModelToggleGroup;
 	public EventToggleGroup SkintoneToggleGroup;
 
-	//public DialogueBoxController DialogueBox;
+	public TMP_Dropdown TaskDropdown;
+	public TMP_Dropdown TaskSetDropdown;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -154,6 +157,16 @@ public class StudySettingsUIController : MonoBehaviour
 	{
 		InfoText.text = defaultInfoText;
 	}
+
+	public void OnTaskSelectionChanged(Int32 selection)
+	{
+		Debug.Log("Task Selection: " + selection);
+	}
+	public void OnTaskSetSelectionChanged(Int32 selection)
+	{
+		Debug.Log("Task Selection: " + selection);
+	}
+
 	public void OnBeginExperimentButtonPressed()
 	{
 		if (!CheckFields()) 
@@ -263,6 +276,9 @@ public class StudySettingsUIController : MonoBehaviour
 
 		settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
 		settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
+
+		settings.SetValue("Task", TaskDropdown.options[TaskDropdown.value].text);
+		settings.SetValue("TaskSet", TaskSetDropdown.options[TaskSetDropdown.value].text);
 	}
 	void MarkUIElementError(GameObject uiElement, string errorMessage)
 	{
