@@ -18,8 +18,6 @@ public class StudySettingsUIController : MonoBehaviour
 	string subject_name;
 	string id;
 	string ppid { get { return id + "_" + SubjectNameInputField.text; } }
-
-	string experiment_name = "Experiment 1";
 	 
 	public TMP_InputField SessionNumberInputField;
 	public Button SessionNumberIncButton;
@@ -35,7 +33,6 @@ public class StudySettingsUIController : MonoBehaviour
 	public EventToggleGroup SkintoneToggleGroup;
 
 	public TMP_Dropdown TaskDropdown;
-	public TMP_Dropdown TaskSetDropdown;
 
 
 	// Start is called before the first frame update
@@ -158,15 +155,6 @@ public class StudySettingsUIController : MonoBehaviour
 		InfoText.text = defaultInfoText;
 	}
 
-	public void OnTaskSelectionChanged(Int32 selection)
-	{
-		Debug.Log("Task Selection: " + selection);
-	}
-	public void OnTaskSetSelectionChanged(Int32 selection)
-	{
-		Debug.Log("Task Selection: " + selection);
-	}
-
 	public void OnBeginExperimentButtonPressed()
 	{
 		if (!CheckFields()) 
@@ -175,7 +163,7 @@ public class StudySettingsUIController : MonoBehaviour
 		// check if this session exists, and we might overwrite data
 		bool exists = Session.instance.CheckSessionExists(
 				filepath,
-				experiment_name,
+				StudyController.ExperimentName,
 				ppid,
 				sessionNumber
 			);
@@ -213,7 +201,7 @@ public class StudySettingsUIController : MonoBehaviour
 
 		// initialize the session
 		// this will trigger the OnSessionBegin event
-		Session.instance.Begin(experiment_name, Session.instance.ppid, Session.instance.number, null, sessionSettings);
+		Session.instance.Begin(StudyController.ExperimentName, Session.instance.ppid, Session.instance.number, null, sessionSettings);
 
 		// close the startUI
 		gameObject.SetActive(false);
@@ -266,19 +254,18 @@ public class StudySettingsUIController : MonoBehaviour
 	private void StoreSettingsFromFields(Settings settings)
 	{
 		// Store settings to the UXF object
-		settings.SetValue("ExperimenterName", ExperimenterInputField.text);
-		settings.SetValue("SubjectName", SubjectNameInputField.text);
-		settings.SetValue("ID", IDInputField.text);
-		settings.SetValue("Session", SessionNumberInputField.text);
-		settings.SetValue("FilePath", FilePathInputField.text);
+		settings.SetValue(StudyController.ExperimenterNameKey, ExperimenterInputField.text);
+		settings.SetValue(StudyController.SubjectNameKey, SubjectNameInputField.text);
+		settings.SetValue(StudyController.SubjectIDKey, IDInputField.text);
+		settings.SetValue(StudyController.SessionNumberKey, SessionNumberInputField.text);
+		settings.SetValue(StudyController.DataFilePathKey, FilePathInputField.text);
 
 		AFManager.Instance.agent.Speaker.StoreSettingsFromFields(settings);
 
-		settings.SetValue("Model", ModelToggleGroup.getActiveIndex());
-		settings.SetValue("Skintone", SkintoneToggleGroup.getActiveIndex());
+		settings.SetValue(StudyController.AgentModelKey, ModelToggleGroup.getActiveIndex());
+		settings.SetValue(StudyController.AgentSkintoneKey, SkintoneToggleGroup.getActiveIndex());
 
-		settings.SetValue("Task", TaskDropdown.options[TaskDropdown.value].text);
-		settings.SetValue("TaskSet", TaskSetDropdown.options[TaskSetDropdown.value].text);
+		settings.SetValue(StudyController.SessionTaskKey, TaskDropdown.options[TaskDropdown.value].text);
 	}
 	void MarkUIElementError(GameObject uiElement, string errorMessage)
 	{

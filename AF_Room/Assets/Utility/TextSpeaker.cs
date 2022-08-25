@@ -185,10 +185,10 @@ public class TextSpeaker : MonoBehaviour
 
 	public void StoreSettingsFromFields(Settings settings)
 	{
-		settings.SetValue("VoiceName", VoiceName);
-		settings.SetValue("VoicePitch", VoicePitch);
-		settings.SetValue("VoiceVolume", VoiceVolume);
-		settings.SetValue("VoiceSpeed", VoiceSpeed);
+		settings.SetValue(StudyController.VoiceNameKey, VoiceName);
+		settings.SetValue(StudyController.VoicePitchKey, VoicePitch);
+		settings.SetValue(StudyController.VoiceVolumeKey, VoiceVolume);
+		settings.SetValue(StudyController.VoiceSpeedKey, VoiceSpeed);
 	}
 
 #endif

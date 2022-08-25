@@ -21,7 +21,7 @@ public class SpeechPanelController : MonoBehaviour
     public Button CurrentPromptButton;
     public Button NextButton;
     public TMP_Text PromptCounter;
-    public const string PromptCounterFormat = "Current Prompt: {0} / {1}";
+    public const string PromptCounterFormat = "Current: prompt {0}.{1} - {2} / {3}"; // prompt set, promt number, number in block, total trials
     
     // collection of stock phrase buttons
     // using this array means buttons can be added easily in the inspector.
@@ -53,9 +53,14 @@ public class SpeechPanelController : MonoBehaviour
     public void updatePromptGroup(Trial trial)
 	{
         // phrase button
-        CurrentPromptButton.GetComponentInChildren<TMP_Text>().text = trial.settings.GetString("prompt");
+        CurrentPromptButton.GetComponentInChildren<TMP_Text>().text = trial.settings.GetString(StudyController.PromptKey);
         // counter label
-        PromptCounter.text = string.Format(PromptCounterFormat, trial.numberInBlock, trial.block.trials.Count);
+        PromptCounter.text = string.Format(
+            PromptCounterFormat,
+			trial.settings.GetString(StudyController.PromptSetKey),
+			trial.settings.GetString(StudyController.PromptNumberKey),
+			trial.numberInBlock, 
+            trial.block.trials.Count);
 
         if(trial == Session.instance.CurrentBlock.lastTrial)
 		{

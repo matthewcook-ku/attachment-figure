@@ -47,8 +47,36 @@ public class StudyController : MonoBehaviour
     [Tooltip("Frequency of averaged data collection in sec. 60 is 1 minute.")]
     public float averageInterval = 60.0f;
 
-    // This method should be called by the OnSessionBegin event in the UXF rig.
-    public void SessionBegin(Session session)
+
+	// headings for results file
+	public const string ExperimenterNameKey = "Experimenter Name";
+    public const string SubjectNameKey = "Subject Name";
+    public const string SubjectIDKey = "Subject ID";
+    public const string SessionNumberKey = "Session";
+    public const string DataFilePathKey = "File Path";
+
+	public const string VoiceNameKey = "Voice Name";
+	public const string VoicePitchKey = "Voice Pitch";
+	public const string VoiceVolumeKey = "Voice Volume";
+	public const string VoiceSpeedKey = "Voice Speed";
+
+	public const string AgentModelKey = "Model";
+    public const string AgentSkintoneKey = "Skintone";
+
+    public const string SessionTaskKey = "Task";
+
+	// Settings File Strings
+	public const string ExperimentName = "Experiment 1";
+	public const string TaskFileExtension = ".csv";
+	public const string TaskSpecificationNameKey = "task_specification_name";
+
+	// headings from the above file
+	public const string PromptSetKey = "Prompt Set";
+	public const string PromptNumberKey = "Prompt Number";
+	public const string PromptKey = "Prompt";
+
+	// This method should be called by the OnSessionBegin event in the UXF rig.
+	public void SessionBegin(Session session)
 	{
         Debug.Log("StudyController: Starting Session...");
 
@@ -56,12 +84,12 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Building trails...");
         
         // tell the system where to look for the settings file
-		string taskfile = session.settings.GetString("Task") + " " + session.settings.GetString("TaskSet") + ".csv";
+		string taskfile = session.settings.GetString("Task") + TaskFileExtension;
 		//session.settings.SetValue("trial_specification_name", "question set.csv");
-		session.settings.SetValue("trial_specification_name", taskfile);
+		session.settings.SetValue(TaskSpecificationNameKey, taskfile);
 
 		// read and process the settings file to create blocks and trials
-		BuildExperimentFromCSV(session, "trial_specification_name");
+		BuildExperimentFromCSV(session, TaskSpecificationNameKey);
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");
@@ -82,7 +110,7 @@ public class StudyController : MonoBehaviour
     public void TrialStart(Trial trial)
     {
         Debug.Log("StudyController: Starting Trial...");
-        Debug.Log("Trial Prompt[" + trial.settings.GetString("prompt id") + "]: " + trial.settings.GetString("prompt"));
+        Debug.Log("Trial Prompt[" + trial.settings.GetString(PromptSetKey) + " : " + trial.settings.GetString(PromptNumberKey) + "]: " + trial.settings.GetString(PromptKey));
 
         // initilize the proxemics tracker for the new trial
         subject.proxemicsTracker.initNextTrial(trial);
@@ -165,7 +193,7 @@ public class StudyController : MonoBehaviour
         }
         else
 		{
-            Debug.Log($"Reading file from settings key: \"{csvFileKey}\".");
+            //Debug.Log($"Reading file from settings key: \"{csvFileKey}\".");
         }
 
         // get the csv file name
@@ -193,6 +221,7 @@ public class StudyController : MonoBehaviour
         // this adds a new trial to the session for each row in the table
         // the trial will be created with the settings from the values from the table
         // if "block_num" is specified in the table, the trial will be added to the block with that number
+        // you can access the data through the settings object for the trial using the headings as keys
         session.BuildFromTable(table, true);
 
         // report what was done
@@ -204,8 +233,11 @@ public class StudyController : MonoBehaviour
             for(int j = 0; j < session.blocks[i].trials.Count; j++)
 			{
                 settingsString += "\n\t" + "trial[" + j + "]: ";
-                settingsString += "(" + session.blocks[i].trials[j].settings.GetString("prompt id") + ") ";
-                settingsString += session.blocks[i].trials[j].settings.GetString("prompt");
+                settingsString += "(";
+				settingsString += session.blocks[i].trials[j].settings.GetString(PromptSetKey) + " : ";
+                settingsString += session.blocks[i].trials[j].settings.GetString(PromptNumberKey);
+				settingsString += ") ";
+				settingsString += session.blocks[i].trials[j].settings.GetString(PromptKey);
             }
         }
         Debug.Log(settingsString);
