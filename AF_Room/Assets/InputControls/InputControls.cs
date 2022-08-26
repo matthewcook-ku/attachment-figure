@@ -80,6 +80,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DisableFPS"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c985127-7848-45da-86d9-03de2f82b7d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""VerticalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""541fbc72-e38a-4739-bdd2-e6b499423283"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisableFPS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -949,6 +969,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_FPSControls_Run = m_FPSControls.FindAction("Run", throwIfNotFound: true);
         m_FPSControls_LookX = m_FPSControls.FindAction("LookX", throwIfNotFound: true);
         m_FPSControls_LookY = m_FPSControls.FindAction("LookY", throwIfNotFound: true);
+        m_FPSControls_DisableFPS = m_FPSControls.FindAction("DisableFPS", throwIfNotFound: true);
         // AgentControls
         m_AgentControls = asset.FindActionMap("AgentControls", throwIfNotFound: true);
         m_AgentControls_SwapSkins = m_AgentControls.FindAction("SwapSkins", throwIfNotFound: true);
@@ -1040,6 +1061,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_FPSControls_Run;
     private readonly InputAction m_FPSControls_LookX;
     private readonly InputAction m_FPSControls_LookY;
+    private readonly InputAction m_FPSControls_DisableFPS;
     public struct FPSControlsActions
     {
         private @InputControls m_Wrapper;
@@ -1050,6 +1072,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_FPSControls_Run;
         public InputAction @LookX => m_Wrapper.m_FPSControls_LookX;
         public InputAction @LookY => m_Wrapper.m_FPSControls_LookY;
+        public InputAction @DisableFPS => m_Wrapper.m_FPSControls_DisableFPS;
         public InputActionMap Get() { return m_Wrapper.m_FPSControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1077,6 +1100,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LookY.started -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnLookY;
                 @LookY.performed -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnLookY;
                 @LookY.canceled -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnLookY;
+                @DisableFPS.started -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnDisableFPS;
+                @DisableFPS.performed -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnDisableFPS;
+                @DisableFPS.canceled -= m_Wrapper.m_FPSControlsActionsCallbackInterface.OnDisableFPS;
             }
             m_Wrapper.m_FPSControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1099,6 +1125,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LookY.started += instance.OnLookY;
                 @LookY.performed += instance.OnLookY;
                 @LookY.canceled += instance.OnLookY;
+                @DisableFPS.started += instance.OnDisableFPS;
+                @DisableFPS.performed += instance.OnDisableFPS;
+                @DisableFPS.canceled += instance.OnDisableFPS;
             }
         }
     }
@@ -1346,6 +1375,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnLookX(InputAction.CallbackContext context);
         void OnLookY(InputAction.CallbackContext context);
+        void OnDisableFPS(InputAction.CallbackContext context);
     }
     public interface IAgentControlsActions
     {

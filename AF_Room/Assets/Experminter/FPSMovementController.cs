@@ -18,9 +18,6 @@ using UnityEngine.InputSystem;
 
 public class FPSMovementController : MonoBehaviour
 {
-    // Input System controller
-    //FPSControls controls;
-    //FPSControls.GroundMovementActions groundMovement;
     // Input System values from controls
     Vector2 horizontalInput;
     Vector2 verticalInput;
@@ -45,12 +42,6 @@ public class FPSMovementController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
-
-    private void Awake()
-    {
-        //controls = new FPSControls();
-        //groundMovement = controls.GroundMovement;
-    }
 
     // input event functions
     void OnHorizontalInputPerformed(InputAction.CallbackContext context)
@@ -77,6 +68,11 @@ public class FPSMovementController : MonoBehaviour
     {
         lookY = context.ReadValue<float>();
     }
+    void OnDisableFPSPerformed(InputAction.CallbackContext context)
+    {
+        //Debug.Log("Disable FPS Key Triggered.");
+        // need to find a way to signal this to the ExperimenterViewController...
+    }
 
     private void OnEnable()
     {
@@ -88,6 +84,7 @@ public class FPSMovementController : MonoBehaviour
         actions.Run.performed += OnRunPerformed;
         actions.LookX.performed += OnLookXPerformed;
         actions.LookY.performed += OnLookYPerformed;
+        actions.DisableFPS.performed += OnDisableFPSPerformed;
 
         // activate controls
         InputManager.EnableActionMap(actions, true);
@@ -106,9 +103,10 @@ public class FPSMovementController : MonoBehaviour
         actions.Run.performed -= OnRunPerformed;
         actions.LookX.performed -= OnLookXPerformed;
         actions.LookY.performed -= OnLookYPerformed;
+		actions.DisableFPS.performed -= OnDisableFPSPerformed;
 
-        // deactivate controls
-        InputManager.EnableActionMap(actions, false);
+		// deactivate controls
+		InputManager.EnableActionMap(actions, false);
 
         // unlock the cursor
         Cursor.lockState = CursorLockMode.None;

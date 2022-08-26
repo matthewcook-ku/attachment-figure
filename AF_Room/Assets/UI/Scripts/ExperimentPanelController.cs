@@ -39,6 +39,11 @@ public class ExperimentPanelController : MonoBehaviour
 
 	private void OnFPSTogglePerformed(InputAction.CallbackContext obj)
 	{
+		ToggleFPS();
+	}
+
+	public void ToggleFPS()
+	{
 		bool fpsToggledState = !fps.enabled;
 		Debug.Log("FPS Controls: " + (fpsToggledState ? "on" : "off"));
 		FPSIndicator.enabled = fpsToggledState;
