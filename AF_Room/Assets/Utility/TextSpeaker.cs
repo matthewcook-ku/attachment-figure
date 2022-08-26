@@ -174,7 +174,7 @@ public class TextSpeaker : MonoBehaviour
 		}
 		// use SpeakNative to play audio throguh the OS
 		//Speaker.Instance.SpeakNative(text, Voice, VoiceSpeed, VoicePitch, VoiceVolume, true);
-		// use Speak to play through an audio source
+		// use Speak to play through an audio source - needed for lipsync
 		Speaker.Instance.Speak(text, SpeakerAudioSource, Voice, true, VoiceSpeed, VoicePitch, VoiceVolume);
 	}
 
