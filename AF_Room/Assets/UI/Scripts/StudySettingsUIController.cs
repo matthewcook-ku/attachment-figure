@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using UXF;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class StudySettingsUIController : MonoBehaviour
 {
@@ -26,7 +28,6 @@ public class StudySettingsUIController : MonoBehaviour
 	public TMP_InputField FilePathInputField;
 	public Button FileBrowseButton;
 	public LocalFileDataHander FileDataHandler;
-	string filepath;
 
 	public Camera ModelSettingsRenderTextureCamera;
 	public EventToggleGroup ModelToggleGroup;
@@ -49,7 +50,6 @@ public class StudySettingsUIController : MonoBehaviour
 		IDInputField.text = "";
 		sessionNumber = 1;
 		SessionNumberInputField.text = sessionNumber.ToString();
-		filepath = FilePathInputField.text;	// filled in from user prefs, so grab it
 		defaultInfoText = InfoText.text;
 
 		// update UXF data
@@ -127,6 +127,7 @@ public class StudySettingsUIController : MonoBehaviour
 		SessionNumberInputField.text = sessionNumber.ToString();
 		Session.instance.number = sessionNumber;
 	}
+
 	private void SetModelFromCurrentSelection()
 	{
 		int index = ModelToggleGroup.getActiveIndex();
@@ -162,7 +163,7 @@ public class StudySettingsUIController : MonoBehaviour
 
 		// check if this session exists, and we might overwrite data
 		bool exists = Session.instance.CheckSessionExists(
-				filepath,
+				FilePathInputField.text,
 				StudyController.ExperimentName,
 				ppid,
 				sessionNumber
@@ -198,6 +199,14 @@ public class StudySettingsUIController : MonoBehaviour
 		// record the UI data into settings
 		Settings sessionSettings = new Settings();
 		StoreSettingsFromFields(sessionSettings);
+
+		// set the file storage path in the file data handler
+		Debug.Log(ColorString.Colorize("StudySettings: using file storage path: " + FilePathInputField.text, "green"));
+		IEnumerable<LocalFileDataHander> fileHandlers = Session.instance.ActiveDataHandlers.OfType<LocalFileDataHander>();
+		foreach (LocalFileDataHander fileHandler in fileHandlers)
+		{
+			fileHandler.storagePath = FilePathInputField.text;
+		}
 
 		// initialize the session
 		// this will trigger the OnSessionBegin event
