@@ -8,9 +8,8 @@ using System.Text.RegularExpressions;
 
 // UXF Session Driver
 //
-// This script drives the major events of the study session. This is the place to sequence out any events fro the study.
+// This script drives the major events of the study session. This is the place to sequence out any events for the study.
 // This is also the central place to put settings for this session. Objects implementing the session should come here to collect those settings. 
-// This will probably need to be broken up into different sessions for the different studies.
 //
 // Elements
 // - UXF event handlers
@@ -24,6 +23,11 @@ using System.Text.RegularExpressions;
 // SubjectUI
 //
 // UXF_Rig - connect event handlers to Events tab
+
+// Experiment Definition File
+// The experiment is defined by a .csv file in Streaming Assets folder.
+// The program looks for a file with the same name as the task selection dropdown.
+// Each line of the file is read into a trial in the session.
 
 public class StudyController : MonoBehaviour
 {
@@ -63,17 +67,60 @@ public class StudyController : MonoBehaviour
 	public const string AgentModelKey = "Model";
     public const string AgentSkintoneKey = "Skintone";
 
-    public const string SessionTaskKey = "Task";
+    public const string SessionTaskKey = "Task"; // holds which task was selected in task dropdown from start screen
+
+	public const string AskedByKey = "Asked By";
+
+	// these are headings in results, but also match headings in the settings file 
+    // this way trial and block numbers match between the settings and results file
+	public const string PromptSetKey = "Prompt Set";
+	public const string PromptNumberKey = "Prompt Number";
+	public const string PromptKey = "Prompt";
 
 	// Settings File Strings
 	public const string ExperimentName = "Experiment 1";
 	public const string TaskFileExtension = ".csv";
-	public const string TaskSpecificationNameKey = "task_specification_name";
+	public const string TaskSpecificationFilenameKey = "task_specification_filename"; // name of the input file with extension
 
-	// headings from the above file
-	public const string PromptSetKey = "Prompt Set";
-	public const string PromptNumberKey = "Prompt Number";
-	public const string PromptKey = "Prompt";
+	private void OnEnable()
+	{
+		SpeechPanelController.OnShowPromptButtonClick += SetTrialAskedBySubject;
+		SpeechPanelController.OnSpeakPromptButtonClick += SetTrialAskedByAgent;
+	}
+
+	private void OnDisable()
+	{
+		// un-register for events
+		SpeechPanelController.OnShowPromptButtonClick -= SetTrialAskedBySubject;
+		SpeechPanelController.OnSpeakPromptButtonClick -= SetTrialAskedByAgent;
+	}
+
+	// Record who is asking questions in the current trial. If no trial is active this is ignored.
+	void SetTrialAskedBySubject(string message)
+    {
+		if (Session.instance && Session.instance.InTrial)
+        {
+			Debug.Log("Setting Trial Settings \"Asked By\" to: Subject");
+			Session.instance.CurrentTrial.settings.SetValue(AskedByKey, "Subject");
+        }
+        else
+        {
+			Debug.Log("No current trial. Ignoring request to set \"Asked By\" to: Subject");
+		}
+    }
+	// Record who is asking questions in the current trial. If no trial is active this is ignored.
+	void SetTrialAskedByAgent(string message)
+	{
+		if (Session.instance && Session.instance.InTrial)
+		{
+			Debug.Log("Setting Trial Settings \"Asked By\" to: Agent");
+			Session.instance.CurrentTrial.settings.SetValue(AskedByKey, "Agent");
+		}
+		else
+		{
+			Debug.Log("No current trial. Ignoring request to set \"Asked By\" to: Agent");
+		}
+	}
 
 	// This method should be called by the OnSessionBegin event in the UXF rig.
 	public void SessionBegin(Session session)
@@ -84,12 +131,12 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Building trails...");
         
         // tell the system where to look for the settings file
-		string taskfile = session.settings.GetString("Task") + TaskFileExtension;
-		//session.settings.SetValue("trial_specification_name", "question set.csv");
-		session.settings.SetValue(TaskSpecificationNameKey, taskfile);
+        // currently - the name of the settings file comes from the task dropdown selection + .csv
+		string taskfile = session.settings.GetString(SessionTaskKey) + TaskFileExtension;
+		session.settings.SetValue(TaskSpecificationFilenameKey, taskfile);
 
 		// read and process the settings file to create blocks and trials
-		BuildExperimentFromCSV(session, TaskSpecificationNameKey);
+		BuildExperimentFromCSV(session, TaskSpecificationFilenameKey);
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");
@@ -182,7 +229,7 @@ public class StudyController : MonoBehaviour
         Debug.Log("Session Ended ... Safe to Quit");
     }
 
-    // Replace the CSVExperimentBuilder build function 
+    // Replaces the CSVExperimentBuilder build function 
     // This does the exact same thing, but uses our CSV parsing rather than the standard.
     public void BuildExperimentFromCSV(Session session, string csvFileKey)
     {
@@ -217,7 +264,8 @@ public class StudyController : MonoBehaviour
         Debug.Log("Parsing file...");
         var table = ParseCSV(csvLines);
 
-        // build the experiment.
+        // build the experiment
+
         // this adds a new trial to the session for each row in the table
         // the trial will be created with the settings from the values from the table
         // if "block_num" is specified in the table, the trial will be added to the block with that number
