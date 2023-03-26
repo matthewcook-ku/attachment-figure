@@ -41,7 +41,7 @@ public class StudyController : MonoBehaviour
 
     [Tooltip("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
-    public SubjectUIController subjectUI;
+    public SubjectHUDController subjectHUD;
 
     [Tooltip("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
@@ -50,6 +50,14 @@ public class StudyController : MonoBehaviour
     public float trackingInterval = 0.3f;
     [Tooltip("Frequency of averaged data collection in sec. 60 is 1 minute.")]
     public float averageInterval = 60.0f;
+
+    // events - these mirror the UXF events, but allow easy access by being static
+    // they will be called by the UXF events
+	public static event Action OnUXFSessionBegin;
+    public static event Action OnUXFTrialBegin;
+	public static event Action OnUXFTrialEnd;
+	public static event Action OnUXFPreSessionEnd;
+	public static event Action OnUXFSessionEnd;
 
 
 	// headings for results file
@@ -105,7 +113,7 @@ public class StudyController : MonoBehaviour
         }
         else
         {
-			Debug.Log("No current trial. Ignoring request to set \"Asked By\" to: Subject");
+			Debug.Log(ColorString.Colorize("No current trial. Ignoring request to set \"Asked By\" to: Subject", "red"));
 		}
     }
 	// Record who is asking questions in the current trial. If no trial is active this is ignored.
@@ -118,7 +126,7 @@ public class StudyController : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("No current trial. Ignoring request to set \"Asked By\" to: Agent");
+			Debug.Log(ColorString.Colorize("No current trial. Ignoring request to set \"Asked By\" to: Agent", "red"));
 		}
 	}
 
@@ -151,7 +159,10 @@ public class StudyController : MonoBehaviour
         Debug.Log("Starting proxemics trackers.");
         StartCoroutine(ProxemicsTrackingManualRecord());
         StartCoroutine(ProxemicsTrackingManualRecordAverage());
-    }
+
+        // call any additional events
+        OnUXFSessionBegin?.Invoke();
+	}
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialStart(Trial trial)
@@ -159,9 +170,15 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Starting Trial...");
         Debug.Log("Trial Prompt[" + trial.settings.GetString(PromptSetKey) + " : " + trial.settings.GetString(PromptNumberKey) + "]: " + trial.settings.GetString(PromptKey));
 
-        // initilize the proxemics tracker for the new trial
-        subject.proxemicsTracker.initNextTrial(trial);
-    }
+		// set the default Asked By to Agent
+		trial.settings.SetValue(AskedByKey, "Agent");
+
+		// initilize the proxemics tracker for the new trial
+		subject.proxemicsTracker.initNextTrial(trial);
+
+		// call any additional events
+		OnUXFTrialBegin?.Invoke();
+	}
 
     // This coroutine method will set up recording and then continue every trackingInterval seconds to manually signal the porixemics tracker to record a row of data.
     IEnumerator ProxemicsTrackingManualRecord()
@@ -211,7 +228,10 @@ public class StudyController : MonoBehaviour
             subject.proxemicsTracker.closeSession(trial.session);
         }
 
-        Debug.Log("Ending Trial...done");
+		// call any additional events
+		OnUXFTrialEnd?.Invoke();
+
+		Debug.Log("Ending Trial...done");
     }
 
     // This method should be called by the PreSessionEnd event in the UXF rig.
@@ -221,12 +241,18 @@ public class StudyController : MonoBehaviour
 
         // stop the tracking
         StopAllCoroutines();
-    }
+
+		// call any additional events
+		OnUXFPreSessionEnd?.Invoke();
+	}
 
     // This method should be called by the OnSessionEnd event in the UXF rig.
     public void SessionEnd(Session session)
     {
-        Debug.Log("Session Ended ... Safe to Quit");
+		// call any additional events
+		OnUXFSessionEnd?.Invoke();
+
+		Debug.Log("Session Ended ... Safe to Quit");
     }
 
     // Replaces the CSVExperimentBuilder build function 
