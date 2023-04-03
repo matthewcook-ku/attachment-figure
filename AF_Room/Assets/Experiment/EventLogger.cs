@@ -19,6 +19,7 @@ public class EventLogger : MonoBehaviour
         Attention,
         Prompter,
         PromptSpeech,
+        ResponseSpeech,
         StockSpeech,
         CustomSpeech
 	}
@@ -37,6 +38,7 @@ public class EventLogger : MonoBehaviour
 		AnimationPanelController.OnAttentionChange += OnAttentionEvent;
         SpeechPanelController.OnShowPromptButtonClick += OnPrompterEvent;
 		SpeechPanelController.OnSpeakPromptButtonClick += OnPromptSpeechEvent;
+		SpeechPanelController.OnSpeakResponseButtonClick += OnResponseSpeechEvent;
 		SpeechPanelController.OnPhraseButtonClick += OnStockSpeechEvent;
 		SpeechPanelController.OnSendChat += OnCustomSpeechEvent;
     }
@@ -49,6 +51,7 @@ public class EventLogger : MonoBehaviour
 		AnimationPanelController.OnAttentionChange -= OnAttentionEvent;
 		SpeechPanelController.OnShowPromptButtonClick -= OnPrompterEvent;
 		SpeechPanelController.OnSpeakPromptButtonClick -= OnPromptSpeechEvent;
+		SpeechPanelController.OnSpeakResponseButtonClick -= OnResponseSpeechEvent;
 		SpeechPanelController.OnPhraseButtonClick -= OnStockSpeechEvent;
 		SpeechPanelController.OnSendChat -= OnCustomSpeechEvent;
     }
@@ -81,6 +84,8 @@ public class EventLogger : MonoBehaviour
 				return "subject prompter";
 			case EventType.PromptSpeech:
 				return "prompt speech";
+			case EventType.ResponseSpeech:
+				return "response speech";
 			case EventType.StockSpeech:
                 return "stock speech";
             case EventType.CustomSpeech:
@@ -106,12 +111,15 @@ public class EventLogger : MonoBehaviour
 
 	void OnPrompterEvent(string message)
     {
-		Debug.Log("EventLogger logging prompter event");
 		Log(message, EventType.Prompter);
 	}
 	void OnPromptSpeechEvent(string message)
 	{
 		Log(message, EventType.PromptSpeech);
+	}
+	void OnResponseSpeechEvent(string message)
+	{
+		Log(message, EventType.ResponseSpeech);
 	}
 	void OnStockSpeechEvent(string message)
 	{

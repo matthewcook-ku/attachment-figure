@@ -23,12 +23,19 @@ public class SpeechPanelController : MonoBehaviour
     // Used by (for example) the EventLogger to record this event to the log.
     public static event Action<string> OnSpeakPromptButtonClick;
 	public static event Action<string> OnShowPromptButtonClick;
+	public static event Action<string> OnSpeakResponseButtonClick;
 	public static event Action<string> OnPhraseButtonClick;
 	public static event Action<string> OnSendChat;
 
-	public Button CurrentPromptButton;
-    public Button SpeakPromptButton;
-    public Button ShowPromptButton;
+	public Button CurrentPromptDisplay;
+	public Button CurrentPromptSpeakButton;
+	public Button CurrentPromptPanelButton;
+	public Button CurrentResponseDisplay;
+	public Button CurrentResponseSpeakButton;
+
+//	public Button CurrentPromptButton;
+//    public Button SpeakPromptButton;
+//    public Button ShowPromptButton;
     public Button NextButton;
     public TMP_Text PromptCounter;
     public const string PromptCounterFormat = "Current: prompt {0}.{1} - {2} / {3}"; // prompt set, promt number, number in block, total trials
@@ -53,31 +60,67 @@ public class SpeechPanelController : MonoBehaviour
         {
             b.onClick.AddListener(delegate { phraseButtonPressed(b); });
         }
-        
-        // wire the current phrase button as well.
-        // not any more, now this button is just used for display
-        //CurrentPromptButton.onClick.AddListener(delegate { phraseButtonPressed(CurrentPromptButton); });
     }
 
     // Update the prompt when the current trial changes. 
     // This will be called by the UXF OnTrialBegin event
     public void updatePromptGroup(Trial trial)
 	{
-        // set the text of the current prompt button to the current prompt
-        CurrentPromptButton.GetComponentInChildren<TMP_Text>().text = trial.settings.GetString(StudyController.PromptKey);
-        // also set the displayed value of the counter label
-        PromptCounter.text = string.Format(
-            PromptCounterFormat,
+		// check the reciprical response type for this trial
+		string res_type = StudyController.AskerAgentValue;  // default to agent
+		string prompt = trial.settings.GetString(StudyController.PromptKey);
+		string response = ""; // default to nothing
+		try
+		{
+			res_type = trial.settings.GetString(StudyController.AskerKey);
+
+			if (res_type != StudyController.AskerSubjectValue && res_type != StudyController.AskerAgentValue)
+				Debug.Log("Unknown asker value: " + res_type);
+
+			// assuming we got this far, let's also grab the response
+			try
+			{
+				response = trial.settings.GetString(StudyController.ResponseKey);
+			}
+			catch (KeyNotFoundException)
+			{
+				// if key not found, no response, so keep ""
+			}
+
+		}
+		catch (KeyNotFoundException)
+		{
+			// if key not found, all prompts are for the agent to speak, so keep default
+		}
+
+		// set up the UI
+		CurrentPromptDisplay.GetComponentInChildren<TMP_Text>().text = prompt;
+		CurrentResponseDisplay.GetComponentInChildren<TMP_Text>().text = response;
+		if (res_type == StudyController.AskerAgentValue)
+		{
+			CurrentPromptSpeakButton.interactable = true;
+			CurrentPromptPanelButton.interactable = false;
+		}
+		else
+		{
+			CurrentPromptSpeakButton.interactable = false;
+			CurrentPromptPanelButton.interactable = true;
+		}
+		CurrentResponseSpeakButton.interactable = !(response == ""); // if empty, turn off button
+
+		// also set the displayed value of the counter label
+		PromptCounter.text = string.Format(
+			PromptCounterFormat,
 			trial.settings.GetString(StudyController.PromptSetKey), // the set of prompts
 			trial.settings.GetString(StudyController.PromptNumberKey),  // the number within the set
 			trial.numberInBlock, // the current trial
-            trial.block.trials.Count); // total number of trials
+			trial.block.trials.Count); // total number of trials
 
-        if(trial == Session.instance.CurrentBlock.lastTrial)
+		if (trial == Session.instance.CurrentBlock.lastTrial)
 		{
-            NextButton.interactable = false;
+			NextButton.interactable = false;
 		}
-    }
+	}
 
     public void nextPromptButtonPressed()
 	{
@@ -96,7 +139,7 @@ public class SpeechPanelController : MonoBehaviour
 		Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         // Use the text of the CurrentPromptButton as the text to speak.
-        string message = CurrentPromptButton.GetComponentInChildren<TMP_Text>().text;
+        string message = CurrentPromptDisplay.GetComponentInChildren<TMP_Text>().text;
 		
         // speak the message
 		speak(message);
@@ -108,15 +151,28 @@ public class SpeechPanelController : MonoBehaviour
 	{
 		Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-		// Use the text of the CurrentPromptButton as the text to display.
-		string message = CurrentPromptButton.GetComponentInChildren<TMP_Text>().text;
+		// Use the text of the CurrentPromptDisplay as the text to display.
+		string message = CurrentPromptDisplay.GetComponentInChildren<TMP_Text>().text;
 
         // show the prompter to the subject
-        // TODO show prompt here
+        // this is done by listening for the event below
 
 		// also notify any listeners that we displayed the prompter to the user
         // StudyController 
 		OnShowPromptButtonClick?.Invoke(message);
+	}
+	public void speakResponseButtonPressed()
+	{
+		Debug.Log("Button Pressed: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+		// Use the text of the CurrentResponseDisplay as the text to speak.
+		string message = CurrentResponseDisplay.GetComponentInChildren<TMP_Text>().text;
+
+		// speak the message
+		speak(message);
+
+		// also notify any listeners that we made the agent speak
+		OnSpeakResponseButtonClick?.Invoke(message);
 	}
 
 	public void phraseButtonPressed(Button sender)

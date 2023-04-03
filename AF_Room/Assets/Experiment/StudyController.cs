@@ -83,52 +83,16 @@ public class StudyController : MonoBehaviour
     // this way trial and block numbers match between the settings and results file
 	public const string PromptSetKey = "Prompt Set";
 	public const string PromptNumberKey = "Prompt Number";
+    public const string AskerKey = "Asker";
+	public const string AskerSubjectValue = "Subject";  // possible value of Asker field
+	public const string AskerAgentValue = "Agent";      // possible value of Asker field
 	public const string PromptKey = "Prompt";
+    public const string ResponseKey = "AI Response";
 
 	// Settings File Strings
 	public const string ExperimentName = "Experiment 1";
 	public const string TaskFileExtension = ".csv";
 	public const string TaskSpecificationFilenameKey = "task_specification_filename"; // name of the input file with extension
-
-	private void OnEnable()
-	{
-		SpeechPanelController.OnShowPromptButtonClick += SetTrialAskedBySubject;
-		SpeechPanelController.OnSpeakPromptButtonClick += SetTrialAskedByAgent;
-	}
-
-	private void OnDisable()
-	{
-		// un-register for events
-		SpeechPanelController.OnShowPromptButtonClick -= SetTrialAskedBySubject;
-		SpeechPanelController.OnSpeakPromptButtonClick -= SetTrialAskedByAgent;
-	}
-
-	// Record who is asking questions in the current trial. If no trial is active this is ignored.
-	void SetTrialAskedBySubject(string message)
-    {
-		if (Session.instance && Session.instance.InTrial)
-        {
-			Debug.Log("Setting Trial Settings \"Asked By\" to: Subject");
-			Session.instance.CurrentTrial.settings.SetValue(AskedByKey, "Subject");
-        }
-        else
-        {
-			Debug.Log(ColorString.Colorize("No current trial. Ignoring request to set \"Asked By\" to: Subject", "red"));
-		}
-    }
-	// Record who is asking questions in the current trial. If no trial is active this is ignored.
-	void SetTrialAskedByAgent(string message)
-	{
-		if (Session.instance && Session.instance.InTrial)
-		{
-			Debug.Log("Setting Trial Settings \"Asked By\" to: Agent");
-			Session.instance.CurrentTrial.settings.SetValue(AskedByKey, "Agent");
-		}
-		else
-		{
-			Debug.Log(ColorString.Colorize("No current trial. Ignoring request to set \"Asked By\" to: Agent", "red"));
-		}
-	}
 
 	// This method should be called by the OnSessionBegin event in the UXF rig.
 	public void SessionBegin(Session session)
@@ -172,6 +136,19 @@ public class StudyController : MonoBehaviour
 
 		// set the default Asked By to Agent
 		trial.settings.SetValue(AskedByKey, "Agent");
+
+        // now see if there is an asker setting
+        try
+        {
+            string asker = trial.settings.GetString(AskerKey);
+			Debug.Log("Setting Trial Settings \"Asked By\" to: " + asker);
+			trial.settings.SetValue(AskedByKey, asker);
+		}
+        catch(KeyNotFoundException)
+        {
+			// if not found, then default to agent, so leave it as is.
+			Debug.Log("No Asker field, setting \"Asked By\" to default: Agent");
+		}
 
 		// initilize the proxemics tracker for the new trial
 		subject.proxemicsTracker.initNextTrial(trial);
@@ -306,13 +283,20 @@ public class StudyController : MonoBehaviour
             settingsString += "\n" + "Block[" + i + "]: " + session.blocks[i].trials.Count + " trials";
             for(int j = 0; j < session.blocks[i].trials.Count; j++)
 			{
-                settingsString += "\n\t" + "trial[" + j + "]: ";
-                settingsString += "(";
+				settingsString += "\n\t" + "trial[" + j + "]: ";
+				settingsString += "(";
 				settingsString += session.blocks[i].trials[j].settings.GetString(PromptSetKey) + " : ";
-                settingsString += session.blocks[i].trials[j].settings.GetString(PromptNumberKey);
+				settingsString += session.blocks[i].trials[j].settings.GetString(PromptNumberKey);
 				settingsString += ") ";
+
+                try { settingsString += "[" + session.blocks[i].trials[j].settings.GetString(AskerKey) + "] "; }
+                catch (KeyNotFoundException) { /* ignore exception when this key does not exist */ }
+
 				settingsString += session.blocks[i].trials[j].settings.GetString(PromptKey);
-            }
+
+				try { settingsString += "\n\t    --> " + session.blocks[i].trials[j].settings.GetString(ResponseKey); }
+				catch (KeyNotFoundException) { /* ignore exception when this key does not exist */ }
+			}
         }
         Debug.Log(settingsString);
     }

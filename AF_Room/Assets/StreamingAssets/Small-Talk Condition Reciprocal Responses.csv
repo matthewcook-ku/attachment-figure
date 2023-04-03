@@ -1,0 +1,37 @@
+﻿block_num,Prompt Set,Prompt Number,Asker,Prompt,AI Response
+1,1,1,Agent,When was the last time you walked for more than an hour? Describe where you went and what you saw.,
+1,1,2,Subject,Do you read the news often and which news source do you prefer? Why?,"I read many things and I have read lots of news before, however, I don’t have a preferred source."
+1,1,3,Agent,What was the best gift you ever received and why?,
+1,1,4,Subject,What is your favorite holiday? Why?,"It seems like many people are happy around the winter holidays, so I like those."
+1,1,5,Agent,What was the funniest thing that ever happened to you when you were with a small child?,
+1,1,6,Subject,"If you had to move from Kansas, where would you go?","If I could travel, I would go to Paris."
+1,1,7,Agent,What is the best restaurant you’ve been to in the last month? Can you tell me about it?,
+1,1,8,Subject,What is a good number of people to have in a student household and why?,"Three seems like a good number, anymore and it might get crowded."
+1,1,9,Agent,Describe the last pet you owned.,
+1,1,10,Subject,What gifts did you receive on your last birthday?,I don’t have a birthday.
+1,1,11,Agent,What was the best gift you ever received and why?,
+1,1,12,Subject,How did you celebrate last Halloween?,"I haven’t celebrated Halloween, but I supposed I would wear a mask."
+1,2,13,Agent,Describe the last time you went to the zoo.,
+1,2,14,Subject,What did you do this summer?,I had conversations like this one.
+1,2,15,Agent,What is your favorite holiday? Why?,
+1,2,16,Subject,What was your first impression of college the first time you ever went on campus?,"The first time I saw a picture of a college campus, I liked the buildings style."
+1,2,17,Agent,Who is your favorite actor of your own gender? ,
+1,2,18,Subject,"One of you says a word, and the next says a word that starts with the last letter of the word just said. Do this until you have 6 words. Any words will do – you aren’t making a sentence.",(RA will refer to list of neutral words in protocol)
+1,2,19,Agent,What is your favorite college class you’ve taken? Why?,
+1,2,20,Subject,What gifts did you receive last holiday season?,I did not receive any gifts for the holidays.
+1,2,21,Agent,What is the best TV show you’ve seen in the last month? Can you tell me about it?,
+1,2,22,Subject,Where are you from? Name all the places you’ve lived.,I am from here and have only ever lived here.
+1,2,23,Agent,Do you like to get up early or stay up late? Is there anything funny that has resulted from this?,
+1,2,24,Subject,Tell the names and ages of your family members (to the extent you know this information),I don’t think I know this information.
+1,3,25,Agent,What was your high school like?,
+1,3,26,Subject,What are the advantages and disadvantages of artificial Christmas trees?,"There are many pros and cons to artificial Christmas trees. For example, artificial trees are reusable however, people report that natural trees smell nicer."
+1,3,27,Agent,What foreign country would you most like to visit? What attracts you to this place?,
+1,3,28,Subject,Do you subscribe to any magazines? Which ones?,"I do not, however, as part of my training I read many magazines."
+1,3,29,Agent,What is the last concert you saw?,
+1,3,30,Subject,Do you think left-handed people are more creative than right-handed people?,"Some studies have found that left-handed people are more creative however other have found no difference between left and right-handed people, so I am not sure."
+1,3,31,Agent,Were you ever in a school play? What was your role? What was the plot of the play? Did anything funny ever happen when you were on stage?,
+1,3,32,Subject,Do you prefer digital watches and clocks or the kind with hands? Why?,I have no preference; they both tell time the same.
+1,3,33,Agent,Describe your mother’s best friend.,
+1,3,34,Subject,What is the best book you’ve read in the last three months?,I’m not sure if I can pick one best book out of everything I’ve read in the last 3 months.
+1,3,35,Agent,Did you have a class pet when you were in elementary school? Do you remember the pet's name?,
+1,3,36,Subject,How often do you get your hair cut? Have you ever had a really bad haircut experience?,I’ve never had a haircut so I’m lucky to have never had a bad experience with one.

@@ -29,7 +29,7 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		// listen for prompter event from the UI
 		SpeechPanelController.OnShowPromptButtonClick += OnPrompterEvent;
-		SpeechPanelController.OnSpeakPromptButtonClick += OnNonPrompterEvent;
+		//SpeechPanelController.OnSpeakPromptButtonClick += OnNonPrompterEvent;
 		StudyController.OnUXFTrialBegin += OnTrialBegin;
 		StudyController.OnUXFTrialEnd += OnTrialEnd;
 	}
@@ -38,7 +38,7 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		// un-register for events
 		SpeechPanelController.OnShowPromptButtonClick -= OnPrompterEvent;
-		SpeechPanelController.OnSpeakPromptButtonClick -= OnNonPrompterEvent;
+		//SpeechPanelController.OnSpeakPromptButtonClick -= OnNonPrompterEvent;
 		StudyController.OnUXFTrialBegin -= OnTrialBegin;
 		StudyController.OnUXFTrialEnd -= OnTrialEnd;
 	}
