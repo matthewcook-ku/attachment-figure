@@ -59,13 +59,13 @@ public class SubjectPrompterController : MonoBehaviour
 	private void OnTrialEnd()
 	{
 		fade(false, fadeDuration);
-		PrompterText.text = PrompterBlankingValue;
+		setPrompterText(PrompterBlankingValue);
 	}
 
 	private void OnPrompterEvent(string message)
 	{
 		// update the currently displayed message
-		PrompterText.text = message;
+		setPrompterText(message);
 
 		// make sure the prompter is showing
 		if(!isVisible)
@@ -82,6 +82,19 @@ public class SubjectPrompterController : MonoBehaviour
 		}
 		// blank the currently displayed message
 		PrompterText.text = PrompterBlankingValue;
+	}
+
+	public void setPrompterTitle(string title)
+	{
+		PrompterPanelTitle.text = title;
+	}
+	public void setPrompterText(string text)
+	{
+		PrompterText.text = text;
+	}
+	public void togglePrompterVisibility(bool active, float fadeDuration)
+	{
+		fade(active, fadeDuration);
 	}
 
 	private void togglePrompter(bool active)
