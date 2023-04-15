@@ -205,8 +205,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 339200690}
   m_HandleRect: {fileID: 339200689}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11121,8 +11121,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377524991}
-  m_LocalRotation: {x: -0, y: -0.25058484, z: -0, w: 0.9680947}
-  m_LocalPosition: {x: 0, y: 0, z: 579}
+  m_LocalRotation: {x: 0.3197863, y: -0, z: -0, w: 0.94748974}
+  m_LocalPosition: {x: 0, y: 0, z: 47.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1008423634}
@@ -11132,7 +11132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -29.024, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -872, y: 2109.4}
+  m_AnchoredPosition: {x: -359.99997, y: 940.33}
   m_SizeDelta: {x: 700, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &377524993
@@ -30962,7 +30962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -179.99998}
+  m_AnchoredPosition: {x: 0, y: -179.99994}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &845767293
@@ -31910,9 +31910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "One of you says a word, and the next says a word that starts with the
-    last letter of the word just said. Do this until you have 6 words. Any words
-    will do \u2013 you aren\u2019t making a sentence."
+  m_text: 'Can you comfortably read the text on this panel? '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6aba7163b7b4a4353ba0862eb462e7e0, type: 2}
   m_sharedMaterial: {fileID: -1743510966188828708, guid: 6aba7163b7b4a4353ba0862eb462e7e0, type: 2}
@@ -33570,7 +33568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 30, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &960644121
@@ -63352,7 +63350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1969568052

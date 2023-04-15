@@ -20,7 +20,7 @@ public class PromptPositionPanelController : MonoBehaviour
 		prompterVisibleState = Prompter.isVisible();
 
 		// make sure the prompter is visible
-		Prompter.setVisibility(true);
+		Prompter.fadeVisibility(true);
 	}
 	void OnDisable()
 	{
@@ -28,7 +28,7 @@ public class PromptPositionPanelController : MonoBehaviour
 		if (SubjectPOVRenderTextureCamera != null) SubjectPOVRenderTextureCamera.Unsubscribe(this);
 
 		// turn off prompter
-		Prompter.setVisibility(prompterVisibleState);
+		Prompter.fadeVisibility(prompterVisibleState);
 	}
 
 	private void Start()

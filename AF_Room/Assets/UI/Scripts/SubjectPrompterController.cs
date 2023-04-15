@@ -19,7 +19,8 @@ public class SubjectPrompterController : MonoBehaviour
 	private Tween fadeTween;
 	public CanvasGroup canvasFadeGroup;
 	public float fadeDuration;  // fade duration in seconds
-	private bool visible;
+	public const float defaultFadeDuration = 1.0f;
+	private bool visible = true;
 
 	public GameObject defaultPosition;
 	public float translateSpeed = 1.0f;
@@ -104,7 +105,7 @@ public class SubjectPrompterController : MonoBehaviour
 	}
 	public void trasnformPosition(Vector3 diff)
 	{
-		this.transform.position += diff;
+		this.transform.position += (diff);	
 	}
 	public void transformRotation(Vector3 rot)
 	{
@@ -116,6 +117,7 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		return visible;
 	}
+
 	public void setVisibility(bool active)
 	{
 		if (visible == active) return;
@@ -146,7 +148,7 @@ public class SubjectPrompterController : MonoBehaviour
 		}
 	}
 
-	public void fadeVisibility(bool active, float duration)
+	public void fadeVisibility(bool active, float duration = defaultFadeDuration)
 	{
 		if(fadeTween != null)   // we are currently fadinging, so we need to stop that animation
 		{
@@ -155,6 +157,14 @@ public class SubjectPrompterController : MonoBehaviour
 		
 		fadeTween = canvasFadeGroup.DOFade((active) ? 1f : 0f, duration);
 		fadeTween.onComplete += () => { setVisibility(active); };	
+	}
+	public void toggleVisible()
+	{
+		setVisibility(!visible);
+	}
+	public void toggleVisibleFade()
+	{
+		fadeVisibility(!visible, fadeDuration);
 	}
 
 	// fade the panel in and out forever
@@ -187,6 +197,8 @@ public class SubjectPrompterController : MonoBehaviour
 		}
 		else
 		{
+			// reverse the x direction for this POV
+			positionDelta.x *= -1;
 			this.transform.position += (translateSpeed * positionDelta);
 		}
 	}
