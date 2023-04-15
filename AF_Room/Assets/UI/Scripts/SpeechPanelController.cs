@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UXF;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 // Controller for the Speech UI
 //
@@ -33,10 +35,14 @@ public class SpeechPanelController : MonoBehaviour
 	public Button CurrentResponseDisplay;
 	public Button CurrentResponseSpeakButton;
 
-//	public Button CurrentPromptButton;
-//    public Button SpeakPromptButton;
-//    public Button ShowPromptButton;
-    public Button NextButton;
+	private Regex regexInstruction = new Regex("^<.*>\\s*$"); // look for lines starting and ending with angle brackets: < stuff stuff stuff > 
+	private static Color defaultResponseTextColor = Color.black;
+	private static Color instructionResponseTextColor = Color.blue;
+
+	//	public Button CurrentPromptButton;
+	//    public Button SpeakPromptButton;
+	//    public Button ShowPromptButton;
+	public Button NextButton;
     public TMP_Text PromptCounter;
     public const string PromptCounterFormat = "Current: prompt {0}.{1} - {2} / {3}"; // prompt set, promt number, number in block, total trials
     
@@ -70,6 +76,7 @@ public class SpeechPanelController : MonoBehaviour
 		string res_type = StudyController.AskerAgentValue;  // default to agent
 		string prompt = trial.settings.GetString(StudyController.PromptKey);
 		string response = ""; // default to nothing
+		bool response_is_instruction = false;
 		try
 		{
 			res_type = trial.settings.GetString(StudyController.AskerKey);
@@ -81,6 +88,7 @@ public class SpeechPanelController : MonoBehaviour
 			try
 			{
 				response = trial.settings.GetString(StudyController.ResponseKey);
+				response_is_instruction = regexInstruction.IsMatch(response);
 			}
 			catch (KeyNotFoundException)
 			{
@@ -94,19 +102,36 @@ public class SpeechPanelController : MonoBehaviour
 		}
 
 		// set up the UI
-		CurrentPromptDisplay.GetComponentInChildren<TMP_Text>().text = prompt;
-		CurrentResponseDisplay.GetComponentInChildren<TMP_Text>().text = response;
-		if (res_type == StudyController.AskerAgentValue)
+		TMP_Text CurrentPromptDisplayText = CurrentPromptDisplay.GetComponentInChildren<TMP_Text>();
+		TMP_Text CurrentResponseDisplayText = CurrentResponseDisplay.GetComponentInChildren<TMP_Text>();
+
+
+		CurrentPromptDisplayText.text = prompt;
+		CurrentResponseDisplayText.text = response;
+		CurrentResponseDisplayText.color = defaultResponseTextColor;
+		if (res_type == StudyController.AskerAgentValue)	// agent asking
 		{
 			CurrentPromptSpeakButton.interactable = true;
 			CurrentPromptPanelButton.interactable = false;
+			CurrentResponseSpeakButton.interactable = false;
 		}
-		else
+		else	// subject asking
 		{
 			CurrentPromptSpeakButton.interactable = false;
 			CurrentPromptPanelButton.interactable = true;
+			CurrentResponseSpeakButton.interactable = true;
 		}
-		CurrentResponseSpeakButton.interactable = !(response == ""); // if empty, turn off button
+		
+		if(response == "")
+		{
+			CurrentResponseSpeakButton.interactable = false; // if empty, turn off button
+		}
+
+		if(response_is_instruction)
+		{
+			CurrentResponseSpeakButton.interactable = false; // if instruction, turn off button
+			CurrentResponseDisplayText.color = instructionResponseTextColor;
+		}
 
 		// also set the displayed value of the counter label
 		PromptCounter.text = string.Format(

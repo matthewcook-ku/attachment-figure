@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
+using UnityEngine.InputSystem;
 
 // Controls a floating panel with text for the user to read
 
@@ -16,14 +18,13 @@ public class SubjectPrompterController : MonoBehaviour
 	// Fade animation elements
 	private Tween fadeTween;
 	public CanvasGroup canvasFadeGroup;
-	public float fadeDuration;	// fade duration in seconds
-	public bool isVisible
-	{
-		get
-		{
-			return (canvasFadeGroup.alpha > 0.0f);
-		}
-	}
+	public float fadeDuration;  // fade duration in seconds
+	private bool visible;
+
+	public GameObject defaultPosition;
+	public float translateSpeed = 1.0f;
+	public float rotateSpeed = 1.0f;
+	public InputManager inputManager;
 
 	private void OnEnable()
 	{
@@ -45,8 +46,11 @@ public class SubjectPrompterController : MonoBehaviour
 
 	private void Start()
 	{
+		// store this as the default position on startup
+		AFUtilities.alignTransforms(this.transform, defaultPosition.transform);
+
 		// turn the prompter off on startup
-		togglePrompter(false);
+		setVisibility(false);
 
 		// test fading
 		//StartCoroutine(TestFade());
@@ -58,7 +62,7 @@ public class SubjectPrompterController : MonoBehaviour
 	}
 	private void OnTrialEnd()
 	{
-		fade(false, fadeDuration);
+		fadeVisibility(false, fadeDuration);
 		setPrompterText(PrompterBlankingValue);
 	}
 
@@ -68,17 +72,17 @@ public class SubjectPrompterController : MonoBehaviour
 		setPrompterText(message);
 
 		// make sure the prompter is showing
-		if(!isVisible)
+		if(!visible)
 		{
-			fade(true, fadeDuration);
+			fadeVisibility(true, fadeDuration);
 		}
 	}
 	private void OnNonPrompterEvent(string message)
 	{
 		// make sure the prompter is NOT showing
-		if (isVisible)
+		if (visible)
 		{
-			fade(false, fadeDuration);
+			fadeVisibility(false, fadeDuration);
 		}
 		// blank the currently displayed message
 		PrompterText.text = PrompterBlankingValue;
@@ -92,19 +96,57 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		PrompterText.text = text;
 	}
-	public void togglePrompterVisibility(bool active, float fadeDuration)
+
+
+	public void resetPosition()
 	{
-		fade(active, fadeDuration);
+		AFUtilities.alignTransforms(defaultPosition.transform, this.transform);
+	}
+	public void trasnformPosition(Vector3 diff)
+	{
+		this.transform.position += diff;
+	}
+	public void transformRotation(Vector3 rot)
+	{
+		this.transform.Rotate(rot);
 	}
 
-	private void togglePrompter(bool active)
+
+	public bool isVisible()
 	{
+		return visible;
+	}
+	public void setVisibility(bool active)
+	{
+		if (visible == active) return;
+
 		canvasFadeGroup.interactable = active;
 		canvasFadeGroup.blocksRaycasts = active;
 		canvasFadeGroup.alpha = (active) ? 1f : 0f;
+		visible = active;
+
+		// enable or disable the input controls
+		InputControls.PrompterControlsActions actions = inputManager.InputActions.PrompterControls;
+		
+		if(visible)
+		{
+			// register for input events
+			actions.Position.performed += OnPositionPerformed;
+			actions.Rotation.started += OnRotationPerformed;    // button down
+			actions.Rotation.canceled += OnRotationPerformed;   // button up
+			InputManager.EnableActionMap(actions, true);
+		}
+		else
+		{
+			// remove input events
+			actions.Position.performed -= OnPositionPerformed;
+			actions.Rotation.performed -= OnRotationPerformed;
+			// deactivate controls
+			InputManager.EnableActionMap(actions, false);
+		}
 	}
 
-	private void fade(bool active, float duration)
+	public void fadeVisibility(bool active, float duration)
 	{
 		if(fadeTween != null)   // we are currently fadinging, so we need to stop that animation
 		{
@@ -112,7 +154,7 @@ public class SubjectPrompterController : MonoBehaviour
 		}
 		
 		fadeTween = canvasFadeGroup.DOFade((active) ? 1f : 0f, duration);
-		fadeTween.onComplete += () => { togglePrompter(active); };	
+		fadeTween.onComplete += () => { setVisibility(active); };	
 	}
 
 	// fade the panel in and out forever
@@ -122,10 +164,35 @@ public class SubjectPrompterController : MonoBehaviour
 		{
 			yield return new WaitForSeconds(2f);
 			Debug.Log("fading in");
-			fade(true, fadeDuration);
+			fadeVisibility(true, fadeDuration);
 			yield return new WaitForSeconds(3f);
 			Debug.Log("fading out");
-			fade(false, fadeDuration);
+			fadeVisibility(false, fadeDuration);
 		}
+	}
+
+
+	// Input System values from controls
+	Vector3 positionDelta;
+	bool rotationOn;
+
+	// input event functions
+	void OnPositionPerformed(InputAction.CallbackContext context)
+	{
+		positionDelta = context.ReadValue<Vector3>();
+
+		if(rotationOn)
+		{
+			this.transform.Rotate(rotateSpeed * positionDelta);
+		}
+		else
+		{
+			this.transform.position += (translateSpeed * positionDelta);
+		}
+	}
+	void OnRotationPerformed(InputAction.CallbackContext context)
+	{
+		rotationOn = context.ReadValueAsButton();
+		//Debug.Log("Rotation: " + (rotationOn ? "ON" : "OFF"));
 	}
 }

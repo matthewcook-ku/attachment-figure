@@ -16,7 +16,7 @@
 1,2,15,Agent,What is your favorite holiday? Why?,
 1,2,16,Subject,What was your first impression of college the first time you ever went on campus?,"The first time I saw a picture of a college campus, I liked the buildings style."
 1,2,17,Agent,Who is your favorite actor of your own gender? ,
-1,2,18,Subject,"One of you says a word, and the next says a word that starts with the last letter of the word just said. Do this until you have 6 words. Any words will do – you aren’t making a sentence.",(RA will refer to list of neutral words in protocol)
+1,2,18,Subject,"One of you says a word, and the next says a word that starts with the last letter of the word just said. Do this until you have 6 words. Any words will do – you aren’t making a sentence.",< RA will refer to list of neutral words in protocol >
 1,2,19,Agent,What is your favorite college class you’ve taken? Why?,
 1,2,20,Subject,What gifts did you receive last holiday season?,I did not receive any gifts for the holidays.
 1,2,21,Agent,What is the best TV show you’ve seen in the last month? Can you tell me about it?,
