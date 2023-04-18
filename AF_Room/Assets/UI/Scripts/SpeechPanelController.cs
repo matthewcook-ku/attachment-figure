@@ -79,7 +79,7 @@ public class SpeechPanelController : MonoBehaviour
 		bool response_is_instruction = false;
 		try
 		{
-			res_type = trial.settings.GetString(StudyController.AskerKey);
+			res_type = trial.settings.GetString(StudyController.AskerKey); // might throw
 
 			if (res_type != StudyController.AskerSubjectValue && res_type != StudyController.AskerAgentValue)
 				Debug.Log("Unknown asker value: " + res_type);
@@ -87,7 +87,7 @@ public class SpeechPanelController : MonoBehaviour
 			// assuming we got this far, let's also grab the response
 			try
 			{
-				response = trial.settings.GetString(StudyController.ResponseKey);
+				response = trial.settings.GetString(StudyController.ResponseKey); // might throw
 				response_is_instruction = regexInstruction.IsMatch(response);
 			}
 			catch (KeyNotFoundException)
@@ -122,9 +122,9 @@ public class SpeechPanelController : MonoBehaviour
 			CurrentResponseSpeakButton.interactable = true;
 		}
 		
-		if(response == "")
+		if(response != "")
 		{
-			CurrentResponseSpeakButton.interactable = false; // if empty, turn off button
+			CurrentResponseSpeakButton.interactable = true; // if there happens to be a response, even if not usual, turn on the button
 		}
 
 		if(response_is_instruction)
