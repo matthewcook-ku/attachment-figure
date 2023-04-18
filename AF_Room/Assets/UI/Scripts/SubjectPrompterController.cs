@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using UnityEngine.InputSystem;
+using System;
 
 // Controls a floating panel with text for the user to read
 
@@ -13,7 +14,6 @@ public class SubjectPrompterController : MonoBehaviour
 	// UI Elements
     public TMP_Text PrompterPanelTitle;
     public TMP_Text PrompterText;
-	private const string PrompterBlankingValue = "^__^";
 
 	// Fade animation elements
 	private Tween fadeTween;
@@ -21,6 +21,7 @@ public class SubjectPrompterController : MonoBehaviour
 	public float fadeDuration;  // fade duration in seconds
 	public const float defaultFadeDuration = 1.0f;
 	private bool visible = true;
+	private bool inputControlsActive = true;
 
 	public GameObject defaultPosition;
 	public float translateSpeed = 1.0f;
@@ -31,7 +32,6 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		// listen for prompter event from the UI
 		SpeechPanelController.OnShowPromptButtonClick += OnPrompterEvent;
-		//SpeechPanelController.OnSpeakPromptButtonClick += OnNonPrompterEvent;
 		StudyController.OnUXFTrialBegin += OnTrialBegin;
 		StudyController.OnUXFTrialEnd += OnTrialEnd;
 	}
@@ -40,7 +40,6 @@ public class SubjectPrompterController : MonoBehaviour
 	{
 		// un-register for events
 		SpeechPanelController.OnShowPromptButtonClick -= OnPrompterEvent;
-		//SpeechPanelController.OnSpeakPromptButtonClick -= OnNonPrompterEvent;
 		StudyController.OnUXFTrialBegin -= OnTrialBegin;
 		StudyController.OnUXFTrialEnd -= OnTrialEnd;
 	}
@@ -52,6 +51,8 @@ public class SubjectPrompterController : MonoBehaviour
 
 		// turn the prompter off on startup
 		setVisibility(false);
+		setInputControlsActive(false);
+		
 
 		// test fading
 		//StartCoroutine(TestFade());
@@ -63,8 +64,7 @@ public class SubjectPrompterController : MonoBehaviour
 	}
 	private void OnTrialEnd()
 	{
-		fadeVisibility(false, fadeDuration);
-		setPrompterText(PrompterBlankingValue);
+		fadeVisibility(false, fadeDuration, () => { setPrompterText(""); }); // clear the prompter text after fade is complete.
 	}
 
 	private void OnPrompterEvent(string message)
@@ -77,16 +77,6 @@ public class SubjectPrompterController : MonoBehaviour
 		{
 			fadeVisibility(true, fadeDuration);
 		}
-	}
-	private void OnNonPrompterEvent(string message)
-	{
-		// make sure the prompter is NOT showing
-		if (visible)
-		{
-			fadeVisibility(false, fadeDuration);
-		}
-		// blank the currently displayed message
-		PrompterText.text = PrompterBlankingValue;
 	}
 
 	public void setPrompterTitle(string title)
@@ -126,11 +116,16 @@ public class SubjectPrompterController : MonoBehaviour
 		canvasFadeGroup.blocksRaycasts = active;
 		canvasFadeGroup.alpha = (active) ? 1f : 0f;
 		visible = active;
+	}
 
+	public void setInputControlsActive(bool active)
+	{
+		if (active == inputControlsActive) return;
+		
 		// enable or disable the input controls
 		InputControls.PrompterControlsActions actions = inputManager.InputActions.PrompterControls;
-		
-		if(visible)
+
+		if (active)
 		{
 			// register for input events
 			actions.Position.performed += OnPositionPerformed;
@@ -146,25 +141,23 @@ public class SubjectPrompterController : MonoBehaviour
 			// deactivate controls
 			InputManager.EnableActionMap(actions, false);
 		}
+		inputControlsActive = active;
 	}
 
-	public void fadeVisibility(bool active, float duration = defaultFadeDuration)
+	public void fadeVisibility(bool active, float duration = defaultFadeDuration, Action callback = null)
 	{
 		if(fadeTween != null)   // we are currently fadinging, so we need to stop that animation
 		{
-			fadeTween.Kill(false);	// don't run the callback after kill
+			fadeTween.Kill(false);	// don't run any callbacks after kill
 		}
 		
+		// start a new fade
 		fadeTween = canvasFadeGroup.DOFade((active) ? 1f : 0f, duration);
-		fadeTween.onComplete += () => { setVisibility(active); };	
-	}
-	public void toggleVisible()
-	{
-		setVisibility(!visible);
-	}
-	public void toggleVisibleFade()
-	{
-		fadeVisibility(!visible, fadeDuration);
+		
+		// set visible when done
+		fadeTween.onComplete += () => { setVisibility(active); };
+		// call any additional callbacks
+		fadeTween.onComplete += () => { callback?.Invoke(); };
 	}
 
 	// fade the panel in and out forever

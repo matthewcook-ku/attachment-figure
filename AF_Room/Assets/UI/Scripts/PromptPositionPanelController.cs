@@ -21,14 +21,17 @@ public class PromptPositionPanelController : MonoBehaviour
 
 		// make sure the prompter is visible
 		Prompter.fadeVisibility(true);
+		Prompter.setInputControlsActive(true);
 	}
 	void OnDisable()
 	{
 		// remove self from cameras
 		if (SubjectPOVRenderTextureCamera != null) SubjectPOVRenderTextureCamera.Unsubscribe(this);
 
-		// turn off prompter
+		// return prompter to previous state
 		Prompter.fadeVisibility(prompterVisibleState);
+		// turn off input controls no matter what
+		Prompter.setInputControlsActive(false);
 	}
 
 	private void Start()
