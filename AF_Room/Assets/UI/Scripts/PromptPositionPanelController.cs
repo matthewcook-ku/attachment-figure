@@ -11,13 +11,20 @@ public class PromptPositionPanelController : MonoBehaviour
 	public SubjectPrompterController Prompter;
 	public SubscriberCamera SubjectPOVRenderTextureCamera;
 
-	private bool prompterVisibleState;	// was the prompter visible when we started.
+	public const string PrompterTestingText = "Can you comfortably read the text on this panel?";
+
+	private bool prompterVisibleState;  // was the prompter visible when we started.
+	private string prompterOriginalMessage;	// saved message when the prompter came up.
 
 	// called when panel is opened by SetActive call
 	public void OnEnable()
 	{
 		// save the prompter status when we started
 		prompterVisibleState = Prompter.isVisible();
+		prompterOriginalMessage = Prompter.PrompterText.text;
+
+		// display the testing message
+		Prompter.PrompterText.text = PrompterTestingText;
 
 		// make sure the prompter is visible
 		Prompter.fadeVisibility(true);
@@ -30,6 +37,7 @@ public class PromptPositionPanelController : MonoBehaviour
 
 		// return prompter to previous state
 		Prompter.fadeVisibility(prompterVisibleState);
+		Prompter.PrompterText.text = prompterOriginalMessage;
 		// turn off input controls no matter what
 		Prompter.setInputControlsActive(false);
 	}
