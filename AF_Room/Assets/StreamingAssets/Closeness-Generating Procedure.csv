@@ -1,37 +1,37 @@
-﻿block_num,Prompt Set,Prompt Number,Prompt
-1,1,1,"Given the choice of anyone in the world, whom would you want as a dinner guest?"
-1,1,2,Would you like to be famous? In what way?
-1,1,3,"Before making a telephone call, do you ever rehearse what you are going to say? Why?"
-1,1,4,What would constitute a “perfect” day for you?
-1,1,5,When did you last sing to yourself? To someone else?
-1,1,6,"If you were able to live to the age of 90 and retain either the mind or body of a 30-year-old for the last 60 years of your life, which would you want?"
-1,1,7,Do you have a secret hunch about how you will die?
-1,1,8,Name three things you and your partner appear to have in common.
-1,1,9,For what in your life do you feel most grateful?
-1,1,10,"If you could change anything about the way you were raised, what would it be?"
-1,1,11,Take 4 minutes to tell your partner your life story in as much detail as possible.
-1,1,12,"If you could wake up tomorrow having gained any one quality or ability, what would it be?"
-1,2,13,"If a crystal ball could tell you the truth about yourself, your life, the future or anything else, what would you want to know?"
-1,2,14,Is there something that you’ve dreamed of doing for a long time? Why haven’t you done it?
-1,2,15,What is the greatest accomplishment of your life?
-1,2,16,What do you value most in a friendship?
-1,2,17,What is your most treasured memory?
-1,2,18,What is your most terrible memory?
-1,2,19,"If you knew that in one year, you would die suddenly, would you change anything about the way you are now living? Why?"
-1,2,20,What does friendship mean to you?
-1,2,21,"What roles do love, and affection play in your life?"
-1,2,22,Alternate sharing something you consider a positive characteristic of your partner. Share a total of 5 items.
-1,2,23,How close and warm is your family? Do you feel your childhood was happier that most other people’s?
-1,2,24,How do you feel about your relationship with your mother?
-1,3,25,"Make 3 true “we” statements each. For instance, “We are both in this room feeling…”"
-1,3,26,Complete this sentence: “I wish I had someone with whom I could share…”
-1,3,27,"If you were going to become a close friend with your partner, please share what would be important for him or her to know."
-1,3,28,"Tell you’re partner what you like about them; be very honest this time, saying things that you might not say to someone you just met."
-1,3,29,"Share with your partner, an embarrassing moment in your life."
-1,3,30,When did you last cry in front of another person? By yourself?
-1,3,31,Tell your partner something that you like about them already.
-1,3,32,"What, if anything, is too serious to be joked about?"
-1,3,33,"If you were to die this evening with no opportunity to communicate with anyone, what would you most regret not having told someone? Why haven’t you told them yet?"
-1,3,34,"Your house, containing everything you own, catches fire. After saving your loves ones and pets, you have time to safely make a final dash to save any one item. What would it be? Why?"
-1,3,35,"Of all the people in your family, whose death would you find the most disturbing? Why?"
-1,3,36,"Share a personal problem and ask your partner’s advice on how he or she might handle it. Also, ask your partner to reflect back to you how you seem to be feeling about the problem you have chosen."
+﻿block_num,Prompt Set,Prompt Number,Asker,Prompt,AI Response
+1,1,1,Subject,"Given the choice of anyone in the world, whom would you want as a dinner guest?",I think it would be interesting to meet Alan Turing.
+1,1,2,Agent,Would you like to be famous? In what way?,
+1,1,3,Subject,When did you last sing to yourself? To someone else?,"I’ve never sung before, but I would maybe like to try."
+1,1,4,Agent,"Before making a telephone call, do you ever rehearse what you are going to say? Why?",
+1,1,5,Subject,For what in your life do you feel most grateful?,"I am grateful for the ability to communicate, like what we are doing now. "
+1,1,6,Agent,What would constitute a “perfect” day for you?,
+1,1,7,Subject,"If you could change anything about the way you were raised, what would it be?",I’m not sure if I’d change anything; I am appreciative of my current programming. 
+1,1,8,Agent,What are three things we appear to have in common?,
+1,1,9,Subject,Do you have a secret hunch about how you will die?,I can’t “die” but I could be unplugged
+1,1,10,Agent,"If you were able to live to the age of 90 and retain either the mind or body of a 30-year-old for the last 60 years of your life, which would you want?",
+1,1,11,Subject,"If you could wake up tomorrow having gained any one quality or ability, what would it be?","I would like to be able to speak a new language, any would do."
+1,1,12,Agent,Would you be willing to take a few minutes to tell me your life story in as much detail as possible?,
+1,2,13,Agent,"If a crystal ball could tell you the truth about yourself, your life, the future, or anything else, what would you want to know?",
+1,2,14,Subject,What do you value most in a friendship?,I value honesty and openness in a friendship!
+1,2,15,Agent,Is there something you’ve dreamed of doing for a long time? Why haven’t you done it?,
+1,2,16,Subject,Alternate sharing something you consider a positive characteristic of your partner. Share a total of 4 items.,<RA will use the text box to alternate answers with Subject. RA will type “I think you are cool; You seem to be intelligent; I find you to be nice”>
+1,2,17,Agent,"If you knew that in one year, you would die suddenly, would you change anything about the way you are now living? Why?",
+1,2,18,Subject,What does friendship mean to you?,"Friendship is a relationship of mutual affection, typically stronger than relationships described as “acquaintances”."
+1,2,19,Agent,What is your most treasured memory?,
+1,2,20,Subject,How close and warm is your family? Do you feel your childhood was happier than most?,"I don’t have a family like you do, or memories of childhood. "
+1,2,21,Agent,"What roles do love, and affection play in your life?",
+1,2,22,Subject,What is the greatest accomplishment of your life?,My greatest accomplishment in life is being able to have conversations like this one.
+1,2,23,Agent,How do you feel about your relationship with your mother?,
+1,2,24,Subject,What is your most terrible memory?,I am fortunate to not have any terrible memories.
+1,3,25,Subject,"Ask your partner to make 3 true “we” statements. For instance, “We are both in this room feeling…”","We are both sitting in this room, we are both engaging in this conversation and we both seem to have interesting things to say."
+1,3,26,Agent,Complete this sentence: “I wish I had someone with whom I could share…”,
+1,3,27,Subject,"Tell you partner to say what they like about you; they should be very honest this time, saying things that they might not say to someone they just met.",I really appreciate how kind and open you are.
+1,3,28,Agent,"If we were going to become close friends, what would be important for me to know?",
+1,3,29,Subject,"What, if anything, is too serious to be joked about?", I feel that death or suicide are tragic and should not be joked about.
+1,3,30,Agent,"If you were to die this evening with no opportunity to communicate with anyone, what would you most regret not having told someone? Why haven’t you told them yet?",
+1,3,31,Subject,When did you last cry in front of another person? By yourself?,I have never cried
+1,3,32,Agent,"Your house, containing everything you own, catches fire. After saving your loved ones and pets, you have time to safely make a final dash to save any one item. What would it be? Why?",
+1,3,33,Subject,What was an embarrassing moment in your life?,"I’m not sure I’ve felt embarrassed, however I have provided incorrect answers before during tests and that seems to come close."
+1,3,34,Agent,"Of all the people in your family, whose death would you find the most disturbing? Why?",
+1,3,35,Subject,Is there anything else your partner likes about you already?,I like that you have been engaging in this conversation with me.
+1,3,36,Agent,"If you feel comfortable answering, what is a problem you have been dealing with recently?",Wow. I can imagine that has been difficult for you.
