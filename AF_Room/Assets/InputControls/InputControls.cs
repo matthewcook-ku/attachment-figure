@@ -957,6 +957,120 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""PrompterControls"",
+            ""id"": ""2a429b3c-6ef1-40d8-ab82-e251662837d7"",
+            ""actions"": [
+                {
+                    ""name"": ""Position"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f9e45078-9de9-4b7a-acd3-0ac7dd876bfa"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""1acd582b-2675-4240-9d8b-58c5579ffad3"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""3D Vector"",
+                    ""id"": ""2f8f9cb4-748d-46ba-b381-69414fabd3ae"",
+                    ""path"": ""3DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9a72c53c-450a-4d92-9b7d-bc003b61be10"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""c5b3248e-0b0a-47c2-9c90-e010f05073a7"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""24c18fc4-a65c-456d-bf10-590e99377d57"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""ba3f8f4c-5ae8-4b1a-b49c-15a18c465400"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""forward"",
+                    ""id"": ""9c84d729-8b6f-4b11-a006-ef8412cf7cdc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""backward"",
+                    ""id"": ""1ef0c273-979d-4439-ae64-8cdd36052300"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""421d8c2f-4ac0-4d93-90be-22653b708025"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -996,6 +1110,10 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_ExperimenterControls = asset.FindActionMap("ExperimenterControls", throwIfNotFound: true);
         m_ExperimenterControls_ToggleFPS = m_ExperimenterControls.FindAction("ToggleFPS", throwIfNotFound: true);
         m_ExperimenterControls_ToggleSubjectUI = m_ExperimenterControls.FindAction("ToggleSubjectUI", throwIfNotFound: true);
+        // PrompterControls
+        m_PrompterControls = asset.FindActionMap("PrompterControls", throwIfNotFound: true);
+        m_PrompterControls_Position = m_PrompterControls.FindAction("Position", throwIfNotFound: true);
+        m_PrompterControls_Rotation = m_PrompterControls.FindAction("Rotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1367,6 +1485,47 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         }
     }
     public ExperimenterControlsActions @ExperimenterControls => new ExperimenterControlsActions(this);
+
+    // PrompterControls
+    private readonly InputActionMap m_PrompterControls;
+    private IPrompterControlsActions m_PrompterControlsActionsCallbackInterface;
+    private readonly InputAction m_PrompterControls_Position;
+    private readonly InputAction m_PrompterControls_Rotation;
+    public struct PrompterControlsActions
+    {
+        private @InputControls m_Wrapper;
+        public PrompterControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Position => m_Wrapper.m_PrompterControls_Position;
+        public InputAction @Rotation => m_Wrapper.m_PrompterControls_Rotation;
+        public InputActionMap Get() { return m_Wrapper.m_PrompterControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PrompterControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IPrompterControlsActions instance)
+        {
+            if (m_Wrapper.m_PrompterControlsActionsCallbackInterface != null)
+            {
+                @Position.started -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnPosition;
+                @Position.performed -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnPosition;
+                @Position.canceled -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnPosition;
+                @Rotation.started -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnRotation;
+                @Rotation.performed -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnRotation;
+                @Rotation.canceled -= m_Wrapper.m_PrompterControlsActionsCallbackInterface.OnRotation;
+            }
+            m_Wrapper.m_PrompterControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Position.started += instance.OnPosition;
+                @Position.performed += instance.OnPosition;
+                @Position.canceled += instance.OnPosition;
+                @Rotation.started += instance.OnRotation;
+                @Rotation.performed += instance.OnRotation;
+                @Rotation.canceled += instance.OnRotation;
+            }
+        }
+    }
+    public PrompterControlsActions @PrompterControls => new PrompterControlsActions(this);
     public interface IFPSControlsActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
@@ -1405,5 +1564,10 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     {
         void OnToggleFPS(InputAction.CallbackContext context);
         void OnToggleSubjectUI(InputAction.CallbackContext context);
+    }
+    public interface IPrompterControlsActions
+    {
+        void OnPosition(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
     }
 }

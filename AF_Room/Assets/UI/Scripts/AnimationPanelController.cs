@@ -19,14 +19,14 @@ public class AnimationPanelController : MonoBehaviour
     public EventToggleGroup ExpressionToggleGroup;
 
     // these are used for logging actions to the log file
-    public event Action<int> OnExpressionButtonClick;
-    public event Action<int> OnGestureButtonClick;
-    public event Action<bool> OnAttentionChange;
-    public event Action<bool> OnGlancingChange;             //
-    //public event Action<float> OnAffinityPercentChanged;    //
+    public static event Action<int> OnExpressionButtonClick;
+    public static event Action<int> OnGestureButtonClick;
+    public static event Action<bool> OnAttentionChange;
+    public static event Action<bool> OnGlancingChange;
+	//public static event Action<float> OnAffinityPercentChanged;    //
 
 
-    private void Start()
+	private void Start()
 	{
         //Debug.Log("AnimationPanelController Start");
 

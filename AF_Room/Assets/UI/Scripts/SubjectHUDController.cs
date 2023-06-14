@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 
 // Controller to access the Subject's UI
 
-public class SubjectUIController : MonoBehaviour
+public class SubjectHUDController : MonoBehaviour
 {
-	bool showUI;
+	bool showHUD;
 	public GameObject HeadsetReadoutPanel;
 	public GameObject Reticle;
 
@@ -27,11 +27,11 @@ public class SubjectUIController : MonoBehaviour
 	}*/
 
 	
-	public void ToggleSubjectUI()
+	public void ToggleSubjectHUD()
 	{
-		showUI = !showUI;
+		showHUD = !showHUD;
 		
-		HeadsetReadoutPanel.SetActive(showUI);
-		Reticle.SetActive(showUI);
+		HeadsetReadoutPanel.SetActive(showHUD);
+		Reticle.SetActive(showHUD);
 	}
 }

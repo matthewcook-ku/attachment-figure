@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 
 // Controller for elements related to the study subject.
 //
@@ -36,6 +38,10 @@ public class SubjectController : MonoBehaviour
             CameraOffset.transform.localPosition = new Vector3(0.0f, value, 0.0f);
         }
     }
+	[Tooltip("The camera representing the VR view.")]
+	public Camera SubjectViewCamera;
+	[Tooltip("A game object marking the default starting psoition of the player's view.")]
+	public GameObject SubjectResetPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -49,10 +55,18 @@ public class SubjectController : MonoBehaviour
         GazeTarget = transform.Find("Main Camera");
     }
 
-    // return the subject's XR origin to the start point, which is local origin of this GameObject
+    // Reset the player's view. This means moving the XR origin to align it with the subject as our start point
+    [ContextMenu("Reset Player Position")]
     public void ResetSubjectPosition()
     {
-        Debug.Log("Resetting player position to [0,0,0].");
-        XROrigin.transform.localPosition = Vector3.zero;
+        Debug.Log("Resetting player position");
+
+        // first rotate the XROrigin to match the camera's position.
+        float rotationAngleY = SubjectResetPosition.transform.rotation.eulerAngles.y - SubjectViewCamera.transform.eulerAngles.y;
+        XROrigin.transform.Rotate(0.0f, rotationAngleY, 0.0f);
+
+        // now move
+        Vector3 dist = SubjectResetPosition.transform.position - SubjectViewCamera.transform.position;
+        XROrigin.transform.position += dist;
     }
 }

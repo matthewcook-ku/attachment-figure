@@ -22,9 +22,11 @@ public class InputManager : MonoBehaviour
     // Delegate for map changes
     // subscribe with actionMapChange += MyFunc in Start, and -= in OnDisable
     public static event Action<InputActionMap> ActionMapChange;
+    // allow objects to register for notification when enabled.
+	public static event Action InputManagaerEnabled;
 
 
-    private void Awake()
+	private void Awake()
     {
         InputActions = new InputControls();
     }
@@ -34,7 +36,10 @@ public class InputManager : MonoBehaviour
         //ToggleActionMap(InputActions.TestingActions);
         ToggleActionMap(InputActions.AgentControls);
         ToggleActionMap(InputActions.ExperimenterControls);
-    }
+
+		Debug.Log("<color=teal>InputManager: notifying of enabled</color>");
+		InputManagaerEnabled?.Invoke();
+	}
 
     private void OnDisable()
     {

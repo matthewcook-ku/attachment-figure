@@ -8,9 +8,8 @@ using System.Text.RegularExpressions;
 
 // UXF Session Driver
 //
-// This script drives the major events of the study session. This is the place to sequence out any events fro the study.
+// This script drives the major events of the study session. This is the place to sequence out any events for the study.
 // This is also the central place to put settings for this session. Objects implementing the session should come here to collect those settings. 
-// This will probably need to be broken up into different sessions for the different studies.
 //
 // Elements
 // - UXF event handlers
@@ -25,6 +24,11 @@ using System.Text.RegularExpressions;
 //
 // UXF_Rig - connect event handlers to Events tab
 
+// Experiment Definition File
+// The experiment is defined by a .csv file in Streaming Assets folder.
+// The program looks for a file with the same name as the task selection dropdown.
+// Each line of the file is read into a trial in the session.
+
 public class StudyController : MonoBehaviour
 {
     [Tooltip("Object representing the subject.")]
@@ -37,7 +41,7 @@ public class StudyController : MonoBehaviour
 
     [Tooltip("Refs to the UI canvas objects.")]
     public ExperimenterUIController experimenterUI;
-    public SubjectUIController subjectUI;
+    public SubjectHUDController subjectHUD;
 
     [Tooltip("The maximum field of view in degrees of the head mounted display. Some common vlues include:\n- Vive Pro Eye: 110\n- Oculus Quest 2: 89")]
     public int HMDFieldOfView = 110;
@@ -46,6 +50,14 @@ public class StudyController : MonoBehaviour
     public float trackingInterval = 0.3f;
     [Tooltip("Frequency of averaged data collection in sec. 60 is 1 minute.")]
     public float averageInterval = 60.0f;
+
+    // events - these mirror the UXF events, but allow easy access by being static
+    // they will be called by the UXF events
+	public static event Action OnUXFSessionBegin;
+    public static event Action OnUXFTrialBegin;
+	public static event Action OnUXFTrialEnd;
+	public static event Action OnUXFPreSessionEnd;
+	public static event Action OnUXFSessionEnd;
 
 
 	// headings for results file
@@ -63,17 +75,24 @@ public class StudyController : MonoBehaviour
 	public const string AgentModelKey = "Model";
     public const string AgentSkintoneKey = "Skintone";
 
-    public const string SessionTaskKey = "Task";
+    public const string SessionTaskKey = "Task"; // holds which task was selected in task dropdown from start screen
+
+	public const string AskedByKey = "Asked By";
+
+	// these are headings in results, but also match headings in the settings file 
+    // this way trial and block numbers match between the settings and results file
+	public const string PromptSetKey = "Prompt Set";
+	public const string PromptNumberKey = "Prompt Number";
+    public const string AskerKey = "Asker";
+	public const string AskerSubjectValue = "Subject";  // possible value of Asker field
+	public const string AskerAgentValue = "Agent";      // possible value of Asker field
+	public const string PromptKey = "Prompt";
+    public const string ResponseKey = "AI Response";
 
 	// Settings File Strings
 	public const string ExperimentName = "Experiment 1";
 	public const string TaskFileExtension = ".csv";
-	public const string TaskSpecificationNameKey = "task_specification_name";
-
-	// headings from the above file
-	public const string PromptSetKey = "Prompt Set";
-	public const string PromptNumberKey = "Prompt Number";
-	public const string PromptKey = "Prompt";
+	public const string TaskSpecificationFilenameKey = "task_specification_filename"; // name of the input file with extension
 
 	// This method should be called by the OnSessionBegin event in the UXF rig.
 	public void SessionBegin(Session session)
@@ -84,12 +103,12 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Building trails...");
         
         // tell the system where to look for the settings file
-		string taskfile = session.settings.GetString("Task") + TaskFileExtension;
-		//session.settings.SetValue("trial_specification_name", "question set.csv");
-		session.settings.SetValue(TaskSpecificationNameKey, taskfile);
+        // currently - the name of the settings file comes from the task dropdown selection + .csv
+		string taskfile = session.settings.GetString(SessionTaskKey) + TaskFileExtension;
+		session.settings.SetValue(TaskSpecificationFilenameKey, taskfile);
 
 		// read and process the settings file to create blocks and trials
-		BuildExperimentFromCSV(session, TaskSpecificationNameKey);
+		BuildExperimentFromCSV(session, TaskSpecificationFilenameKey);
 
         // start experimenter UI
         Debug.Log("Load experimenter UI.");
@@ -104,7 +123,10 @@ public class StudyController : MonoBehaviour
         Debug.Log("Starting proxemics trackers.");
         StartCoroutine(ProxemicsTrackingManualRecord());
         StartCoroutine(ProxemicsTrackingManualRecordAverage());
-    }
+
+        // call any additional events
+        OnUXFSessionBegin?.Invoke();
+	}
 
     // This method should be called by the OnTrialBegin event in the UXF rig.
     public void TrialStart(Trial trial)
@@ -112,9 +134,28 @@ public class StudyController : MonoBehaviour
         Debug.Log("StudyController: Starting Trial...");
         Debug.Log("Trial Prompt[" + trial.settings.GetString(PromptSetKey) + " : " + trial.settings.GetString(PromptNumberKey) + "]: " + trial.settings.GetString(PromptKey));
 
-        // initilize the proxemics tracker for the new trial
-        subject.proxemicsTracker.initNextTrial(trial);
-    }
+		// set the default Asked By to Agent
+		trial.settings.SetValue(AskedByKey, "Agent");
+
+        // now see if there is an asker setting
+        try
+        {
+            string asker = trial.settings.GetString(AskerKey);
+			Debug.Log("Setting Trial Settings \"Asked By\" to: " + asker);
+			trial.settings.SetValue(AskedByKey, asker);
+		}
+        catch(KeyNotFoundException)
+        {
+			// if not found, then default to agent, so leave it as is.
+			Debug.Log("No Asker field, setting \"Asked By\" to default: Agent");
+		}
+
+		// initilize the proxemics tracker for the new trial
+		subject.proxemicsTracker.initNextTrial(trial);
+
+		// call any additional events
+		OnUXFTrialBegin?.Invoke();
+	}
 
     // This coroutine method will set up recording and then continue every trackingInterval seconds to manually signal the porixemics tracker to record a row of data.
     IEnumerator ProxemicsTrackingManualRecord()
@@ -164,7 +205,10 @@ public class StudyController : MonoBehaviour
             subject.proxemicsTracker.closeSession(trial.session);
         }
 
-        Debug.Log("Ending Trial...done");
+		// call any additional events
+		OnUXFTrialEnd?.Invoke();
+
+		Debug.Log("Ending Trial...done");
     }
 
     // This method should be called by the PreSessionEnd event in the UXF rig.
@@ -174,15 +218,21 @@ public class StudyController : MonoBehaviour
 
         // stop the tracking
         StopAllCoroutines();
-    }
+
+		// call any additional events
+		OnUXFPreSessionEnd?.Invoke();
+	}
 
     // This method should be called by the OnSessionEnd event in the UXF rig.
     public void SessionEnd(Session session)
     {
-        Debug.Log("Session Ended ... Safe to Quit");
+		// call any additional events
+		OnUXFSessionEnd?.Invoke();
+
+		Debug.Log("Session Ended ... Safe to Quit");
     }
 
-    // Replace the CSVExperimentBuilder build function 
+    // Replaces the CSVExperimentBuilder build function 
     // This does the exact same thing, but uses our CSV parsing rather than the standard.
     public void BuildExperimentFromCSV(Session session, string csvFileKey)
     {
@@ -217,7 +267,8 @@ public class StudyController : MonoBehaviour
         Debug.Log("Parsing file...");
         var table = ParseCSV(csvLines);
 
-        // build the experiment.
+        // build the experiment
+
         // this adds a new trial to the session for each row in the table
         // the trial will be created with the settings from the values from the table
         // if "block_num" is specified in the table, the trial will be added to the block with that number
@@ -232,13 +283,20 @@ public class StudyController : MonoBehaviour
             settingsString += "\n" + "Block[" + i + "]: " + session.blocks[i].trials.Count + " trials";
             for(int j = 0; j < session.blocks[i].trials.Count; j++)
 			{
-                settingsString += "\n\t" + "trial[" + j + "]: ";
-                settingsString += "(";
+				settingsString += "\n\t" + "trial[" + j + "]: ";
+				settingsString += "(";
 				settingsString += session.blocks[i].trials[j].settings.GetString(PromptSetKey) + " : ";
-                settingsString += session.blocks[i].trials[j].settings.GetString(PromptNumberKey);
+				settingsString += session.blocks[i].trials[j].settings.GetString(PromptNumberKey);
 				settingsString += ") ";
+
+                try { settingsString += "[" + session.blocks[i].trials[j].settings.GetString(AskerKey) + "] "; }
+                catch (KeyNotFoundException) { /* ignore exception when this key does not exist */ }
+
 				settingsString += session.blocks[i].trials[j].settings.GetString(PromptKey);
-            }
+
+				try { settingsString += "\n\t    --> " + session.blocks[i].trials[j].settings.GetString(ResponseKey); }
+				catch (KeyNotFoundException) { /* ignore exception when this key does not exist */ }
+			}
         }
         Debug.Log(settingsString);
     }

@@ -17,14 +17,12 @@ public class EventLogger : MonoBehaviour
         Expression,
         Gesture,
         Attention,
+        Prompter,
+        PromptSpeech,
+        ResponseSpeech,
         StockSpeech,
         CustomSpeech
 	}
-
-    // connected objects for logging
-    public AnimationPanelController animationPanel;
-    public SpeechPanelController speechPanel;
-
     
     // Start is called before the first frame update
     void Start()
@@ -35,24 +33,27 @@ public class EventLogger : MonoBehaviour
 
 	private void OnEnable()
 	{
-        //Debug.Log("animationPanel = " + animationPanel);
-        //Debug.Log("speechPanel = " + speechPanel);
-
-        animationPanel.OnExpressionButtonClick += OnExpressionEvent;
-        animationPanel.OnGestureButtonClick += OnGestureEvent;
-        animationPanel.OnAttentionChange += OnAttentionEvent;
-        speechPanel.OnPhraseButtonClick += OnStockSpeechEvent;
-        speechPanel.OnSendChat += OnCustomSpeechEvent;
+        AnimationPanelController.OnExpressionButtonClick += OnExpressionEvent;
+		AnimationPanelController.OnGestureButtonClick += OnGestureEvent;
+		AnimationPanelController.OnAttentionChange += OnAttentionEvent;
+        SpeechPanelController.OnShowPromptButtonClick += OnPrompterEvent;
+		SpeechPanelController.OnSpeakPromptButtonClick += OnPromptSpeechEvent;
+		SpeechPanelController.OnSpeakResponseButtonClick += OnResponseSpeechEvent;
+		SpeechPanelController.OnPhraseButtonClick += OnStockSpeechEvent;
+		SpeechPanelController.OnSendChat += OnCustomSpeechEvent;
     }
 
 	private void OnDisable()
 	{
-        // un-register for events
-        animationPanel.OnExpressionButtonClick -= OnExpressionEvent;
-        animationPanel.OnGestureButtonClick -= OnGestureEvent;
-        animationPanel.OnAttentionChange -= OnAttentionEvent;
-        speechPanel.OnPhraseButtonClick -= OnStockSpeechEvent;
-        speechPanel.OnSendChat -= OnCustomSpeechEvent;
+		// un-register for events
+		AnimationPanelController.OnExpressionButtonClick -= OnExpressionEvent;
+		AnimationPanelController.OnGestureButtonClick -= OnGestureEvent;
+		AnimationPanelController.OnAttentionChange -= OnAttentionEvent;
+		SpeechPanelController.OnShowPromptButtonClick -= OnPrompterEvent;
+		SpeechPanelController.OnSpeakPromptButtonClick -= OnPromptSpeechEvent;
+		SpeechPanelController.OnSpeakResponseButtonClick -= OnResponseSpeechEvent;
+		SpeechPanelController.OnPhraseButtonClick -= OnStockSpeechEvent;
+		SpeechPanelController.OnSendChat -= OnCustomSpeechEvent;
     }
 
 	public void OutputLogFile()
@@ -79,7 +80,13 @@ public class EventLogger : MonoBehaviour
                 return "gesture";
             case EventType.Attention:
                 return "attention";
-            case EventType.StockSpeech:
+			case EventType.Prompter:
+				return "subject prompter";
+			case EventType.PromptSpeech:
+				return "prompt speech";
+			case EventType.ResponseSpeech:
+				return "response speech";
+			case EventType.StockSpeech:
                 return "stock speech";
             case EventType.CustomSpeech:
                 return "custom speech";
@@ -102,8 +109,19 @@ public class EventLogger : MonoBehaviour
         log.AddCompleteRow(values);
     }
 
-
-    void OnStockSpeechEvent(string message)
+	void OnPrompterEvent(string message)
+    {
+		Log(message, EventType.Prompter);
+	}
+	void OnPromptSpeechEvent(string message)
+	{
+		Log(message, EventType.PromptSpeech);
+	}
+	void OnResponseSpeechEvent(string message)
+	{
+		Log(message, EventType.ResponseSpeech);
+	}
+	void OnStockSpeechEvent(string message)
 	{
         Log(message, EventType.StockSpeech);
     }
